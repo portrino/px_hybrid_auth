@@ -27,10 +27,18 @@
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 use \TYPO3\CMS\Backend\Utility\BackendUtility;
 
+// only take the px_lib abstract controller if it is installed
+
+if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('px_lib')) {
+    abstract class DynamicAbstractUpdateScript extends \Portrino\PxLib\Script\AbstractUpdateScript  {}
+} else {
+    abstract class DynamicAbstractUpdateScript extends \Portrino\PxHybridAuth\Script\AbstractUpdateScript  {}
+}
+
 /**
  * Class ext_update
  */
-class ext_update extends \Portrino\PxLib\Script\AbstractUpdateScript {
+class ext_update extends DynamicAbstractUpdateScript {
 
     /**
      * @var string

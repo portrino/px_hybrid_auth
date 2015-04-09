@@ -27,17 +27,24 @@ namespace Portrino\PxHybridAuth\Controller;
  ***************************************************************/
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 
+    // only take the px_lib abstract controller if it is installed
+if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('px_lib')) {
+    class DynamicAbstractUserController extends \Portrino\PxLib\Controller\AbstractController {}
+} else {
+    class DynamicAbstractUserController extends \Portrino\PxHybridAuth\Controller\AbstractController {}
+}
+
 /**
  * Class AbstractUserController
  *
  * @package Portrino\PxHybridAuth\Controller
  */
-class AbstractUserController extends \Portrino\PxHybridAuth\Controller\AbstractController {
+class AbstractUserController extends DynamicAbstractUserController {
 
      public function initializeNewLoginAction() {
         $redirectUrl = ($this->request->hasArgument('redirect_url')) ? $this->request->getArgument('redirect_url') : NULL;
         $redirectPid = ($this->request->hasArgument('redirect_pid')) ? $this->request->getArgument('redirect_pid') : NULL;
-        // handle the redirects
+            // handle the redirects
         if ($redirectUrl) {
             $this->redirectToUri($redirectUrl);
         }
@@ -45,7 +52,7 @@ class AbstractUserController extends \Portrino\PxHybridAuth\Controller\AbstractC
             $this->redirectToPage($redirectPid);
         }
         $loginError = ($this->request->hasArgument('login_error')) ? $this->request->getArgument('login_error') : NULL;
-        // handle the redirect
+            // handle the redirect
         if ($loginError) {
             $this->signalSlotDispatcher->dispatch(__CLASS__, 'loginErrorBeforeRedirect', array($this, $this->request));
             $this->redirectToPage($this->settings['redirectPageLoginError']);
@@ -59,9 +66,9 @@ class AbstractUserController extends \Portrino\PxHybridAuth\Controller\AbstractC
      */
     public function newLoginAction() {
         $returnUrl = GeneralUtility::_GP('return_url') ? GeneralUtility::_GP('return_url') : NULL;
-        // only if no return_url given use the redirectPageLogin from TS/Flexform settings
+            // only if no return_url given use the redirectPageLogin from TS/Flexform settings
         if (!$returnUrl) {
-            // if no redirectPageLogin from TS/Flexform was given use the loginPid from ext_conf
+                // if no redirectPageLogin from TS/Flexform was given use the loginPid from ext_conf
             $returnPid = $this->settings['redirectPageLogin'] ? $this->settings['redirectPageLogin'] : $this->extConf['basic.']['login_pid'];
         }
         if ($this->settings['storagePid']) {
@@ -70,6 +77,7 @@ class AbstractUserController extends \Portrino\PxHybridAuth\Controller\AbstractC
             $pids = $GLOBALS['TSFE']->getStorageSiterootPids();
             $storagePids = $pids['_STORAGE_PID'];
         }
+
         $this->view->assign('redirect_url', $returnUrl);
         $this->view->assign('redirect_pid', $returnPid);
         $this->view->assign('pid', $storagePids);
@@ -83,7 +91,7 @@ class AbstractUserController extends \Portrino\PxHybridAuth\Controller\AbstractC
      * @param integer$recursive An integer >=0 telling how deep to dig for pids under each entry in $pid_list
      * @return string List of PID values (comma separated)
      */
-    public function getPidList($pid_list, $recursive = 0) {
+    protected function getPidList($pid_list, $recursive = 0) {
         $cObjData = $this->configurationManager->getContentObject();
         if (!strcmp($pid_list, '')) {
             $pid_list = $GLOBALS['TSFE']->id;

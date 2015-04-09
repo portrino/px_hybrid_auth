@@ -94,7 +94,7 @@ if ((boolean)$extConf['facebook.']['enabled'] ||
         'Portrino\PxHybridAuth\Hooks\LogOffHook->postProcessing';
 }
 
-if (\Portrino\PxLib\Utility\ExtensionManagementUtility::isFeatureEnabled('auto_fe_user_creation', $_EXTKEY)) {
+if ((boolean)$extConf['auto_fe_user_creation.']['enabled']) {
     $signalSlotDispatcher->connect(
         'Portrino\PxHybridAuth\Service\SocialLoginAuthenticationService',
         'getUser',
@@ -102,6 +102,10 @@ if (\Portrino\PxLib\Utility\ExtensionManagementUtility::isFeatureEnabled('auto_f
         'getUser',
         FALSE
     );
+}
+// if px_lib is not loaded take the ProcessDatamapDispatcher from py_hybrid_auth
+if (!\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('px_lib')) {
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][] = 'Portrino\\PxHybridAuth\\Hooks\\ProcessDataMapDispatcher';
 }
 
 $signalSlotDispatcher->connect(
@@ -119,4 +123,5 @@ $signalSlotDispatcher->connect(
     'preventEmptyFlexFormValues',
     FALSE
 );
+
 

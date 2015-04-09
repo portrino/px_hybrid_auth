@@ -29,12 +29,19 @@ namespace Portrino\PxHybridAuth\Controller;
 
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 
+    // only take the px_lib abstract controller if it is installed
+if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('px_lib')) {
+    class DynamicIdentityController extends \Portrino\PxLib\Controller\AbstractController {}
+} else {
+    class DynamicIdentityController extends \Portrino\PxHybridAuth\Controller\AbstractController {}
+}
+
 /**
  * Class IdentityController
  *
  * @package Portrino\PxHybridAuth\Controller
  */
-class IdentityController extends \Portrino\PxHybridAuth\Controller\AbstractController {
+class IdentityController extends DynamicIdentityController {
 
     /**
      * @var integer The uid of the current logged in user

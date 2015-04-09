@@ -69,23 +69,6 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
     protected $currentPageUid;
 
     /**
-     * @var \Portrino\PxLib\Domain\Model\Page
-     */
-    protected $currentPage;
-
-    /**
-     * @var \Portrino\PxLib\Domain\Repository\PageRepository
-     * @inject
-     */
-    protected $pageRepository;
-
-    /**
-     * @var \Portrino\PxLib\Utility\FalUtility
-     * @inject
-     */
-    protected $falUtility;
-
-    /**
      * Initializes the controller before invoking an action method.
      *
      * Override this method to solve tasks which all actions have in
@@ -100,7 +83,6 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
         $this->controllerSettings = $this->settings['controllers'][$this->request->getControllerName()];
         $this->actionSettings = $this->controllerSettings['actions'][$this->request->getControllerActionName()];
         $this->currentPageUid = $GLOBALS['TSFE']->id;
-        $this->currentPage = $this->pageRepository->findByUid($this->currentPageUid);
     }
 
     /**
@@ -119,7 +101,6 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
             'actionSettings' => $this->actionSettings,
             'extConf' => $this->extConf,
             'currentPageUid' => $this->currentPageUid,
-            'currentPage' => $this->currentPage,
             'dateTime' => $this->dateTime
         ));
     }
@@ -159,7 +140,7 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
     /**
      * Deactivate FlashMessages for erros
      *
-     * @see Tx_Extbase_MVC_Controller_ActionController::getErrorFlashMessage()
+     * @see TYPO3\CMS\Extbase\Mvc\Controller\ActionController::getErrorFlashMessage()
      */
     protected function getErrorFlashMessage() {
         return FALSE;
