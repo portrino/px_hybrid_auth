@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-09-08T07:52:05Z" product-name="px_hybrid_auth">
+		<header/>
+		<body>
+
+            <!-- #####      -->
+            <!-- tt_content -->
+            <!-- #####      -->
+
+            <trans-unit id="CType.I.px_hybrid_auth_login" xml:space="preserve">
+                <source>HybridAuth Login Form</source>
+            </trans-unit>
+
+            <trans-unit id="CType.I.px_hybrid_auth_login.description" xml:space="preserve">
+                <source>Login form to authenticate against a social provider (e.g. Facebook, LinkedIn, ...)</source>
+            </trans-unit>
+
+            <trans-unit id="tt_content.pi_flexform.sheet_general" xml:space="preserve">
+                <source>General</source>
+            </trans-unit>
+            <trans-unit id="tt_content.pi_flexform.sheet_redirect" xml:space="preserve">
+				<source>Redirects</source>
+			</trans-unit>
+            <trans-unit id="tt_content.pi_flexform.redirectPageLogin" xml:space="preserve">
+				<source>After Successful Login Redirect to Page</source>
+			</trans-unit>
+			<trans-unit id="tt_content.pi_flexform.redirectPageLoginError" xml:space="preserve">
+				<source>After Failed Login Redirect to Page</source>
+			</trans-unit>
+            <trans-unit id="tt_content.pi_flexform.user_storage" xml:space="preserve">
+				<source>User Storage Page</source>
+			</trans-unit>
+            <trans-unit id="tt_content.pi_flexform.show_logoutFormAfterLogin" xml:space="preserve">
+				<source>Display Logout Form After Successful Login</source>
+			</trans-unit>
+            <trans-unit id="tt_content.pi_flexform.recursive" xml:space="preserve">
+				<source>Recursive</source>
+			</trans-unit>
+
+            <!-- ##### -->
+            <!-- user  -->
+            <!-- ##### -->
+
+            <!-- fe_users -->
+            <trans-unit id="fe_users.tabs.px_hybrid_auth" xml:space="preserve">
+                <source>PxHybridAuth</source>
+            </trans-unit>
+            <trans-unit id="fe_users.message.no_configured_providers.header" xml:space="preserve">
+                <source>No social provider configuration given!</source>
+            </trans-unit>
+            <trans-unit id="fe_users.message.no_configured_providers.body" xml:space="preserve">
+                <source>Please enable and configure your social providers within the extension configuration in the extension manager!</source>
+            </trans-unit>
+
+            <!-- identities -->
+            <trans-unit id="tx_pxhybridauth_domain_model_user.identities" xml:space="preserve" >
+                <source>Identities</source>
+            </trans-unit>
+
+            <!-- ##### -->
+            <!-- identity -->
+            <!-- ##### -->
+            <trans-unit id="tx_pxhybridauth_domain_model_identity" xml:space="preserve">
+                <source>Identity</source>
+            </trans-unit>
+            <trans-unit id="tx_pxhybridauth_domain_model_identity.identifier" xml:space="preserve">
+                <source>Identifier</source>
+            </trans-unit>
+            <trans-unit id="tx_pxhybridauth_domain_model_identity.tx_extbase_type" xml:space="preserve">
+                <source>Type</source>
+            </trans-unit>
+            <trans-unit id="tx_pxhybridauth_domain_model_identity.tx_extbase_type.Tx_PxHybridAuth_Domain_Model_Identity_FacebookIdentity" xml:space="preserve">
+                <source>Facebook</source>
+            </trans-unit>
+            <trans-unit id="tx_pxhybridauth_domain_model_identity.tx_extbase_type.Tx_PxHybridAuth_Domain_Model_Identity_XingIdentity" xml:space="preserve">
+                <source>Xing</source>
+            </trans-unit>
+            <trans-unit id="tx_pxhybridauth_domain_model_identity.tx_extbase_type.Tx_PxHybridAuth_Domain_Model_Identity_LinkedInIdentity" xml:space="preserve">
+                <source>LinkedIn</source>
+            </trans-unit>
+            
+            <trans-unit id="actions" xml:space="preserve">
+                <source>Logintype</source>
+            </trans-unit>
+
+            <trans-unit id="facebook_user.new_login" xml:space="preserve">
+                <source>Facebook</source>
+            </trans-unit>
+
+            <trans-unit id="linkedin_user.new_login" xml:space="preserve">
+                <source>LinkedIn</source>
+            </trans-unit>
+
+            <trans-unit id="xing_user.new_login" xml:space="preserve">
+                <source>Xing</source>
+            </trans-unit>
+
+            <trans-unit id="plugins.identity.name" xml:space="preserve">
+                <source>PxHybridAuth::SocialAccounts</source>
+            </trans-unit>
+        </body>
+	</file>
+</xliff>

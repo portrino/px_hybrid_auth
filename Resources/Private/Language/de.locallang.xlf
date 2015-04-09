@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-09-08T07:52:05Z" product-name="px_hybrid_auth">
+		<header/>
+		<body>
+            <trans-unit id="tx_pxhybridauth_domain_model_identity.tx_extbase_type" xml:space="preserve">
+                <source>Type</source>
+                <target state="translated">Typ</target>
+            </trans-unit>
+            <trans-unit id="tx_pxhybridauth_domain_model_identity.tx_extbase_type.Tx_PxHybridAuth_Domain_Model_Identity_FacebookIdentity" xml:space="preserve">
+                <source>Facebook</source>
+                <target state="translated">Facebook</target>
+            </trans-unit>
+            <trans-unit id="tx_pxhybridauth_domain_model_identity.tx_extbase_type.Tx_PxHybridAuth_Domain_Model_Identity_XingIdentity" xml:space="preserve">
+                <source>Xing</source>
+                <target state="translated">Xing</target>
+            </trans-unit>
+            <trans-unit id="tx_pxhybridauth_domain_model_identity.tx_extbase_type.Tx_PxHybridAuth_Domain_Model_Identity_LinkedInIdentity" xml:space="preserve">
+                <source>LinkedIn</source>
+                <target state="translated">LinkedIn</target>
+            </trans-unit>
+
+            <trans-unit id="facebook" xml:space="preserve">
+                <source>Facebook</source>
+                <target state="translated">Facebook</target>
+            </trans-unit>
+            <trans-unit id="linkedin" xml:space="preserve">
+                <source>LinkedIn</source>
+                <target state="translated">LinkedIn</target>
+            </trans-unit>
+            <trans-unit id="xing" xml:space="preserve">
+                <source>Xing</source>
+                <target state="translated">Xing</target>
+            </trans-unit>
+
+            <trans-unit id="sign_in_facebook" xml:space="preserve">
+                <source>Sign in with Facebook</source>
+                <target state="translated">Mit Facebook einloggen</target>
+            </trans-unit>
+            <trans-unit id="sign_in_linkedin" xml:space="preserve">
+                <source>Sign in with LinkedIn</source>
+                <target state="translated">Mit LinkedIn einloggen</target>
+            </trans-unit>
+            <trans-unit id="sign_in_xing" xml:space="preserve">
+                <source>Sign in with Xing</source>
+                <target state="translated">Mit Xing einloggen</target>
+            </trans-unit>
+            <trans-unit id="connect_with_facebook" xml:space="preserve">
+                <source>Connect with Facebook</source>
+                <target state="translated">Verbinden mit Facebook</target>
+            </trans-unit>
+            <trans-unit id="connect_with_linkedin" xml:space="preserve">
+                <source>Connect with LinkedIn</source>
+                <target state="translated">Verbinden mit LinkedIn</target>
+            </trans-unit>
+            <trans-unit id="connect_with_xing" xml:space="preserve">
+                <source>Connect with Xing</source>
+                <target state="translated">Verbinden mit Xing</target>
+            </trans-unit>
+
+            <trans-unit id="connected" xml:space="preserve">
+                <source>Connected</source>
+                <target state="translated">Verbunden</target>
+            </trans-unit>
+
+            <trans-unit id="logout" xml:space="preserve">
+                <source>Logout</source>
+                <target state="translated">Logout</target>
+            </trans-unit>
+		</body>
+	</file>
+</xliff>

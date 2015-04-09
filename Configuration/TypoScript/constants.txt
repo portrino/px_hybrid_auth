@@ -1,0 +1,35 @@
+
+plugin.tx_pxhybridauth {
+	view {
+		# cat=plugin.tx_pxhybridauth/file; type=string; label=Path to template root (FE)
+		templateRootPath = EXT:px_hybrid_auth/Resources/Private/Templates/
+		# cat=plugin.tx_pxhybridauth/file; type=string; label=Path to template partials (FE)
+		partialRootPath = EXT:px_hybrid_auth/Resources/Private/Partials/
+		# cat=plugin.tx_pxhybridauth/file; type=string; label=Path to template layouts (FE)
+		layoutRootPath = EXT:px_hybrid_auth/Resources/Private/Layouts/
+	}
+	persistence {
+		# cat=plugin.tx_pxhybridauth//a; type=string; label=Default storage PID
+		storagePid =
+        recursive =
+        classes {
+            Portrino\PxHybridAuth\Domain\Model\Identity {
+                newRecordStoragePid =
+            }
+            Portrino\PxHybridAuth\Domain\Model\Identity\FacebookIdentity {
+                newRecordStoragePid =
+            }
+            Portrino\PxHybridAuth\Domain\Model\Identity\XingIdentity {
+                newRecordStoragePid =
+            }
+            Portrino\PxHybridAuth\Domain\Model\Identity\LinkedInIdentity {
+                newRecordStoragePid =
+            }
+        }
+	}
+    settings {
+        redirectPageLogin =
+        redirectPageLoginError =
+        showLogoutFormAfterLogin = 0
+    }
+}

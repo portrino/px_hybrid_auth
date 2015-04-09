@@ -1,0 +1,27 @@
+<f:layout name="UpdateScript" />
+<f:section name="main">
+    <div class="main">
+
+        <table class="t3-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Details</th>
+                    <th>Ok?</th>
+                    <th>Update?</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <f:render partial="UpdateScript/UpdateTableNames" arguments="{_all}" />
+            </tr>
+            <tr>
+                <f:render partial="UpdateScript/UpdateColumnNames" arguments="{_all}" />
+            </tr>
+            <tr>
+                <f:render partial="UpdateScript/UpdateExtbaseTypes" arguments="{_all}" />
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</f:section>

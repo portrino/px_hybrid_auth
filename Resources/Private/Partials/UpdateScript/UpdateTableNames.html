@@ -1,0 +1,26 @@
+<td>TableNames</td>
+<td>tx_pxregister_domain_model_identity -> tx_pxhybridauth_domain_model_identity</td>
+<td>
+    <f:if condition="{status.tableNames} == 'OK'">
+        <span class="t3-icon t3-icon-status t3-icon-status-status t3-icon-status-checked">&nbsp;</span>
+    </f:if>
+    <f:if condition="{status.tableNames} == 'INFO'">
+        <span class="t3-icon t3-icon-status t3-icon-status-status t3-icon-dialog-warning">&nbsp;</span>
+    </f:if>
+    <f:if condition="{status.tableNames} == 'ERROR'">
+        <span class="t3-icon t3-icon-status t3-icon-status-status t3-icon-status-permission-denied">&nbsp;</span>
+    </f:if>
+</td>
+<td style="text-align: center;">
+    <f:if condition="{status.tableNames} == 'INFO'">
+        <a href="{requestUri}&action=updateTableNames">
+            <span class="t3-icon t3-icon-extensions t3-icon-extensions-extensionmanager t3-icon-extensionmanager-update-script">&nbsp;</span>
+        </a>
+    </f:if>
+    <f:if condition="{status.tableNames} == 'ERROR'">
+        <a href="{requestUri}&action=updateTableNames">
+            <span class="t3-icon t3-icon-extensions t3-icon-extensions-extensionmanager t3-icon-extensionmanager-update-script">&nbsp;</span>
+        </a>
+    </f:if>
+</td>
+

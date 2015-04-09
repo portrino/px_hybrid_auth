@@ -1,0 +1,186 @@
+
+plugin.tx_pxhybridauth {
+	view {
+		templateRootPath = {$plugin.tx_pxhybridauth.view.templateRootPath}
+		partialRootPath = {$plugin.tx_pxhybridauth.view.partialRootPath}
+		layoutRootPath = {$plugin.tx_pxhybridauth.view.layoutRootPath}
+	}
+	persistence {
+		storagePid = {$plugin.tx_pxhybridauth.persistence.storagePid}
+        recursive = {$plugin.tx_pxhybridauth.persistence.recursive}
+        classes {
+            Portrino\PxHybridAuth\Domain\Model\Identity {
+                newRecordStoragePid = {$plugin.tx_pxhybridauth.persistence.classes.Portrino\PxHybridAuth\Domain\Model\Identity.newRecordStoragePid}
+            }
+            Portrino\PxHybridAuth\Domain\Model\Identity\FacebookIdentity {
+                newRecordStoragePid = {$plugin.tx_pxhybridauth.persistence.classes.Portrino\PxHybridAuth\Domain\Model\Identity\FacebookIdentity.newRecordStoragePid}
+            }
+            Portrino\PxHybridAuth\Domain\Model\Identity\XingIdentity {
+                newRecordStoragePid = {$plugin.tx_pxhybridauth.persistence.classes.Portrino\PxHybridAuth\Domain\Model\Identity\XingIdentity.newRecordStoragePid}
+            }
+            Portrino\PxHybridAuth\Domain\Model\Identity\LinkedinIdentity {
+                newRecordStoragePid = {$plugin.tx_pxhybridauth.persistence.classes.Portrino\PxHybridAuth\Domain\Model\Identity\LinkedinIdentity.newRecordStoragePid}
+            }
+        }
+	}
+    features {
+        skipDefaultArguments = 1
+    }
+    settings {
+        storagePid = {$plugin.tx_pxhybridauth.persistence.storagePid}
+        recursive = {$plugin.tx_pxhybridauth.persistence.recursive}
+        redirectPageLogin = {$plugin.tx_pxhybridauth.settings.redirectPageLogin}
+        redirectPageLoginError = {$plugin.tx_pxhybridauth.settings.redirectPageLoginError}
+        showLogoutFormAfterLogin = {$plugin.tx_pxhybridauth.settings.showLogoutFormAfterLogin}
+        loginPid = {$loginPid}
+    }
+}
+
+plugin.tx_pxhybridauth_login = USER
+plugin.tx_pxhybridauth_login {
+    userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+    pluginName = Login
+    vendorName = Portrino
+    extensionName = PxHybridAuth
+    controller = Xing
+    action = newLogin
+    switchableControllerActions {
+        FacebookUser {
+            1 = newLogin
+        }
+        LinkedinUser {
+            1 = newLogin
+        }
+        XingUser {
+            1 = newLogin
+        }
+    }
+    settings =< plugin.tx_pxhybridauth.settings
+    persistence =< plugin.tx_pxhybridauth.persistence
+    view =< plugin.tx_pxhybridauth.view
+}
+
+# global extbase settings
+config.tx_extbase {
+    persistence {
+        classes {
+            Portrino\PxHybridAuth\Domain\Model\Identity {
+                subclasses {
+                    Portrino\PxHybridAuth\Domain\Model\Identity\FacebookIdentity = Portrino\PxHybridAuth\Domain\Model\Identity\FacebookIdentity
+                    Portrino\PxHybridAuth\Domain\Model\Identity\XingIdentity = Portrino\PxHybridAuth\Domain\Model\Identity\XingIdentity
+                    Portrino\PxHybridAuth\Domain\Model\Identity\LinkedinIdentity = Portrino\PxHybridAuth\Domain\Model\Identity\LinkedinIdentity
+                }
+            }
+            Portrino\PxHybridAuth\Domain\Model\Identity\FacebookIdentity {
+                mapping {
+                    tableName = tx_pxhybridauth_domain_model_identity
+                    recordType = Tx_PxHybridAuth_Domain_Model_Identity_FacebookIdentity
+                    columns {
+                        tx_extbase_type.mapOnProperty = extbaseType
+                    }
+                }
+            }
+
+            Portrino\PxHybridAuth\Domain\Model\Identity\XingIdentity {
+                mapping {
+                    tableName = tx_pxhybridauth_domain_model_identity
+                    recordType = Tx_PxHybridAuth_Domain_Model_Identity_XingIdentity
+                }
+            }
+
+            Portrino\PxHybridAuth\Domain\Model\Identity\LinkedinIdentity {
+                mapping {
+                    tableName = tx_pxhybridauth_domain_model_identity
+                    recordType = Tx_PxHybridAuth_Domain_Model_Identity_LinkedinIdentity
+                }
+            }
+
+            TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
+                subclasses {
+                    Portrino\PxHybridAuth\Domain\Model\User = Portrino\PxHybridAuth\Domain\Model\User
+                }
+            }
+            Portrino\PxHybridAuth\Domain\Model\User {
+                mapping {
+                    tableName = fe_users
+                    columns {
+                        tx_pxhybridauth_identities.mapOnProperty = identities
+                    }
+                }
+            }
+        }
+    }
+}
+
+###
+### API
+###
+pxHybridAuthApi = PAGE
+pxHybridAuthApi {
+    typeNum =
+    10 = USER
+    10 {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = PxHybridAuth
+        vendorName = Portrino
+        pluginName =
+        controller =
+        switchableControllerActions {
+        }
+        settings =< plugin.tx_pxhybridauth.settings
+        persistence =< plugin.tx_pxhybridauth.persistence
+        view =< plugin.tx_pxhybridauth.view
+    }
+
+    config {
+        disableAllHeaderCode = 1
+        additionalHeaders = Content-type:application/json
+        xhtml_cleaning = 0
+        admPanel = 0
+        no_cache = 1
+    }
+}
+
+###
+### Endpoint API
+###
+pxHybridAuthApiEndpoint < pxHybridAuthApi
+pxHybridAuthApiEndpoint {
+    typeNum = 1410157426
+    10 {
+        pluginName = HybridAuth
+        controller = HybridAuth
+        action = endpoint
+        switchableControllerActions {
+            HybridAuth {
+                1 = endpoint
+            }
+        }
+    }
+}
+
+page.includeJSFooter {
+    1410170863  = EXT:px_hybrid_auth/Resources/Public/Js/px_hybrid_auth.js
+}
+
+temp.hybridAuthPlugin = USER
+temp.hybridAuthPlugin {
+    userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+    extensionName = PxHybridAuth
+    pluginName = Login
+    vendorName = Portrino
+    controller =
+    action = newLogin
+    view < plugin.tx_pxhybridauth.view
+    persistence < plugin.tx_pxhybridauth.persistence
+    settings < plugin.tx_pxhybridauth.settings
+}
+
+temp.hybridAuthPluginFacebook < temp.hybridAuthPlugin
+temp.hybridAuthPluginFacebook.controller = FacebookUser
+
+temp.hybridAuthPluginLinkedIn < temp.hybridAuthPlugin
+temp.hybridAuthPluginLinkedIn.controller = LinkedInUser
+
+temp.hybridAuthPluginXing < temp.hybridAuthPlugin
+temp.hybridAuthPluginXing.controller = Xing

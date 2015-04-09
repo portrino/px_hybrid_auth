@@ -1,0 +1,29 @@
+<td>ColumnNames</td>
+<td>
+    <b>fe_users</b><br>
+    RENAME tx_pxregister_domain_model_identity -> tx_pxhybridauth_domain_model_identity <br>
+</td>
+<td>
+    <f:if condition="{status.columnNames} == 'OK'">
+        <span class="t3-icon t3-icon-status t3-icon-status-status t3-icon-status-checked">&nbsp;</span>
+    </f:if>
+    <f:if condition="{status.columnNames} == 'INFO'">
+        <span class="t3-icon t3-icon-status t3-icon-status-status t3-icon-dialog-warning">&nbsp;</span>
+    </f:if>
+    <f:if condition="{status.columnNames} == 'ERROR'">
+        <span class="t3-icon t3-icon-status t3-icon-status-status t3-icon-status-permission-denied">&nbsp;</span>
+    </f:if>
+</td>
+<td style="text-align: center;">
+    <f:if condition="{status.columnNames} == 'INFO'">
+        <a href="{requestUri}&action=updateColumnNames">
+            <span class="t3-icon t3-icon-extensions t3-icon-extensions-extensionmanager t3-icon-extensionmanager-update-script">&nbsp;</span>
+        </a>
+    </f:if>
+    <f:if condition="{status.columnNames} == 'ERROR'">
+        <a href="{requestUri}&action=updateColumnNames">
+            <span class="t3-icon t3-icon-extensions t3-icon-extensions-extensionmanager t3-icon-extensionmanager-update-script">&nbsp;</span>
+        </a>
+    </f:if>
+</td>
+
