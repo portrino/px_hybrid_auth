@@ -34,7 +34,7 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @package Portrino\PxHybridAuth\Controller
  */
-class IdentityController extends \Portrino\PxLib\Controller\AbstractController {
+class IdentityController extends \Portrino\PxHybridAuth\Controller\AbstractController {
 
     /**
      * @var integer The uid of the current logged in user

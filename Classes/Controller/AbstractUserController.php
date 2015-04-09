@@ -32,18 +32,36 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @package Portrino\PxHybridAuth\Controller
  */
-class AbstractUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+class AbstractUserController extends \Portrino\PxHybridAuth\Controller\AbstractController {
+
+     public function initializeNewLoginAction() {
+        $redirectUrl = ($this->request->hasArgument('redirect_url')) ? $this->request->getArgument('redirect_url') : NULL;
+        $redirectPid = ($this->request->hasArgument('redirect_pid')) ? $this->request->getArgument('redirect_pid') : NULL;
+        // handle the redirects
+        if ($redirectUrl) {
+            $this->redirectToUri($redirectUrl);
+        }
+        if ($redirectPid) {
+            $this->redirectToPage($redirectPid);
+        }
+        $loginError = ($this->request->hasArgument('login_error')) ? $this->request->getArgument('login_error') : NULL;
+        // handle the redirect
+        if ($loginError) {
+            $this->signalSlotDispatcher->dispatch(__CLASS__, 'loginErrorBeforeRedirect', array($this, $this->request));
+            $this->redirectToPage($this->settings['redirectPageLoginError']);
+        }
+    }
 
     /**
-     * @var array
+     * action newLogin
+     *
+     * @return void
      */
-    protected $extConf;
-
-    protected function initializeView(\TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view) {
+    public function newLoginAction() {
         $returnUrl = GeneralUtility::_GP('return_url') ? GeneralUtility::_GP('return_url') : NULL;
-            // only if no return_url given use the redirectPageLogin from TS/Flexform settings
+        // only if no return_url given use the redirectPageLogin from TS/Flexform settings
         if (!$returnUrl) {
-                // if no redirectPageLogin from TS/Flexform was given use the loginPid from ext_conf
+            // if no redirectPageLogin from TS/Flexform was given use the loginPid from ext_conf
             $returnPid = $this->settings['redirectPageLogin'] ? $this->settings['redirectPageLogin'] : $this->extConf['basic.']['login_pid'];
         }
         if ($this->settings['storagePid']) {
@@ -56,69 +74,6 @@ class AbstractUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
         $this->view->assign('redirect_pid', $returnPid);
         $this->view->assign('pid', $storagePids);
         $this->view->assign('settings', $this->settings);
-
-        parent::initializeView($view);
-    }
-
-    protected function initializeAction() {
-        $this->extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['px_hybrid_auth']);
-        $redirectUrl = ($this->request->hasArgument('redirect_url')) ? $this->request->getArgument('redirect_url') : NULL;
-        $redirectPid = ($this->request->hasArgument('redirect_pid')) ? $this->request->getArgument('redirect_pid') : NULL;
-            // handle the redirects
-        if ($redirectUrl) {
-            $this->redirectToUri($redirectUrl);
-        }
-        if ($redirectPid) {
-            $this->redirectToPage($redirectPid);
-        }
-        $loginError = ($this->request->hasArgument('login_error')) ? $this->request->getArgument('login_error') : NULL;
-            // handle the redirect
-        if ($loginError) {
-            $this->signalSlotDispatcher->dispatch(__CLASS__, 'loginErrorBeforeRedirect', array($this, $this->request));
-            $this->redirectToPage($this->settings['redirectPageLoginError']);
-        }
-        parent::initializeAction();
-    }
-
-    /**
-     * action newLogin
-     *
-     * @return void
-     */
-    public function newLoginAction() {
-    }
-
-
-    /**
-     * redirects to page
-     *
-     * @param null $pageUid
-     * @param array $additionalParams
-     * @param int $pageType
-     * @param bool $noCache
-     * @param bool $noCacheHash
-     * @param string $section
-     * @param bool $linkAccessRestrictedPages
-     * @param bool $absolute
-     * @param bool $addQueryString
-     * @param array $argumentsToBeExcludedFromQueryString
-     */
-    protected function redirectToPage($pageUid = NULL, array $additionalParams = array(), $pageType = 0, $noCache = FALSE, $noCacheHash = FALSE, $section = '', $linkAccessRestrictedPages = FALSE, $absolute = FALSE, $addQueryString = FALSE, array $argumentsToBeExcludedFromQueryString = array()) {
-        $uri = $this->uriBuilder
-            ->reset()
-            ->setTargetPageUid($pageUid)
-            ->setTargetPageType($pageType)
-            ->setNoCache($noCache)
-            ->setUseCacheHash(!$noCacheHash)
-            ->setSection($section)
-            ->setLinkAccessRestrictedPages($linkAccessRestrictedPages)
-            ->setArguments($additionalParams)
-            ->setCreateAbsoluteUri($absolute)
-            ->setAddQueryString($addQueryString)
-            ->setArgumentsToBeExcludedFromQueryString($argumentsToBeExcludedFromQueryString)
-            ->build();
-
-        $this->redirectToURI($uri);
     }
 
     /**
