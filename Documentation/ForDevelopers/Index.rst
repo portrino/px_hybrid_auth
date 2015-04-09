@@ -56,7 +56,7 @@ HybridAuth offers a the following SignalSlots (Extbase pendant to Hooks) to exte
       Slot is called after social authentication is done
 
  - :Class:
-      Portrino\\PxHybridAuth\\Controller;
+      Portrino\\PxHybridAuth\\Controller\\AbstractUserController
    :Name:
       loginErrorBeforeRedirect
    :File:
@@ -64,7 +64,7 @@ HybridAuth offers a the following SignalSlots (Extbase pendant to Hooks) to exte
    :Method:
       initializeNewLoginAction()
    :Description:
-      Slot is called if an error occured during initializing the newLoginAction()
+      Slot is called if an error occurred during initializing the newLoginAction()
 
 
 
