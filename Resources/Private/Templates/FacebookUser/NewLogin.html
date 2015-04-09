@@ -18,9 +18,7 @@
                 <input type="hidden" name="tx_pxhybridauth_login[redirect_url]" value="{redirect_url}" />
                 <input type="hidden" name="tx_pxhybridauth_login[redirect_pid]" value="{redirect_pid}" />
                 <input type="hidden" name="logintype" value="login" />
-                <div class="input submit facebook">
-                    <span><input type="submit" value="{f:translate(key:'sign_in_facebook')}"></span>
-                </div>
+                <f:render partial="FacebookUser/Button"/>
             </form>
         </f:else>
     </f:security.ifAuthenticated>
