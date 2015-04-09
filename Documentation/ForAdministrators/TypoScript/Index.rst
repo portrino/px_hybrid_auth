@@ -39,3 +39,6 @@ settings.redirectPageLoginError         PID         The page to be redirected to
 settings.showLogoutFormAfterLogin       boolean     Display logout button after successful login                                                       false
 settings.loginPid                       PID         The id of the login page.
 ======================================  ==========  =================================================================================================  =======
+
+Example
+'''''''

@@ -38,7 +38,7 @@ You can choose which social network should be used in the upper DropDown Menu. T
 Tab "Redirects"
 ^^^^^^^^^^^^^^^
 
-In the second tab "Redirects" you can choose where to redirect after a successful or after a failed Login.
+In the second tab "Redirects" you can choose where to redirect after a successful or failed login.
 
 .. figure:: ../Images/UserManual/FlexformRedirects.png
     :width: 500px
@@ -51,7 +51,7 @@ In the second tab "Redirects" you can choose where to redirect after a successfu
 List of social accounts
 -----------------------
 
-To create the list of the providers with which the user is connected you have to create a new content element of the type *plugin*. Select afterwards the Plugin *PxHybridAuth::Social Accounts* and click the save button.
+To show the list of providers with which the user is connected in frontend you can put a special plugin to your page. Select the plugin *PxHybridAuth::Social Accounts* and click the save button.
 
 .. figure:: ../Images/UserManual/SocialAccounts.png
     :width: 500px

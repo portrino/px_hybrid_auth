@@ -19,18 +19,11 @@ In the different tabs you can configure system wide settings and the social prov
 
     You need to create your own application for the desired social provider on their developer pages.
 
-    e.g.:
+    Currently the following social providers are supported out-of-the-box:
 
-    - https://developers.facebook.com/
-    - https://developer.linkedin.com/
-    - https://dev.xing.com/
-
-Currently the following social providers are supported out-of-the-box:
-
-- Facebook
-- LinkedIn
-- Xing
-
+    - Facebook - https://developers.facebook.com/
+    - LinkedIn - https://developer.linkedin.com/
+    - Xing - https://dev.xing.com/
 
 Basic
 '''''
@@ -39,9 +32,9 @@ Basic
     :width: 500px
     :align: left
 
-.. important:: Set the Pid of your Login page.
+.. important:: Set the Pid of your Login page. This page will be used as return_url for HybridAuth after oauth process takes place.
 
-If there is no Login url stored in the session of the user this page will be used for the login.
+
 
 If you enable the debug mode for Single SignOn (SSO) you can get additional information if the login to a social provider through PxHybridAuth does not work. You can also define the location of a file where this debug information are stored.
 

@@ -66,7 +66,73 @@ HybridAuth offers a the following SignalSlots (Extbase pendant to Hooks) to exte
    :Description:
       Slot is called if an error occurred during initializing the newLoginAction()
 
+Example
+'''''''
+
+ext_localconf.php
+
+.. code-block:: php
+
+  if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('px_hybrid_auth')) {
+
+    $signalSlotDispatcher->connect(
+        'Portrino\PxHybridAuth\Service\SocialLoginAuthenticationService',
+        'getUser',
+        'Portrino\PxRegister\Slots\HybridAuthSlot',
+        'getUser',
+        FALSE
+    );
+
+    $signalSlotDispatcher->connect(
+        'Portrino\PxHybridAuth\Service\SocialLoginAuthenticationService',
+        'authUser',
+        'Portrino\PxRegister\Slots\HybridAuthSlot',
+        'authUser',
+        FALSE
+    );
+
+    $signalSlotDispatcher->connect(
+        'Portrino\PxHybridAuth\Controller\AbstractUserController',
+        'loginErrorBeforeRedirect',
+        'Portrino\PxRegister\Slots\HybridAuthSlot',
+        'loginErrorBeforeRedirect',
+        FALSE
+    );
+  }
 
 
+
+HybridAuthSlot.php
+
+
+.. code-block:: php
+
+  /**
+   * Class HybridAuthSlot
+   *
+   * @package Portrino\PxRegister\Slots
+   */
+  class HybridAuthSlot {
+
+      /**
+       * authUser
+       *
+       * @param array $user
+       * @param int $result
+       */
+      public function authUser($user, &$result) {
+          ...
+      }
+
+      /**
+       * loginErrorBeforeRedirect
+       *
+       * @param \Portrino\PxHybridAuth\Controller\AbstractUserController $pObj
+       * @param \TYPO3\CMS\Extbase\Mvc\Request $request
+       */
+      public function loginErrorBeforeRedirect($pObj, $request) {
+          ...
+      }
+  }
 
 

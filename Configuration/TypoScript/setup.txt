@@ -1,10 +1,16 @@
 
 plugin.tx_pxhybridauth {
-	view {
-		templateRootPath = {$plugin.tx_pxhybridauth.view.templateRootPath}
-		partialRootPath = {$plugin.tx_pxhybridauth.view.partialRootPath}
-		layoutRootPath = {$plugin.tx_pxhybridauth.view.layoutRootPath}
-	}
+    view {
+        templateRootPaths {
+            10 = EXT:px_hybrid_auth/Resources/Private/Templates/
+        }
+        partialRootPaths {
+            10 = EXT:px_hybrid_auth/Resources/Private/Partials/
+        }
+        layoutRootPaths {
+            10 = EXT:px_hybrid_auth/Resources/Private/Layouts/
+        }
+    }
 	persistence {
 		storagePid = {$plugin.tx_pxhybridauth.persistence.storagePid}
         recursive = {$plugin.tx_pxhybridauth.persistence.recursive}
