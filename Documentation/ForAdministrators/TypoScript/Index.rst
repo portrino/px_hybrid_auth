@@ -9,8 +9,8 @@
 
 .. _configuration-typoscript:
 
-TypoScript
-^^^^^^^^^^
+TypoScript Configuration
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 Include HybridAuth in Template
 ''''''''''''''''''''''''''''''

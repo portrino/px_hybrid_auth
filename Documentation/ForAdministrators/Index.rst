@@ -6,10 +6,10 @@
 .. include:: ../Includes.txt
 
 
-.. _administration:
+.. _for-administrators:
 
-Administration
-==============
+For Administrators
+===================
 
 Import
 ------
@@ -32,7 +32,11 @@ There are no dependencies other than TYPO3 6.2
 From GIT
 ^^^^^^^^
 
-.. warning:: add git clone command here
+Please use the following command to get the extension from GIT.
+
+.. code-block:: bash
+
+    git clone https://github.com/portrino/px_hybrid_auth
 
 Install
 -------
@@ -44,5 +48,10 @@ Configure
 ---------
 Please configure the extension after you have successfully installed it.
 
-- :ref:`configuration-extension-manager`
-- :ref:`configuration-typoscript`
+.. toctree::
+   :maxdepth: 5
+   :titlesonly:
+   :glob:
+
+   ExtensionManager/Index
+   TypoScript/Index

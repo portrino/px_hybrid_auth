@@ -6,32 +6,30 @@
 .. include:: ../../Includes.txt
 
 
-
 .. _configuration-extension-manager:
 
-Extension Manager
-^^^^^^^^^^^^^^^^^
+Extension Manager Configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-After you have installed the extension successfully (:ref:`administration`) you need to configure *PxHybridAuth*. In the different tabs you can
+After you have installed the extension successfully (:ref:`administration`) you need to configure *PxHybridAuth*.
 
-- enable the social provider
-- enter the AppId and
-- and secret key.
+In the different tabs you can configure system wide settings and the social providers (AppId, Secret)
 
-.. warning::
+.. note::
 
-    Das kann ich nicht ganz interpretieren:
-    You need to create your own Login Apps on the desired social networks for each new website.
+    You need to create your own application for the desired social provider on their developer pages.
+
+    e.g.:
+
+    - https://developers.facebook.com/
+    - https://developer.linkedin.com/
+    - https://dev.xing.com/
 
 Currently the following social providers are supported out-of-the-box:
 
 - Facebook
 - LinkedIn
 - Xing
-
-.. note::
-
-    The *PxHybridAuth* extension is designed in a way which should make it easy to integrate other social providers by developers.
 
 
 Basic
@@ -55,7 +53,6 @@ Facebook
     :align: left
 
 In this tab you have the following options:
-
 - Enable login through Facebook
 - Define the Facebook AppId
 - Define the App Secret which is used to generate access tokens

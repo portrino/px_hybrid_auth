@@ -6,10 +6,10 @@
 .. include:: ../Includes.txt
 
 
-.. _users-manual:
+.. _for-users:
 
-Users manual
-============
+For Users
+=========
 
 .. _login-form:
 
@@ -64,4 +64,9 @@ Social accounts of user
 
 After the installation of the *PxHybridAuth* extension you will find a new tab in the fe_user settings. Within this tab the social identities are shown to which the user is connected.
 
-.. warning:: Screenshot mit verbundenen Identities einfügen (Nutzernamen anonymisieren)
+.. figure:: ../Images/UserManual/EditUser.png
+    :width: 500px
+    :align: left
+
+
+
