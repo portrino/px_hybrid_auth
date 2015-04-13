@@ -1,0 +1,35 @@
+{namespace h=Portrino\PxHybridAuth\ViewHelpers}
+<f:layout name="Default" />
+<f:section name="main">
+
+<table class="table">
+    <f:for each="{socialProviders}" as="config" key="provider">
+        <f:if condition="{provider}">
+            <tr>
+                <td>
+                    <span><f:translate key="{provider}"></f:translate></span>
+                </td>
+                <td>
+                    <f:if condition="{config.isConnected}">
+                        <f:then>
+                            <div class="connected">
+                                <f:translate key="connected"></f:translate>
+                            </div>
+                        </f:then>
+                        <f:else>
+                            <f:form action="create" name="identity" object="{identity}" controller="Identity\{provider -> h:format.uppercaseFirst()}Identity">
+                                <div class="input submit {provider}">
+                                    <span>
+                                        <f:form.submit value="{f:translate(key:'connect_with_{provider}')}"></f:form.submit>
+                                    </span>
+                                </div>
+                            </f:form>
+                        </f:else>
+                    </f:if>
+                </td>
+            </tr>
+        </f:if>
+    </f:for>
+</table>
+
+</f:section>

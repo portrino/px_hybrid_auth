@@ -1,0 +1,25 @@
+<f:layout name="Default" />
+<f:section name="main">
+    <f:security.ifAuthenticated>
+        <f:then>
+            <f:if condition="{settings.showLogoutFormAfterLogin}">
+                <form action="{f:uri.page(pageUid:'{settings.loginPid}')}" class="logoutform" method="post">
+                    <input type="hidden" name="logintype" value="logout">
+                    <div class="input submit">
+                        <span><input type="submit" value="{f:translate(key:'logout')}"></span>
+                    </div>
+                </form>
+            </f:if>
+        </f:then>
+        <f:else>
+            <form action="{f:uri.page(pageUid:'{settings.loginPid}')}" name="facebook-user" id="new-login-facebook" class="loginform" method="post" >
+                <input type="hidden" name="tx_pxhybridauth_login[provider]" value="facebook" />
+                <input type="hidden" name="pid" value="{pid}" />
+                <input type="hidden" name="tx_pxhybridauth_login[redirect_url]" value="{redirect_url}" />
+                <input type="hidden" name="tx_pxhybridauth_login[redirect_pid]" value="{redirect_pid}" />
+                <input type="hidden" name="logintype" value="login" />
+                <f:render partial="FacebookUser/Button"/>
+            </form>
+        </f:else>
+    </f:security.ifAuthenticated>
+</f:section>

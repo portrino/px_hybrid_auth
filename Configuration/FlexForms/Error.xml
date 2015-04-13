@@ -1,0 +1,26 @@
+<T3DataStructure>
+    <meta>
+        <langDisable>1</langDisable>
+    </meta>
+    <sheets>
+        <sDEF>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>LLL:EXT:px_hybrid_auth/Resources/Private/Language/locallang_db.xlf:tt_content.pi_flexform.sheet_general</sheetTitle>
+                </TCEforms>
+                <type>array</type>
+                <el>
+                    <error>
+                        <TCEforms>
+                            <label></label>
+                            <config>
+                                <type>user</type>
+                                <userFunc>Portrino\PxHybridAuth\UserFunc\Tca->showNoProvidersConfiguredMessage</userFunc>
+                            </config>
+                        </TCEforms>
+                    </error>
+                </el>
+            </ROOT>
+        </sDEF>
+    </sheets>
+</T3DataStructure>

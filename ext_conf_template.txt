@@ -1,0 +1,41 @@
+# cat=BASIC/A; type=int; label=Login Pid : This page will be used as return_url for HybridAuth after oauth process takes place.
+basic.login_pid =
+
+# cat=BASIC/B; type=boolean; label=Enable Debug Mode : Enable Debug Mode for Single SignOn
+basic.debug_mode =
+
+# cat=BASIC/C; type=string; label=Debug File
+basic.debug_file =
+
+# cat=FACEBOOK/E; type=boolean; label=Facebook enable : Enable Single Sign On via Facebook for this System
+provider.facebook.enabled = 0
+
+# cat=FACEBOOK/F; type=string; label=Facebook AppId
+provider.facebook.id =
+
+# cat=FACEBOOK/G; type=string; label=Facebook Secret
+provider.facebook.secret =
+
+# cat=LINKED IN/H; type=boolean; label=LinkedIn enable : Enable Single Sign On via LinkedIn for this System
+provider.linkedin.enabled = 0
+
+# cat=LINKED IN/I; type=string; label=LinkedIn Key
+provider.linkedin.key =
+
+# cat=LINKED IN/J; type=string; label=LinkedIn Secret
+provider.linkedin.secret =
+
+# cat=XING /K; type=boolean; label=XING enable : Enable Single Sign On via XING for this System
+provider.xing.enabled = 0
+
+# cat=XING /L; type=string; label=XING Key
+provider.xing.key =
+
+# cat=XING /M; type=string; label=XING Secret
+provider.xing.secret =
+
+# cat=AUTOMATIC FEUSER CREATION/N; type=boolean; label=Automatic FE user  creation : Create an frontend user for the given social identity data if the frontend user not exists or cannot be found (!experimental)
+auto_fe_user_creation.enabled = 0
+
+# cat=AUTOMATIC FEUSER CREATION/O; type=int; label= Storage Pid : The Storage Pid of the Page, where the fe_users should be stored
+auto_fe_user_creation.storagePid =

@@ -1,0 +1,27 @@
+
+plugin.tx_pxhybridauth {
+	persistence {
+		# cat=plugin.tx_pxhybridauth//a; type=string; label=Default storage PID
+		storagePid =
+        recursive =
+        classes {
+            Portrino\PxHybridAuth\Domain\Model\Identity {
+                newRecordStoragePid =
+            }
+            Portrino\PxHybridAuth\Domain\Model\Identity\FacebookIdentity {
+                newRecordStoragePid =
+            }
+            Portrino\PxHybridAuth\Domain\Model\Identity\XingIdentity {
+                newRecordStoragePid =
+            }
+            Portrino\PxHybridAuth\Domain\Model\Identity\LinkedInIdentity {
+                newRecordStoragePid =
+            }
+        }
+	}
+    settings {
+        redirectPageLogin =
+        redirectPageLoginError =
+        showLogoutFormAfterLogin = 0
+    }
+}

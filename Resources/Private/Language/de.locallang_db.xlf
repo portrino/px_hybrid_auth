@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-07-09T13:36:00Z" product-name="px_register">
+		<header/>
+		<body>
+
+            <!-- #####      -->
+            <!-- tt_content -->
+            <!-- #####      -->
+
+            <trans-unit id="CType.I.px_hybrid_auth_login" xml:space="preserve">
+                <source>HybridAuth Login Form</source>
+                <target state="translated">HybridAuth Login Formular</target>
+            </trans-unit>
+
+            <trans-unit id="CType.I.px_hybrid_auth_login.description" xml:space="preserve">
+                <source>Social Login form used to authenticate against social provide (e.g. facebook)</source>
+                <target state="translated">Social Login Formular, um sich über einen Social Provider zu authentifizieren.</target>
+            </trans-unit>
+
+            <!-- ##### -->
+            <!-- user  -->
+            <!-- ##### -->
+
+            <!-- fe_users -->
+            <trans-unit id="fe_users.tabs.px_hybrid_auth" xml:space="preserve">
+                <source>PxHybridAuth</source>
+                <target state="translated">PxHybridAuth</target>
+            </trans-unit>
+            <trans-unit id="fe_users.message.no_configured_providers.header" xml:space="preserve">
+                <source>No social provider configuration given!</source>
+                <target state="translated">Keine SocialProvider aktiviert oder konfiguriert!</target>
+            </trans-unit>
+            <trans-unit id="fe_users.message.no_configured_providers.body" xml:space="preserve">
+                <source>Please enable and configure your social providers within the extension configuration in the extension manager!</source>
+                <target state="translated">Bitte aktivieren und konfigurieren Sie ihre gewünschten Social Provider in der Extension Konfiguration im Extension Manager.</target>
+            </trans-unit>
+
+            <!-- identities -->
+            <trans-unit id="tx_pxhybridauth_domain_model_user.identities" xml:space="preserve">
+                <source>Identities</source>
+                <target state="translated">Identitäten</target>
+            </trans-unit>
+
+            <!-- ##### -->
+            <!-- identity -->
+            <!-- ##### -->
+            <trans-unit id="tx_pxhybridauth_domain_model_identity" xml:space="preserve">
+                <source>Identity</source>
+                <target state="translated">Identität</target>
+            </trans-unit>
+            <trans-unit id="tx_pxhybridauth_domain_model_identity.identifier" xml:space="preserve">
+                <source>Identifier</source>
+                <target state="translated">Identität</target>
+            </trans-unit>
+            <trans-unit id="tx_pxhybridauth_domain_model_identity.tx_extbase_type" xml:space="preserve">
+                <source>Type</source>
+                <target state="translated">Typ</target>
+            </trans-unit>
+            <trans-unit id="tx_pxhybridauth_domain_model_identity.tx_extbase_type.Tx_PxHybridAuth_Domain_Model_Identity_FacebookIdentity" xml:space="preserve">
+                <source>Facebook</source>
+                <target state="translated">Facebook</target>
+            </trans-unit>
+            <trans-unit id="tx_pxhybridauth_domain_model_identity.tx_extbase_type.Tx_PxHybridAuth_Domain_Model_Identity_XingIdentity" xml:space="preserve">
+                <source>Xing</source>
+                <target state="translated">Xing</target>
+            </trans-unit>
+            <trans-unit id="tx_pxhybridauth_domain_model_identity.tx_extbase_type.Tx_PxHybridAuth_Domain_Model_Identity_LinkedInIdentity" xml:space="preserve">
+                <source>LinkedIn</source>
+                <target state="translated">LinkedIn</target>
+            </trans-unit>
+
+            <trans-unit id="plugins.identity.name" xml:space="preserve">
+                <source>PxHybridAuth::SocialAccounts</source>
+                <target state="translated">PxHybridAuth::SocialAccounts</target>
+            </trans-unit>
+		</body>
+	</file>
+</xliff>
