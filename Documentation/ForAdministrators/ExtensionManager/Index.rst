@@ -6,12 +6,12 @@
 .. include:: ../../Includes.txt
 
 
-.. _configuration-extension-manager:
+.. _extension-manager-configuration:
 
 Extension Manager Configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-After you have installed the extension successfully (:ref:`administration`) you need to configure *PxHybridAuth*.
+After you have installed the extension successfully (:ref:`for-administrators`) you need to configure *PxHybridAuth*.
 
 In the different tabs you can configure system wide settings and the social providers (AppId, Secret)
 

@@ -22,10 +22,10 @@ Import the extension to your server from the
 From TER
 ^^^^^^^^
 
-Select "*Get Extensions*" in the extension manager and search for "px_hybrid_auth" and click "Import and Install".
-There are no dependencies other than TYPO3 6.2
+Select "*Get Extensions*" in the extension manager and update your extension list. Search for "px_hybrid_auth" and click "Import and Install" to get the latest version.
+There are no other dependencies than TYPO3 6.2.
 
-.. figure:: ../Images/Administration/ExtensionManagerHybridAuthInstallation.png
+.. figure:: ../Images/Administration/GetExtensionHybridAuth.png
     :width: 500px
     :align: left
 

@@ -7,7 +7,7 @@
 
 
 
-.. _configuration-typoscript:
+.. _typoscript-configuration:
 
 TypoScript Configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^

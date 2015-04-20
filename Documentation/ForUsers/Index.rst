@@ -27,7 +27,7 @@ To use this plugin, just create a new content element of the type *HybridAuth Lo
 Tab "General"
 ^^^^^^^^^^^^^
 
-You can choose which social network should be used in the upper DropDown Menu. The content of this list is explained in the topic :ref:`configuration-extension-manager`
+You can choose which social network should be used in the upper DropDown Menu. The content of this list is explained in the topic :ref:`extension-manager-configuration`
 
 .. figure:: ../Images/UserManual/Flexform.png
     :width: 500px
