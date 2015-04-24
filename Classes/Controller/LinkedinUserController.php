@@ -33,11 +33,4 @@ namespace Portrino\PxHybridAuth\Controller;
  */
 class LinkedinUserController extends \Portrino\PxHybridAuth\Controller\AbstractUserController {
 
-    /**
-     * action newLogin
-     *
-     * @return void
-     */
-    public function newLoginAction() {
-    }
 }
