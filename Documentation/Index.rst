@@ -15,7 +15,7 @@ HybridAuth
 .. only:: html
 
 	:Classification:
-		extension_key
+		px_hybrid_auth
 
 	:Version:
 		|release|
@@ -24,10 +24,10 @@ HybridAuth
 		en
 
 	:Description:
-		Adds a plugin "HybridAuth login form" and additional features for social signin via HybridAuth api
+		Adds a plugin "HybridAuth login form" and additional features for social sign-in via HybridAuth API
 
 	:Keywords:
-		login, auth, oauth, hybrid auth, social, signin, connect
+		login, auth, oauth, oauth2, hybrid, social, sign-in, connect, facebook, linkedin, xing
 
 	:Copyright:
 		2015

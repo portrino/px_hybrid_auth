@@ -12,7 +12,7 @@
 
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'HybridAuth',
-	'description' => 'Adds HybridAuth to TYPO3 Login and Logout',
+	'description' => 'Adds social sign-in via HybridAuth to TYPO3-Login and -Logout. (by portrino GmbH)',
 	'category' => 'plugin',
 	'author' => 'André Wuttig',
 	'author_email' => 'wuttig@portrino.de',
@@ -22,7 +22,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'uploadfolder' => '0',
 	'createDirs' => '',
 	'clearCacheOnLoad' => 0,
-	'version' => '1.0.3',
+	'version' => '1.0.5',
 	'constraints' => array(
 		'depends' => array(
             'php' => '5.3.0-5.5.99',
