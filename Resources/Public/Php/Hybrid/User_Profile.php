@@ -160,4 +160,10 @@ class Hybrid_User_Profile
          */
         public $company = NULL;
 
+        /**
+         * Industry
+         * @var String
+         */
+        public $industry = NULL;
+
 }

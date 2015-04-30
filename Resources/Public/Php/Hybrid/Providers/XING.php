@@ -148,6 +148,9 @@ class Hybrid_Providers_XING extends Hybrid_Provider_Model_OAuth1 {
                 if (property_exists($primaryCompany, 'description')) {
                     $this->user->profile->position = $primaryCompany->description;
                 }
+                if (property_exists($primaryCompany, 'industry')) {
+                    $this->user->profile->industry = $primaryCompany->industry;
+                }
             }
         }
         if ((property_exists($oResponse, 'business_address'))) {

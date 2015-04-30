@@ -76,7 +76,7 @@
             <trans-unit id="tx_pxhybridauth_domain_model_identity.tx_extbase_type.Tx_PxHybridAuth_Domain_Model_Identity_XingIdentity" xml:space="preserve">
                 <source>Xing</source>
             </trans-unit>
-            <trans-unit id="tx_pxhybridauth_domain_model_identity.tx_extbase_type.Tx_PxHybridAuth_Domain_Model_Identity_LinkedInIdentity" xml:space="preserve">
+            <trans-unit id="tx_pxhybridauth_domain_model_identity.tx_extbase_type.Tx_PxHybridAuth_Domain_Model_Identity_LinkedinIdentity" xml:space="preserve">
                 <source>LinkedIn</source>
             </trans-unit>
             

@@ -15,7 +15,7 @@
                 <source>Xing</source>
                 <target state="translated">Xing</target>
             </trans-unit>
-            <trans-unit id="tx_pxhybridauth_domain_model_identity.tx_extbase_type.Tx_PxHybridAuth_Domain_Model_Identity_LinkedInIdentity" xml:space="preserve">
+            <trans-unit id="tx_pxhybridauth_domain_model_identity.tx_extbase_type.Tx_PxHybridAuth_Domain_Model_Identity_LinkedinIdentity" xml:space="preserve">
                 <source>LinkedIn</source>
                 <target state="translated">LinkedIn</target>
             </trans-unit>

@@ -2,13 +2,13 @@
 
 $types = array();
 $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['px_hybrid_auth']);
-$providers = array('Facebook', 'LinkedIn', 'Xing');
-foreach($providers as $provider) {
-    if ((Boolean)$extConf['provider.'][strtolower($provider) . '.']['enabled']) {
-        $types['Tx_PxHybridAuth_Domain_Model_Identity_' . $provider . 'Identity'] = array('LLL:EXT:px_hybrid_auth/Resources/Private/Language/locallang_db.xlf:tx_pxhybridauth_domain_model_identity.tx_extbase_type.Tx_PxHybridAuth_Domain_Model_Identity_' . $provider . 'Identity','Tx_PxHybridAuth_Domain_Model_Identity_' . $provider . 'Identity');
+$supportedProviders = array();
+foreach ($extConf['provider.'] as $provider => $config) {
+    $provider = str_replace('.', '', $provider);
+    if ((Boolean)$config['enabled']) {
+        $types['Tx_PxHybridAuth_Domain_Model_Identity_' . $provider . 'Identity'] = array('LLL:EXT:px_hybrid_auth/Resources/Private/Language/locallang_db.xlf:tx_pxhybridauth_domain_model_identity.tx_extbase_type.Tx_PxHybridAuth_Domain_Model_Identity_' . ucfirst($provider) . 'Identity','Tx_PxHybridAuth_Domain_Model_Identity_' . ucfirst($provider) . 'Identity');
     }
 }
-
 return array(
     'ctrl' => array(
         'title'	=> 'LLL:EXT:px_hybrid_auth/Resources/Private/Language/locallang_db.xlf:tx_pxhybridauth_domain_model_identity',
