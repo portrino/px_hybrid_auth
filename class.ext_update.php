@@ -129,4 +129,3 @@ class ext_update extends DynamicAbstractUpdateScript {
         $this->redirectToAction();
     }
 }
-?>
