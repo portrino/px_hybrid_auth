@@ -88,13 +88,15 @@ class SocialLoginAuthenticationServiceSlot {
      */
     protected function createFrontendUserRecordFromSocialUser($socialUser, $pid) {
         $result = FALSE;
-        if (isset($socialUser->email)) {
+        if (isset($socialUser->email) || isset($socialUser->emailVerified)) {
                 // we should load the TCA explicitly, because we are in authentication step and TCA could be not loaded yet
             if (!isset($GLOBALS['TCA']['fe_users'])) {
                 \TYPO3\CMS\Core\Core\Bootstrap::getInstance()->loadCachedTca();
             }
             /** @var \TYPO3\CMS\Core\DataHandling\DataHandler $dataHandler */
             $dataHandler = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\DataHandling\\DataHandler');
+
+            $email = ($socialUser->email) ? $socialUser->email : $socialUser->emailVerified;
 
             if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('saltedpasswords')) {
                 /** @var \TYPO3\CMS\Saltedpasswords\Salt\SaltInterface $saltedpasswordsInstance */
@@ -107,10 +109,10 @@ class SocialLoginAuthenticationServiceSlot {
                 'fe_users',
                 array(
                     'pid' => $pid,
-                    'username' => $socialUser->email,
+                    'username' => $email,
                     'password' => $password,
                     'usergroup' => 1,
-                    'email' => $socialUser->email,
+                    'email' => $email,
                     'first_name' => $socialUser->firstName,
                     'last_name' => $socialUser->lastName,
                     'disable' => 0,
@@ -120,8 +122,8 @@ class SocialLoginAuthenticationServiceSlot {
                 )
             );
             $id = $this->database->sql_insert_id();
-            $username = $dataHandler->getUnique('fe_users','username', $socialUser->email, $id);
-            if ($username != $socialUser->email) {
+            $username = $dataHandler->getUnique('fe_users','username', $email, $id);
+            if ($username != $email) {
                 $this->database->exec_UPDATEquery('fe_users', 'uid=' . intval($id), array('username' => $username));
             }
             $where = 'uid=' . intval($id);
