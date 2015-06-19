@@ -2,11 +2,10 @@
 
 $types = array();
 $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['px_hybrid_auth']);
-$supportedProviders = array();
 foreach ($extConf['provider.'] as $provider => $config) {
     $provider = str_replace('.', '', $provider);
     if ((Boolean)$config['enabled']) {
-        $types['Tx_PxHybridAuth_Domain_Model_Identity_' . $provider . 'Identity'] = array('LLL:EXT:px_hybrid_auth/Resources/Private/Language/locallang_db.xlf:tx_pxhybridauth_domain_model_identity.tx_extbase_type.Tx_PxHybridAuth_Domain_Model_Identity_' . ucfirst($provider) . 'Identity','Tx_PxHybridAuth_Domain_Model_Identity_' . ucfirst($provider) . 'Identity');
+        $types['Tx_PxHybridAuth_Domain_Model_Identity_' . ucfirst($provider) . 'Identity'] = array('LLL:EXT:px_hybrid_auth/Resources/Private/Language/locallang_db.xlf:tx_pxhybridauth_domain_model_identity.tx_extbase_type.Tx_PxHybridAuth_Domain_Model_Identity_' . ucfirst($provider) . 'Identity','Tx_PxHybridAuth_Domain_Model_Identity_' . ucfirst($provider) . 'Identity');
     }
 }
 return array(
@@ -37,9 +36,9 @@ return array(
         'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('px_hybrid_auth') . 'Resources/Public/Icons/tx_pxhybridauth_domain_model_identity.gif'
     ),
     'types' => array(
-        'Tx_PxHybridAuth_Domain_Model_Identity_FacebookIdentity' => array('showitem' => 'tx_extbase_type, sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, identifier, '),
-        'Tx_PxHybridAuth_Domain_Model_Identity_XingIdentity' => array('showitem' => 'tx_extbase_type, sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, identifier, '),
-        'Tx_PxHybridAuth_Domain_Model_Identity_LinkedinIdentity' => array('showitem' => 'tx_extbase_type, sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, identifier, '),
+        'Tx_PxHybridAuth_Domain_Model_Identity_FacebookIdentity' => array('showitem' => 'tx_extbase_type, sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, identifier'),
+        'Tx_PxHybridAuth_Domain_Model_Identity_XingIdentity' => array('showitem' => 'tx_extbase_type, sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, identifier'),
+        'Tx_PxHybridAuth_Domain_Model_Identity_LinkedinIdentity' => array('showitem' => 'tx_extbase_type, sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, identifier'),
 
     ),
 	'interface' => array(
