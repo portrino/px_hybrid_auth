@@ -79,10 +79,9 @@ class SingleSignOnUtility  {
                         'display' => 'page'
                     )
                 ),
-                'debug_mode' => (boolean)$this->extConf['debug_mode'],
-                'debug_file' => $this->extConf['debug_file'],
+                'debug_mode' => (boolean)$this->extConf['basic.']['debug_mode'],
+                'debug_file' => $this->extConf['basic.']['debug_file'],
         );
-
     }
 
     /**
