@@ -10,11 +10,7 @@
   "autoload": {
     "psr-4": {
       "Portrino\\PxHybridAuth\\": "Classes"
-    },
-    "classmap": [
-      "Resources/Public/Php/Hybrid"
-    ]
-
+    }
   },
   "replace": {
     "px_hybrid_auth": "*"
