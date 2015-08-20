@@ -25,6 +25,7 @@ namespace Portrino\PxHybridAuth\Utility;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 /**
  * Class SingleSignOnUtility
@@ -76,7 +77,11 @@ class SingleSignOnUtility  {
                             'secret' => $this->extConf['provider.']['xing.']['secret']
                         ),
                         'scope'   => 'email',
-                        'display' => 'page'
+                        'display' => 'page',
+						'wrapper' => array (
+							'class' => 'Hybrid_Providers_XING',
+							'path' => ExtensionManagementUtility::extPath('px_hybrid_auth') . 'Classes/Providers/XING.php'
+						)
                     )
                 ),
                 'debug_mode' => (boolean)$this->extConf['basic.']['debug_mode'],
