@@ -6,7 +6,7 @@
   "license": ["GPL-2.0+"],
   "require": {
     "typo3/cms-core": ">=6.2.1,<8.0",
-    "hybridauth/hybridauth": "dev-master"
+    "hybridauth/hybridauth": "2.4.*"
   },
   "autoload": {
     "psr-4": {
