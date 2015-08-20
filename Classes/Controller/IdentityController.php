@@ -73,7 +73,7 @@ class IdentityController extends DynamicIdentityController {
     protected function initializeAction() {
         parent::initializeAction();
         $this->feUserUid = is_array($GLOBALS['TSFE']->fe_user->user) ? $GLOBALS['TSFE']->fe_user->user['uid'] : NULL;
-        $this->feUserObj = $this->feUserUid ? $this->userRepository->findOneByUid((int)$this->feUserUid) : NULL;
+        $this->feUserObj = $this->feUserUid ? $this->userRepository->findByIdentifier((int)$this->feUserUid) : NULL;
     }
 
     /**
@@ -131,4 +131,4 @@ class IdentityController extends DynamicIdentityController {
         }
         $this->redirect('list','Identity');
     }
-} 
+}

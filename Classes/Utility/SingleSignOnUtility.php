@@ -49,7 +49,7 @@ class SingleSignOnUtility  {
     public function initializeObject() {
         $this->extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['px_hybrid_auth']);
         $this->config = array(
-                'base_url' => 'http://' . $_SERVER['HTTP_HOST'] . '/api/?type=1410157426&no_cache=1',
+                'base_url' => 'http://' . $_SERVER['HTTP_HOST'] . '/?type=1410157426&no_cache=1',
                 'providers' => array (
                     'Facebook' => array (
                         'enabled' =>  $this->extConf['provider.']['facebook.']['enabled'],

@@ -64,7 +64,7 @@ tt_content.px_hybrid_auth_login {
 }
 ', TRUE);
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService($_EXTKEY, 'auth' /* sv type */, '\Portrino\PxHybridAuth\Service\SocialLoginAuthenticationService' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService($_EXTKEY, 'auth' /* sv type */, 'Portrino\PxHybridAuth\Service\SocialLoginAuthenticationService' /* sv key */,
     array(
         'title' => 'PxHybridAuth Social Login',
         'description' => 'Single Sign On via Social Provider',
@@ -78,7 +78,7 @@ tt_content.px_hybrid_auth_login {
         'os' => '',
         'exec' => '',
 
-        'className' => '\Portrino\PxHybridAuth\Service\SocialLoginAuthenticationService'
+        'className' => 'Portrino\PxHybridAuth\Service\SocialLoginAuthenticationService'
     )
 );
 

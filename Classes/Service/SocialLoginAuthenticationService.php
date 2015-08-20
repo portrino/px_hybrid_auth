@@ -104,7 +104,7 @@ class SocialLoginAuthenticationService extends \TYPO3\CMS\Sv\AbstractAuthenticat
     protected $extensionName = 'px_hybrid_auth';
 
     public function init() {
-        $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Object\ObjectManager');
+        $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Object\ObjectManager');
         $this->signalSlotDispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\SignalSlot\Dispatcher');
         $this->extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['px_hybrid_auth']);
         $this->db = $this->getDatabaseConnection();
@@ -113,7 +113,7 @@ class SocialLoginAuthenticationService extends \TYPO3\CMS\Sv\AbstractAuthenticat
     }
 
     public function initAuth($mode, $loginData, $authInfo, $pObj) {
-        $this->singleSignOnUtility = $this->objectManager->get('\Portrino\PxHybridAuth\Utility\SingleSignOnUtility');
+        $this->singleSignOnUtility = $this->objectManager->get('Portrino\PxHybridAuth\Utility\SingleSignOnUtility');
         if (isset($_REQUEST['pid'])) {
             $this->db_user['check_pid_clause'] = ' AND pid IN (' .
                 $this->db->cleanIntList($_REQUEST['pid']) . ')';
@@ -210,7 +210,7 @@ class SocialLoginAuthenticationService extends \TYPO3\CMS\Sv\AbstractAuthenticat
      */
     public function fetchUserRecordByIdentifier($identifier, $extraWhere = '', $dbUserSetup = '') {
         $result = FALSE;
-        $identityClassName = '\\Portrino\\PxHybridAuth\\Domain\\Model\Identity\\' . ucfirst($this->getServiceProvider()) . 'Identity';
+        $identityClassName = 'Portrino\\PxHybridAuth\\Domain\\Model\Identity\\' . ucfirst($this->getServiceProvider()) . 'Identity';
 
 
         if (class_exists($identityClassName) && defined($identityClassName . '::EXTBASE_TYPE')) {

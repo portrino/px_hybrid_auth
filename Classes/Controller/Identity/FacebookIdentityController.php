@@ -43,8 +43,8 @@ class FacebookIdentityController extends \Portrino\PxHybridAuth\Controller\Ident
      * @return void
      */
     public function createAction(\Portrino\PxHybridAuth\Domain\Model\Identity\FacebookIdentity $identity) {
-        $identity = ($identity) ? $identity : $this->objectManager->get('\\Portrino\\PxHybridAuth\\Domain\\Model\\Identity\\FacebookIdentity');
+        $identity = ($identity) ? $identity : $this->objectManager->get('Portrino\\PxHybridAuth\\Domain\\Model\\Identity\\FacebookIdentity');
         parent::createAction($identity);
     }
 
-} 
+}

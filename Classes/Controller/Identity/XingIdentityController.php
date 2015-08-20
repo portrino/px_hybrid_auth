@@ -44,10 +44,10 @@ class XingIdentityController extends \Portrino\PxHybridAuth\Controller\IdentityC
      * @return void
      */
     public function createAction(\Portrino\PxHybridAuth\Domain\Model\Identity\XingIdentity $identity = NULL) {
-        $identity = ($identity) ? $identity : $this->objectManager->get('\\Portrino\\PxHybridAuth\\Domain\\Model\\Identity\\XingIdentity');
+        $identity = ($identity) ? $identity : $this->objectManager->get('Portrino\\PxHybridAuth\\Domain\\Model\\Identity\\XingIdentity');
         parent::createAction($identity);
     }
 
 
 
-} 
+}

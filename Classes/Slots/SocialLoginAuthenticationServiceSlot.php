@@ -142,7 +142,7 @@ class SocialLoginAuthenticationServiceSlot {
      */
     protected function addIdentityToFrontendUser($user, $provider, $identifier) {
         $result = FALSE;
-        $identityClassName = '\\Portrino\\PxHybridAuth\\Domain\\Model\Identity\\' . $provider . 'Identity';
+        $identityClassName = 'Portrino\\PxHybridAuth\\Domain\\Model\Identity\\' . $provider . 'Identity';
         if (class_exists($identityClassName) && defined($identityClassName . '::EXTBASE_TYPE')) {
             $extbaseType = constant($identityClassName . '::EXTBASE_TYPE');
 

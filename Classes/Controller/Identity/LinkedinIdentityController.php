@@ -43,8 +43,8 @@ class LinkedinIdentityController extends \Portrino\PxHybridAuth\Controller\Ident
      * @return void
      */
     public function createAction(\Portrino\PxHybridAuth\Domain\Model\Identity\LinkedinIdentity $identity = NULL) {
-        $identity = ($identity) ? $identity : $this->objectManager->get('\\Portrino\\PxHybridAuth\\Domain\\Model\\Identity\\LinkedinIdentity');
+        $identity = ($identity) ? $identity : $this->objectManager->get('Portrino\\PxHybridAuth\\Domain\\Model\\Identity\\LinkedinIdentity');
         parent::createAction($identity);
     }
 
-} 
+}

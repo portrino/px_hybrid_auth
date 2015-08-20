@@ -74,7 +74,7 @@ abstract class AbstractUpdateScript implements \Portrino\PxLib\Script\Interfaces
      * @return    boolean    true to allow access
      */
     protected function init() {
-        $this->objectManager = GeneralUtility::makeInstance('\\TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
+        $this->objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
         $this->schemaMigrationService = $this->objectManager->get('TYPO3\\CMS\\Install\\Service\\SqlSchemaMigrationService');
         $this->currentSchema = $this->schemaMigrationService->getFieldDefinitions_database();
     }

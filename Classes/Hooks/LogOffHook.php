@@ -46,9 +46,9 @@ class LogOffHook {
      * @param \TYPO3\CMS\Core\Authentication\AbstractUserAuthentication $pObj
      */
     public function postProcessing($_params, $pObj) {
-        $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Object\ObjectManager');
+        $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Object\ObjectManager');
         /** @var \Portrino\PxHybridAuth\Utility\SingleSignOnUtility $singleSignOnUtility */
-        $singleSignOnUtility = $this->objectManager->get('\Portrino\PxHybridAuth\Utility\SingleSignOnUtility');
+        $singleSignOnUtility = $this->objectManager->get('Portrino\PxHybridAuth\Utility\SingleSignOnUtility');
         $singleSignOnUtility->logout();
         $pObj->removeCookie('PHPSESSID');
     }
