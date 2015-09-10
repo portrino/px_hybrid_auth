@@ -133,4 +133,11 @@ class IdentityController extends DynamicIdentityController {
         }
         $this->redirect('list','Identity');
     }
+
+	/**
+	 * @return \Portrino\PxHybridAuth\Domain\Model\User
+	 */
+	public function getCurrentUser() {
+		return $this->feUserObj;
+	}
 }
