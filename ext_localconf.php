@@ -40,17 +40,17 @@ $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['px_hybrid_
     'Portrino.' . $_EXTKEY,
     'Identity',
     array(
-        'Identity' => 'list',
-        'Identity\FacebookIdentity' => 'create',
-        'Identity\LinkedinIdentity' => 'create',
-        'Identity\XingIdentity' => 'create'
+        'Identity' => 'list,remove',
+        'Identity\FacebookIdentity' => 'create,remove',
+        'Identity\LinkedinIdentity' => 'create,remove',
+        'Identity\XingIdentity' => 'create,remove'
     ),
     // non-cacheable actions
     array(
-        'Identity' => 'list',
-        'Identity\FacebookIdentity' => 'create',
-        'Identity\LinkedinIdentity' => 'create',
-        'Identity\XingIdentity' => 'create'
+        'Identity' => 'list,remove',
+        'Identity\FacebookIdentity' => 'create,remove',
+        'Identity\LinkedinIdentity' => 'create,remove',
+        'Identity\XingIdentity' => 'create,remove'
     )
 );
 

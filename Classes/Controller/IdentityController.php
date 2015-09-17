@@ -135,6 +135,28 @@ class IdentityController extends DynamicIdentityController {
     }
 
 	/**
+     * remove action
+     *
+     * @param string $identity
+     * @ignorevalidation $identity
+     * @return void
+     */
+	public function removeAction($identity) {
+		$identity = strtolower($identity);
+
+		$identities = $this->feUserObj->getIdentities();
+		foreach ($identities as $singleIdentity) {
+			/** @var \Portrino\PxHybridAuth\Domain\Model\Identity $singleIdentity */
+			if (strtolower($singleIdentity->getProvider()) === $identity && $this->feUserObj->isConnected($identity)) {
+				$this->feUserObj->removeIdentity($singleIdentity);
+				$this->userRepository->update($this->feUserObj);
+				$this->signalSlotDispatcher->dispatch(__CLASS__, 'afterRemoveAction', array($this, $singleIdentity));
+			}
+		}
+		$this->redirect('list', 'Identity');
+	}
+
+	/**
 	 * @return \Portrino\PxHybridAuth\Domain\Model\User
 	 */
 	public function getCurrentUser() {
