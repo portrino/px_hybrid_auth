@@ -55,7 +55,9 @@ class AbstractUserController extends DynamicAbstractUserController {
             // handle the redirect
         if ($loginError) {
             $this->signalSlotDispatcher->dispatch(__CLASS__, 'loginErrorBeforeRedirect', array($this, $this->request));
-            $this->redirectToPage($this->settings['redirectPageLoginError']);
+			if ($this->settings['redirectPageLoginError']) {
+				$this->redirectToPage($this->settings['redirectPageLoginError']);
+			}
         }
     }
 
