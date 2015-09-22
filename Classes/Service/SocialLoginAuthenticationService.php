@@ -145,6 +145,7 @@ class SocialLoginAuthenticationService extends \TYPO3\CMS\Sv\AbstractAuthenticat
             );
             \TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule($urlParts, $additionalUrlParts);
             $returnUrl = \TYPO3\CMS\Core\Utility\HttpUtility::buildUrl($urlParts);
+            $this->signalSlotDispatcher->dispatch(__CLASS__, 'returnUrl', array(&$returnUrl, $this));
 
             $additionalUrlParts = array(
                 'query' => 'id=' . $loginPid . '&no_cache=1&tx_pxhybridauth_login[login_error]=1&tx_pxhybridauth_login[provider]=' . $this->provider
