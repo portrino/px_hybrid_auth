@@ -136,7 +136,7 @@ class SocialLoginAuthenticationService extends \TYPO3\CMS\Sv\AbstractAuthenticat
         if ($this->isServiceResponsible()) {
             $loginPid = $this->extConf['basic.']['login_pid'];
             $urlParts = array(
-                'scheme' => \TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('HTTPS') ? 'https' : 'http',
+                'scheme' => \TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('TYPO3_SSL') ? 'https' : 'http',
                 'host' => \TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('HTTP_HOST'),
             );
 
