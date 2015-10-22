@@ -1,11 +1,15 @@
 {
-  "name": "georgringer/px_hybrid_auth",
+  "name": "portrino/px_hybrid_auth",
   "type": "typo3-cms-extension",
   "description": "",
   "homepage": "http://typo3.org",
   "license": ["GPL-2.0+"],
+  "config": {
+    "vendor-dir": "Resources/Public/Php"
+  },
   "require": {
-    "typo3/cms-core": ">=6.2.1,<8.0"
+    "typo3/cms-core": ">=6.2.1,<8.0",
+    "hybridauth/hybridauth": "2.4.*"
   },
   "autoload": {
     "psr-4": {
