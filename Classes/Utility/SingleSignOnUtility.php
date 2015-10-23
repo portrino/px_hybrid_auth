@@ -59,7 +59,11 @@ class SingleSignOnUtility  {
                             'secret' => $this->extConf['provider.']['facebook.']['secret']
                         ),
                         'scope'   => 'email',
-                        'display' => 'page'
+                        'display' => 'page',
+                        'wrapper' => array (
+                            'class' => 'PxHybridAuth_Providers_Facebook',
+                            'path' => ExtensionManagementUtility::extPath('px_hybrid_auth') . 'Classes/Hybrid/Providers/Facebook.php'
+                        )
                     ),
                     'LinkedIn' => array (
                         'enabled' => $this->extConf['provider.']['linkedin.']['enabled'],
@@ -83,7 +87,7 @@ class SingleSignOnUtility  {
                         'scope'   => 'email',
                         'display' => 'page',
 						'wrapper' => array (
-							'class' => 'Hybrid_Providers_XING',
+							'class' => 'PxHybridAuth_Providers_Xing',
 							'path' => ExtensionManagementUtility::extPath('px_hybrid_auth') . 'Classes/Hybrid/Providers/XING.php'
 						)
                     )
@@ -97,7 +101,7 @@ class SingleSignOnUtility  {
      * @param string $provider
      * @param string $returnTo
      *
-     *  @return \Hybrid_User_Profile|FALSE
+     *  @return \Hybrid_User_Profile|\PxHybridAuth_Hybrid_User|FALSE
      */
     public function authenticate($provider, $returnTo) {
         try{

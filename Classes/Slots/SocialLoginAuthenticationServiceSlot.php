@@ -105,21 +105,31 @@ class SocialLoginAuthenticationServiceSlot {
             } else {
                 $password = md5(uniqid());
             }
+
+            $insertArray = array(
+                'pid' => $pid,
+                'username' => $email,
+                'password' => $password,
+                'usergroup' => 1,
+                'email' => $email,
+                'first_name' => $socialUser->firstName,
+                'last_name' => $socialUser->lastName,
+                'disable' => 0,
+                'deleted' => 0,
+                'tstamp' => time(),
+                'crdate' => time()
+            );
+
+                // extend the insert array with fields from PxHybridAuth_Hybrid_User_Profile
+            if ($socialUser instanceof \PxHybridAuth_Hybrid_User_Profile) {
+                if ($socialUser->company) {
+                    $insertArray['company'] = $socialUser->company;
+                }
+            }
+
             $this->database->exec_INSERTquery(
                 'fe_users',
-                array(
-                    'pid' => $pid,
-                    'username' => $email,
-                    'password' => $password,
-                    'usergroup' => 1,
-                    'email' => $email,
-                    'first_name' => $socialUser->firstName,
-                    'last_name' => $socialUser->lastName,
-                    'disable' => 0,
-                    'deleted' => 0,
-                    'tstamp' => time(),
-                    'crdate' => time(),
-                )
+                $insertArray
             );
             $id = $this->database->sql_insert_id();
             $username = $dataHandler->getUnique('fe_users','username', $email, $id);

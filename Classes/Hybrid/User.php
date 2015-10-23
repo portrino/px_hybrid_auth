@@ -13,7 +13,7 @@ class PxHybridAuth_Hybrid_User extends Hybrid_User {
 	function __construct() {
 		parent::__construct();
 
-		$this->profile = = new PxHybridAuth_Hybrid_User_Profile();
+		$this->profile = new PxHybridAuth_Hybrid_User_Profile();
 	}
 
 }

@@ -26,6 +26,8 @@ namespace Portrino\PxHybridAuth\UserFunc;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use \TYPO3\CMS\Backend\Utility\BackendUtility;
+
 /**
  * Class Label
  *
@@ -36,13 +38,14 @@ class Label {
     function getIdentityLabel(&$params, &$pObj) {
         $id = $params['row']['uid'];
         $params['title'] = $params['row']['uid'];
-
-        if ($id) {
-            $type = $GLOBALS['LANG']->sL('LLL:EXT:px_hybrid_auth/Resources/Private/Language/locallang_db.xlf:tx_pxhybridauth_domain_model_identity.tx_extbase_type.' . $params['row']['tx_extbase_type']);
-            if ($type) {
-                $params['title'] = $type . ': ' . $params['row']['identifier'];
+        if ((int)$id > 0) {
+            $row = BackendUtility::getRecord('tx_pxhybridauth_domain_model_identity', $id);
+            if ($row != NULL) {
+                $type = $GLOBALS['LANG']->sL('LLL:EXT:px_hybrid_auth/Resources/Private/Language/locallang_db.xlf:tx_pxhybridauth_domain_model_identity.tx_extbase_type.' . $row['tx_extbase_type']);
+                if ($type) {
+                    $params['title'] = $type . ': ' . $row['identifier'];
+                }
             }
         }
     }
 }
-?>
