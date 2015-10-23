@@ -68,7 +68,11 @@ class SingleSignOnUtility  {
                             'secret' => $this->extConf['provider.']['linkedin.']['secret']
                         ),
                         'scope'   => 'email',
-                        'display' => 'page'
+                        'display' => 'page',
+                        'wrapper' => array (
+                            'class' => 'PxHybridAuth_Providers_LinkedIn',
+                            'path' => ExtensionManagementUtility::extPath('px_hybrid_auth') . 'Classes/Hybrid/Providers/LinkedIn.php'
+                        )
                     ),
                     'XING' => array (
                         'enabled' => $this->extConf['provider.']['xing.']['enabled'],
@@ -80,7 +84,7 @@ class SingleSignOnUtility  {
                         'display' => 'page',
 						'wrapper' => array (
 							'class' => 'Hybrid_Providers_XING',
-							'path' => ExtensionManagementUtility::extPath('px_hybrid_auth') . 'Classes/Providers/XING.php'
+							'path' => ExtensionManagementUtility::extPath('px_hybrid_auth') . 'Classes/Hybrid/Providers/XING.php'
 						)
                     )
                 ),

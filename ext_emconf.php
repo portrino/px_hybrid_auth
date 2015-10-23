@@ -17,20 +17,20 @@ $EM_CONF[$_EXTKEY] = array(
 	'author' => 'André Wuttig',
 	'author_email' => 'wuttig@portrino.de',
     'author_company' => 'portrino GmbH',
-	'state' => 'stable',
+	'state' => 'beta',
 	'internal' => '',
 	'uploadfolder' => '0',
 	'createDirs' => '',
 	'clearCacheOnLoad' => 0,
-	'version' => '1.1.3',
+	'version' => '2.0.0-dev',
 	'constraints' => array(
 		'depends' => array(
-            'typo3' => '6.2.0-7-5.99',
+            'typo3' => '7.6.0-7.6.99',
 		),
 		'conflicts' => array(
 		),
 		'suggests' => array(
             'px_lib' => ''
 		),
-	),
+	)
 );

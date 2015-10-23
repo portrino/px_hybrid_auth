@@ -126,5 +126,3 @@ $signalSlotDispatcher->connect(
     'preventEmptyFlexFormValues',
     FALSE
 );
-
-
