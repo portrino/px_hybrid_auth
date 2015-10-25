@@ -17,7 +17,7 @@
     },
     "classmap": [
       "Classes/Hybrid",
-      "./vendor/hybridauth/hybridauth/additional-providers/hybridauth-xing"
+      "Resources/Public/Php"
      ]
   },
   "replace": {
