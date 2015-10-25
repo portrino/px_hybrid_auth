@@ -7,10 +7,6 @@
   "config": {
     "vendor-dir": "Resources/Public/Php"
   },
-  "require": {
-    "typo3/cms-core": "*",
-    "hybridauth/hybridauth": "2.4.*"
-  },
   "autoload": {
     "psr-4": {
       "Portrino\\PxHybridAuth\\": "Classes"
