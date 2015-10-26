@@ -34,22 +34,33 @@ HybridAuth offers a the following SignalSlots (Extbase pendant to Hooks) to exte
       Description
 
  - :Class:
-      Portrino\\PxHybridAuth\\Service\\SocialLoginAuthenticationServiceSlot
+      Portrino\\PxHybridAuth\\Service\\SocialLoginAuthenticationService
    :Name:
-      getUser
+      returnUrl
    :File:
-      SocialLoginAuthenticationServiceSlot.php
+      SocialLoginAuthenticationService.php
    :Method:
       getUser()
    :Description:
-    Slot is called after the user object is created
+      Slot is called after the returnUrl was build
 
  - :Class:
-      Portrino\\PxHybridAuth\\Service\\SocialLoginAuthenticationServiceSlot
+      Portrino\\PxHybridAuth\\Service\\SocialLoginAuthenticationService
+   :Name:
+      getUser
+   :File:
+      SocialLoginAuthenticationService.php
+   :Method:
+      getUser()
+   :Description:
+      Slot is called after the user object is created
+
+ - :Class:
+      Portrino\\PxHybridAuth\\Service\\SocialLoginAuthenticationService
    :Name:
       authUser
    :File:
-      SocialLoginAuthenticationServiceSlot.php
+      SocialLoginAuthenticationService.php
    :Method:
       authUser()
    :Description:
@@ -65,6 +76,28 @@ HybridAuth offers a the following SignalSlots (Extbase pendant to Hooks) to exte
       initializeNewLoginAction()
    :Description:
       Slot is called if an error occurred during initializing the newLoginAction()
+
+ - :Class:
+      Portrino\\PxHybridAuth\\Controller\\IdentityController
+   :Name:
+      afterCreateAction
+   :File:
+      IdentityController.php
+   :Method:
+      createAction()
+   :Description:
+      Slot is called after create identity, before the redirect takes place
+
+ - :Class:
+      Portrino\\PxHybridAuth\\Controller\\IdentityController
+   :Name:
+      afterRemoveAction
+   :File:
+      IdentityController.php
+   :Method:
+      removeAction()
+   :Description:
+      Slot is called after remove identity, before the redirect takes place
 
 Example
 '''''''
