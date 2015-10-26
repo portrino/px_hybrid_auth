@@ -1,4 +1,8 @@
 <?php
+use \TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+use \TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use \TYPO3\CMS\Core\Utility\VersionNumberUtility;
+
 if (!defined('TYPO3_MODE')) {
 	die('Access denied.');
 }
@@ -6,7 +10,7 @@ if (!defined('TYPO3_MODE')) {
 $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['px_hybrid_auth']);
 
 // Endpoint-Plugin
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+ExtensionUtility::configurePlugin(
     'Portrino.' . $_EXTKEY,
     'HybridAuth',
     array(
@@ -18,7 +22,7 @@ $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['px_hybrid_
     )
 );
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+ExtensionUtility::configurePlugin(
 	'Portrino.' . $_EXTKEY,
 	'Login',
 	array(
@@ -36,7 +40,7 @@ $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['px_hybrid_
 );
 
 // Identity-Plugin
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+ExtensionUtility::configurePlugin(
     'Portrino.' . $_EXTKEY,
     'Identity',
     array(
@@ -54,7 +58,7 @@ $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['px_hybrid_
     )
 );
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScript($_EXTKEY,'setup',
+ExtensionManagementUtility::addTypoScript($_EXTKEY,'setup',
 '[GLOBAL]
 tt_content.px_hybrid_auth_login = COA
 tt_content.px_hybrid_auth_login {
@@ -64,7 +68,7 @@ tt_content.px_hybrid_auth_login {
 }
 ', TRUE);
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService($_EXTKEY, 'auth' /* sv type */, 'Portrino\PxHybridAuth\Service\SocialLoginAuthenticationService' /* sv key */,
+ExtensionManagementUtility::addService($_EXTKEY, 'auth' /* sv type */, 'Portrino\PxHybridAuth\Service\SocialLoginAuthenticationService' /* sv key */,
     array(
         'title' => 'PxHybridAuth Social Login',
         'description' => 'Single Sign On via Social Provider',
@@ -107,7 +111,7 @@ if ((boolean)$extConf['auto_fe_user_creation.']['enabled']) {
     );
 }
 // if px_lib is not loaded take the ProcessDatamapDispatcher from py_hybrid_auth
-if (!\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('px_lib')) {
+if (!ExtensionManagementUtility::isLoaded('px_lib')) {
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][] = 'Portrino\\PxHybridAuth\\Hooks\\ProcessDataMapDispatcher';
 }
 

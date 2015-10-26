@@ -18,6 +18,60 @@
                 <target state="translated">Social Login Formular, um sich über einen Social Provider zu authentifizieren.</target>
             </trans-unit>
 
+             <trans-unit id="tt_content.pi_flexform.sheet_general" xml:space="preserve">
+                <source>General</source>
+                 <target state="translated">Allgemein</target>
+            </trans-unit>
+            <trans-unit id="tt_content.pi_flexform.sheet_redirect" xml:space="preserve">
+				<source>Redirects</source>
+                <target state="translated">Weiterleitungen</target>
+			</trans-unit>
+            <trans-unit id="tt_content.pi_flexform.redirectPageLogin" xml:space="preserve">
+				<source>After Successful Login Redirect to Page</source>
+                <target state="translated">Nach erfolgreicher Anmeldung auf folgende Seite weiterleiten</target>
+			</trans-unit>
+			<trans-unit id="tt_content.pi_flexform.redirectPageLoginError" xml:space="preserve">
+				<source>After Failed Login Redirect to Page</source>
+                <target state="translated">Nach einem Fehler bei der Anmeldung auf folgende Seite weiterleiten</target>
+			</trans-unit>
+            <trans-unit id="tt_content.pi_flexform.user_storage" xml:space="preserve">
+				<source>User Storage Page</source>
+                <target state="translated">Speicherort Benutzer</target>
+			</trans-unit>
+            <trans-unit id="tt_content.pi_flexform.show_logoutFormAfterLogin" xml:space="preserve">
+				<source>Display Logout Form After Successful Login</source>
+                <target state="translated">Weiterleitung nach erfolgreicher Anmeldung deaktivieren, aber Abmeldeformular anzeigen</target>
+			</trans-unit>
+            <trans-unit id="tt_content.pi_flexform.recursive" xml:space="preserve">
+				<source>Recursive</source>
+                <target state="translated">Rekursiv</target>
+			</trans-unit>
+
+            <trans-unit id="tt_content.pi_flexform.recursive.I.0">
+                <source>0 Evenen (only selected page)</source>
+                <target state="translated">0 Ebenen (nur die ausgewählte Seite)</target>
+            </trans-unit>
+            <trans-unit id="tt_content.pi_flexform.recursive.I.1">
+                <source>1 level</source>
+                <target state="translated">1 Ebene</target>
+            </trans-unit>
+            <trans-unit id="tt_content.pi_flexform.recursive.I.2">
+                <source>2 levels</source>
+                <target state="translated">2 Ebenen</target>
+            </trans-unit>
+            <trans-unit id="tt_content.pi_flexform.recursive.I.3">
+                <source>3 levels</source>
+                <target state="translated">3 Ebenen</target>
+            </trans-unit>
+            <trans-unit id="tt_content.pi_flexform.recursive.I.4">
+                <source>4 levels</source>
+                <target state="translated">4 Ebenen</target>
+            </trans-unit>
+            <trans-unit id="tt_content.pi_flexform.recursive.I.5">
+                <source>Infinite</source>
+                <target state="translated">Unendlich</target>
+            </trans-unit>
+
             <!-- ##### -->
             <!-- user  -->
             <!-- ##### -->

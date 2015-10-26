@@ -38,6 +38,25 @@
 				<source>Recursive</source>
 			</trans-unit>
 
+            <trans-unit id="tt_content.pi_flexform.recursive.I.0">
+                <source>0 levels (only selected page)</source>
+            </trans-unit>
+            <trans-unit id="tt_content.pi_flexform.recursive.I.1">
+                <source>1 level</source>
+            </trans-unit>
+            <trans-unit id="tt_content.pi_flexform.recursive.I.2">
+                <source>2 levels</source>
+            </trans-unit>
+            <trans-unit id="tt_content.pi_flexform.recursive.I.3">
+                <source>3 levels</source>
+            </trans-unit>
+            <trans-unit id="tt_content.pi_flexform.recursive.I.4">
+                <source>4 levels</source>
+            </trans-unit>
+            <trans-unit id="tt_content.pi_flexform.recursive.I.5">
+                <source>Infinite</source>
+            </trans-unit>
+
             <!-- ##### -->
             <!-- user  -->
             <!-- ##### -->
