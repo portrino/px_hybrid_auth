@@ -32,14 +32,14 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * Class XingIdentityController
  *
- * @package Portrino\PxHybridAuth\Controller
+ * @package Portrino\PxHybridAuth\Controller\Identity
  */
 class XingIdentityController extends \Portrino\PxHybridAuth\Controller\IdentityController {
 
     /**
      * create action
      *
-     * @param \Portrino\PxHybridAuth\Domain\Model\Identity\XingIdentity $identity
+     * @param \Portrino\PxHybridAuth\Domain\Model\Identity\XingIdentity|NULL $identity
      * @ignorevalidation $identity
      * @return void
      */

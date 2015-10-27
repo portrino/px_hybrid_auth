@@ -80,6 +80,9 @@ class AbstractUserController extends DynamicAbstractUserController {
             $storagePids = $pids['_STORAGE_PID'];
         }
 
+
+
+
         $this->view->assign('redirect_url', $returnUrl);
         $this->view->assign('redirect_pid', $returnPid);
         $this->view->assign('pid', $storagePids);

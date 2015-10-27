@@ -142,9 +142,9 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
      *
      * @see TYPO3\CMS\Extbase\Mvc\Controller\ActionController::getErrorFlashMessage()
      */
-    protected function getErrorFlashMessage() {
-        return FALSE;
-    }
+//    protected function getErrorFlashMessage() {
+//        return FALSE;
+//    }
 
     /**
      * Returns the current view

@@ -73,7 +73,7 @@ class IdentityController extends DynamicIdentityController {
     protected function initializeAction() {
         parent::initializeAction();
         $this->feUserUid = is_array($GLOBALS['TSFE']->fe_user->user) ? $GLOBALS['TSFE']->fe_user->user['uid'] : NULL;
-        $this->feUserObj = $this->feUserUid ? $this->userRepository->findByIdentifier((int)$this->feUserUid) : NULL;
+        $this->feUserObj = $this->feUserUid ? $this->userRepository->findByUid((int)$this->feUserUid) : NULL;
     }
 
     /**
@@ -92,20 +92,22 @@ class IdentityController extends DynamicIdentityController {
      */
     public function listAction() {
         $socialProviders = array();
-        foreach ($this->extConf['provider.'] as $provider => $config) {
-            $provider = str_replace('.', '', $provider);
-            if ((Boolean)$config['enabled']) {
-                $socialProviders[$provider] = array(
-                    'isConnected' => $this->feUserObj->isConnected($provider)
+        if ($this->feUserObj) {
+            foreach ($this->extConf['provider.'] as $provider => $config) {
+                $provider = str_replace('.', '', $provider);
+                if ((Boolean)$config['enabled']) {
+                    $socialProviders[$provider] = array(
+                        'isConnected' => $this->feUserObj->isConnected($provider)
+                    );
+                }
+            }
+            if (count($socialProviders) === 0) {
+                $this->addFlashMessage(
+                    \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('flash.warning.no_configured_providers.body', $this->extensionName),
+                    \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('flash.warning.no_configured_providers.header', $this->extensionName),
+                    \TYPO3\CMS\Core\Messaging\FlashMessage::WARNING
                 );
             }
-        }
-        if (count($socialProviders) === 0) {
-            $this->addFlashMessage(
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('flash.warning.no_configured_providers.body', $this->extensionName),
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('flash.warning.no_configured_providers.header', $this->extensionName),
-                \TYPO3\CMS\Core\Messaging\FlashMessage::WARNING
-            );
         }
         $this->view->assign('socialProviders', $socialProviders);
     }
@@ -117,18 +119,16 @@ class IdentityController extends DynamicIdentityController {
      * @ignorevalidation $identity
      * @return void
      */
-    public function createAction(\Portrino\PxHybridAuth\Domain\Model\Identity $identity) {
+    public function createAction(\Portrino\PxHybridAuth\Domain\Model\Identity $identity = NULL) {
         if ($this->feUserObj != NULL) {
             $return_url = $this->uriBuilder->getRequest()->getRequestUri();
             /** @var \Hybrid_User_Profile $socialUser */
             $socialUser = $this->singleSignOnUtility->authenticate($identity->getProvider(), $return_url);
             if ($socialUser) {
                 $identity->setIdentifier($socialUser->identifier);
+                $this->feUserObj->addIdentity($identity);
+                $this->userRepository->update($this->feUserObj);
             }
-
-            $this->feUserObj->addIdentity($identity);
-            $this->userRepository->update($this->feUserObj);
-
             $this->signalSlotDispatcher->dispatch(__CLASS__, 'afterCreateAction', array($this, $socialUser, $identity));
         }
         $this->redirect('list','Identity');

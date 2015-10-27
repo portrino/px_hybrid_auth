@@ -32,17 +32,19 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * Class FacebookIdentityController
  *
- * @package Portrino\PxHybridAuth\Controller
+ * @package Portrino\PxHybridAuth\Controller\Identity
  */
 class FacebookIdentityController extends \Portrino\PxHybridAuth\Controller\IdentityController {
 
     /**
      * create action
      *
-     * @param \Portrino\PxHybridAuth\Domain\Model\Identity\FacebookIdentity $identity
+     * @param \Portrino\PxHybridAuth\Domain\Model\Identity\FacebookIdentity|NULL $identity
+     * @ignorevalidation $identity
+     * 
      * @return void
      */
-    public function createAction(\Portrino\PxHybridAuth\Domain\Model\Identity\FacebookIdentity $identity) {
+    public function createAction(\Portrino\PxHybridAuth\Domain\Model\Identity\FacebookIdentity $identity = NULL) {
         $identity = ($identity) ? $identity : $this->objectManager->get('Portrino\\PxHybridAuth\\Domain\\Model\\Identity\\FacebookIdentity');
         parent::createAction($identity);
     }

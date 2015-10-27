@@ -32,14 +32,14 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * Class LinkedinIdentityController
  *
- * @package Portrino\PxHybridAuth\Controller
+ * @package Portrino\PxHybridAuth\Controller\Identity
  */
 class LinkedinIdentityController extends \Portrino\PxHybridAuth\Controller\IdentityController {
 
     /**
      * create action
      *
-     * @param \Portrino\PxHybridAuth\Domain\Model\Identity\LinkedinIdentity $identity
+     * @param \Portrino\PxHybridAuth\Domain\Model\Identity\LinkedinIdentity|NULL $identity
      * @return void
      */
     public function createAction(\Portrino\PxHybridAuth\Domain\Model\Identity\LinkedinIdentity $identity = NULL) {
