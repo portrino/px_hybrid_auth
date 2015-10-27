@@ -51,13 +51,14 @@ class SocialLoginAuthenticationServiceSlot {
      * @param array $user
      * @param \Hybrid_User_Profile $socialUser
      * @param \Portrino\PxHybridAuth\Service\SocialLoginAuthenticationService $pObj
+     * @throws \Exception
      */
     public function getUser(&$user, $socialUser, $pObj) {
         $this->extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['px_hybrid_auth']);
         $this->database = $this->getDatabaseConnection();
 
         if (!isset($this->extConf['auto_fe_user_creation.']['storagePid'])) {
-            throw new \Exception('[px_hybrid_auth]: No storagePid for new fe_user records given! Please configure it in the extension configuration');
+            throw new \Exception('[px_hybrid_auth]: No storagePid for new fe_user records given! Please configure it in the extension configuration', 1445939601);
         }
 
         if (!$user) {
@@ -83,8 +84,8 @@ class SocialLoginAuthenticationServiceSlot {
      *
      * @param \Hybrid_User_Profile $socialUser
      * @param int $pid
-     * @param string $header
-     * @return array|FALSE the created user record or false if it is not possible
+     * @return array|bool|FALSE|NULL the created user record or false if it is not possible
+     * @throws \Exception
      */
     protected function createFrontendUserRecordFromSocialUser($socialUser, $pid) {
         $result = FALSE;
@@ -104,6 +105,13 @@ class SocialLoginAuthenticationServiceSlot {
                 $password = $saltedpasswordsInstance->getHashedPassword(uniqid());
             } else {
                 $password = md5(uniqid());
+            }
+
+            $where = 'uid = 1 AND hidden = 0 AND deleted = 0';
+            $fe_group = $this->database->exec_SELECTgetSingleRow('*', 'fe_groups', $where);
+
+            if ($fe_group === FALSE) {
+                throw new \Exception('[px_hybrid_auth]: No fe_group found for uid: 1. Please create a fe_groups record, which will be set as default frontend usergroup during social login.', 1445939594);
             }
 
             $insertArray = array(
