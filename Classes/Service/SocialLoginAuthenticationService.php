@@ -152,6 +152,7 @@ class SocialLoginAuthenticationService extends \TYPO3\CMS\Sv\AbstractAuthenticat
             );
             \TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule($urlParts, $additionalUrlParts);
             $returnUrlNoUser = \TYPO3\CMS\Core\Utility\HttpUtility::buildUrl($urlParts);
+            $this->signalSlotDispatcher->dispatch(__CLASS__, 'returnUrlNoUser', array(&$returnUrlNoUser, $this));
 
             $socialUser = $this->singleSignOnUtility->authenticate($this->provider, $returnUrl);
             $user = $this->fetchUserRecordByIdentifier($socialUser->identifier);
