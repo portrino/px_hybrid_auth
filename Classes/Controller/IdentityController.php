@@ -122,6 +122,8 @@ class IdentityController extends DynamicIdentityController {
             $return_url = $this->uriBuilder->getRequest()->getRequestUri();
             /** @var \Hybrid_User_Profile $socialUser */
             $socialUser = $this->singleSignOnUtility->authenticate($identity->getProvider(), $return_url);
+            $this->signalSlotDispatcher->dispatch(__CLASS__, 'beforeCreateAction', array($this, $socialUser, $identity));
+
             if ($socialUser) {
                 $identity->setIdentifier($socialUser->identifier);
             }
