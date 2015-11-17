@@ -126,10 +126,10 @@ class IdentityController extends DynamicIdentityController {
 
             if ($socialUser) {
                 $identity->setIdentifier($socialUser->identifier);
-            }
 
-            $this->feUserObj->addIdentity($identity);
-            $this->userRepository->update($this->feUserObj);
+                $this->feUserObj->addIdentity($identity);
+                $this->userRepository->update($this->feUserObj);
+            }
 
             $this->signalSlotDispatcher->dispatch(__CLASS__, 'afterCreateAction', array($this, $socialUser, $identity));
         }
