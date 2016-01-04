@@ -1,5 +1,11 @@
 # PxHybridAuth Change log
 
+2.1.0 - 2015-10-19
+------------------
+* [FEATURE] adds slot for `returnUrlNoUser` in `SocialLoginAuthenticationService`
+* [FEATURE] adds slot for `beforeCreationSlot` in `IdentityController`
+* [BUGFIX] only add identity if third party user exists in `IdentityController`
+
 2.0.0 - 2015-10-19
 ------------------
 * adapts PxHybridAuth to work with next TYPO3 LTS Version 7.x 
