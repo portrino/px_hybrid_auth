@@ -55,8 +55,6 @@ class Facebook extends \Hybrid_Providers_Facebook
         try {
             $data = $this->api->api('/me');
 
-            var_dump($data);exit;
-
         } catch (\FacebookApiException $e) {
             throw new \Exception("User profile request failed! {$this->providerId} returned an error: $e", 6);
         }
