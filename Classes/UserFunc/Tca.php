@@ -5,7 +5,7 @@ namespace Portrino\PxHybridAuth\UserFunc;
  *
  *  Copyright notice
  *
- *  (c) 2015 André Wuttig <wuttig@portrino.de>, portrino GmbH
+ *  (c) 2016 André Wuttig <wuttig@portrino.de>, portrino GmbH
  *
  *  All rights reserved
  *
@@ -25,22 +25,33 @@ namespace Portrino\PxHybridAuth\UserFunc;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class Tca
  *
  * @package Portrino\PxHybridAuth\UserFunc
  */
-class Tca {
+class Tca
+{
 
-    public function showNoProvidersConfiguredMessage($PA, $fObj) {
-        $content = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
+    /**
+     * @param $PA
+     * @param $fObj
+     *
+     * @return mixed
+     */
+    public function showNoProvidersConfiguredMessage($PA, $fObj)
+    {
+        $content = GeneralUtility::makeInstance(FlashMessage::class,
             $GLOBALS['LANG']->sL('LLL:EXT:px_hybrid_auth/Resources/Private/Language/locallang_db.xlf:fe_users.message.no_configured_providers.body'),
-            $GLOBALS['LANG']->sL('LLL:EXT:px_hybrid_auth/Resources/Private/Language/locallang_db.xlf:fe_users.message.no_configured_providers.header'), // the header is optional
-            \TYPO3\CMS\Core\Messaging\FlashMessage::WARNING, // the severity is optional as well and defaults to \TYPO3\CMS\Core\Messaging\FlashMessage::OK
-            TRUE // optional, whether the message should be stored in the session or only in the \TYPO3\CMS\Core\Messaging\FlashMessageQueue object (default is FALSE)
+            $GLOBALS['LANG']->sL('LLL:EXT:px_hybrid_auth/Resources/Private/Language/locallang_db.xlf:fe_users.message.no_configured_providers.header'),
+            // the header is optional
+            FlashMessage::WARNING,
+            // the severity is optional as well and defaults to \TYPO3\CMS\Core\Messaging\FlashMessage::OK
+            true // optional, whether the message should be stored in the session or only in the \TYPO3\CMS\Core\Messaging\FlashMessageQueue object (default is FALSE)
         )->render();
         return $content;
     }
 }
-?>

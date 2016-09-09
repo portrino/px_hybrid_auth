@@ -5,7 +5,7 @@ namespace Portrino\PxHybridAuth\Hooks;
  *
  *  Copyright notice
  *
- *  (c) 2015 André Wuttig <wuttig@portrino.de>, portrino GmbH
+ *  (c) 2016 André Wuttig <wuttig@portrino.de>, portrino GmbH
  *
  *  All rights reserved
  *
@@ -25,13 +25,17 @@ namespace Portrino\PxHybridAuth\Hooks;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Portrino\PxHybridAuth\Utility\SingleSignOnUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * Class LogOffHook
  *
  * @package Portrino\PxHybridAuth\Hooks
  */
-class LogOffHook {
+class LogOffHook
+{
 
     /**
      * Object manager
@@ -45,10 +49,11 @@ class LogOffHook {
      * @param array $_params
      * @param \TYPO3\CMS\Core\Authentication\AbstractUserAuthentication $pObj
      */
-    public function postProcessing($_params, $pObj) {
-        $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Object\ObjectManager');
+    public function postProcessing($_params, $pObj)
+    {
+        $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
         /** @var \Portrino\PxHybridAuth\Utility\SingleSignOnUtility $singleSignOnUtility */
-        $singleSignOnUtility = $this->objectManager->get('Portrino\PxHybridAuth\Utility\SingleSignOnUtility');
+        $singleSignOnUtility = $this->objectManager->get(SingleSignOnUtility::class);
         $singleSignOnUtility->logout();
         $pObj->removeCookie('PHPSESSID');
     }

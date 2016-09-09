@@ -5,7 +5,7 @@ namespace Portrino\PxHybridAuth\Controller;
  *
  *  Copyright notice
  *
- *  (c) 2014 André Wuttig <wuttig@portrino.de>, portrino GmbH
+ *  (c) 2016 André Wuttig <wuttig@portrino.de>, portrino GmbH
  *
  *  All rights reserved
  *
@@ -25,39 +25,36 @@ namespace Portrino\PxHybridAuth\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Portrino\PxHybridAuth\Controller\AbstractController;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
-
-    // only take the px_lib abstract controller if it is installed
-if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('px_lib')) {
-    class DynamicAbstractUserController extends \Portrino\PxLib\Controller\AbstractController {}
-} else {
-    class DynamicAbstractUserController extends \Portrino\PxHybridAuth\Controller\AbstractController {}
-}
+use TYPO3\CMS\Core\Utility\MathUtility;
 
 /**
  * Class AbstractUserController
  *
  * @package Portrino\PxHybridAuth\Controller
  */
-class AbstractUserController extends DynamicAbstractUserController {
+class AbstractUserController extends AbstractController
+{
 
-     public function initializeNewLoginAction() {
-        $redirectUrl = ($this->request->hasArgument('redirect_url')) ? $this->request->getArgument('redirect_url') : NULL;
-        $redirectPid = ($this->request->hasArgument('redirect_pid')) ? $this->request->getArgument('redirect_pid') : NULL;
-            // handle the redirects
+    public function initializeNewLoginAction()
+    {
+        $redirectUrl = ($this->request->hasArgument('redirect_url')) ? $this->request->getArgument('redirect_url') : null;
+        $redirectPid = ($this->request->hasArgument('redirect_pid')) ? $this->request->getArgument('redirect_pid') : null;
+        // handle the redirects
         if ($redirectUrl) {
             $this->redirectToUri($redirectUrl);
         }
         if ($redirectPid) {
             $this->redirectToPage($redirectPid);
         }
-        $loginError = ($this->request->hasArgument('login_error')) ? $this->request->getArgument('login_error') : NULL;
-            // handle the redirect
+        $loginError = ($this->request->hasArgument('login_error')) ? $this->request->getArgument('login_error') : null;
+        // handle the redirect
         if ($loginError) {
-            $this->signalSlotDispatcher->dispatch(__CLASS__, 'loginErrorBeforeRedirect', array($this, $this->request));
-			if ($this->settings['redirectPageLoginError']) {
-				$this->redirectToPage($this->settings['redirectPageLoginError']);
-			}
+            $this->signalSlotDispatcher->dispatch(__CLASS__, 'loginErrorBeforeRedirect', [$this, $this->request]);
+            if ($this->settings['redirectPageLoginError']) {
+                $this->redirectToPage($this->settings['redirectPageLoginError']);
+            }
         }
     }
 
@@ -66,11 +63,12 @@ class AbstractUserController extends DynamicAbstractUserController {
      *
      * @return void
      */
-    public function newLoginAction() {
-        $returnUrl = GeneralUtility::_GP('return_url') ? GeneralUtility::_GP('return_url') : NULL;
-            // only if no return_url given use the redirectPageLogin from TS/Flexform settings
+    public function newLoginAction()
+    {
+        $returnUrl = GeneralUtility::_GP('return_url') ? GeneralUtility::_GP('return_url') : null;
+        // only if no return_url given use the redirectPageLogin from TS/Flexform settings
         if (!$returnUrl) {
-                // if no redirectPageLogin from TS/Flexform was given use the loginPid from ext_conf
+            // if no redirectPageLogin from TS/Flexform was given use the loginPid from ext_conf
             $returnPid = $this->settings['redirectPageLogin'] ? $this->settings['redirectPageLogin'] : $this->extConf['basic.']['login_pid'];
         }
         if ($this->settings['storagePid']) {
@@ -79,8 +77,6 @@ class AbstractUserController extends DynamicAbstractUserController {
             $pids = $GLOBALS['TSFE']->getStorageSiterootPids();
             $storagePids = $pids['_STORAGE_PID'];
         }
-
-
 
 
         $this->view->assign('redirect_url', $returnUrl);
@@ -93,19 +89,21 @@ class AbstractUserController extends DynamicAbstractUserController {
      * Returns a commalist of page ids for a query (eg. 'WHERE pid IN (...)')
      *
      * @param string $pid_list A comma list of page ids (if empty current page is used)
-     * @param integer$recursive An integer >=0 telling how deep to dig for pids under each entry in $pid_list
+     * @param integer $recursive An integer >=0 telling how deep to dig for pids under each entry in $pid_list
+     *
      * @return string List of PID values (comma separated)
      */
-    protected function getPidList($pid_list, $recursive = 0) {
+    protected function getPidList($pid_list, $recursive = 0)
+    {
         $cObjData = $this->configurationManager->getContentObject();
         if (!strcmp($pid_list, '')) {
             $pid_list = $GLOBALS['TSFE']->id;
         }
-        $recursive = \TYPO3\CMS\Core\Utility\MathUtility::forceIntegerInRange($recursive, 0);
-        $pid_list_arr = array_unique(GeneralUtility::trimExplode(',', $pid_list, TRUE));
-        $pid_list = array();
+        $recursive = MathUtility::forceIntegerInRange($recursive, 0);
+        $pid_list_arr = array_unique(GeneralUtility::trimExplode(',', $pid_list, true));
+        $pid_list = [];
         foreach ($pid_list_arr as $val) {
-            $val = \TYPO3\CMS\Core\Utility\MathUtility::forceIntegerInRange($val, 0);
+            $val = MathUtility::forceIntegerInRange($val, 0);
             if ($val) {
                 $_list = $cObjData->getTreeList(-1 * $val, $recursive);
                 if ($_list) {

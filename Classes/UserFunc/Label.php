@@ -5,7 +5,7 @@ namespace Portrino\PxHybridAuth\UserFunc;
  *
  *  Copyright notice
  *
- *  (c) 2014 André Wuttig <wuttig@portrino.de>, portrino GmbH
+ *  (c) 2016 André Wuttig <wuttig@portrino.de>, portrino GmbH
  *
  *  All rights reserved
  *
@@ -33,14 +33,16 @@ use \TYPO3\CMS\Backend\Utility\BackendUtility;
  *
  * @package Portrino\PxHybridAuth\UserFunc
  */
-class Label {
+class Label
+{
 
-    function getIdentityLabel(&$params, &$pObj) {
+    function getIdentityLabel(&$params, &$pObj)
+    {
         $id = $params['row']['uid'];
         $params['title'] = $params['row']['uid'];
         if ((int)$id > 0) {
             $row = BackendUtility::getRecord('tx_pxhybridauth_domain_model_identity', $id);
-            if ($row != NULL) {
+            if ($row != null) {
                 $type = $GLOBALS['LANG']->sL('LLL:EXT:px_hybrid_auth/Resources/Private/Language/locallang_db.xlf:tx_pxhybridauth_domain_model_identity.tx_extbase_type.' . $row['tx_extbase_type']);
                 if ($type) {
                     $params['title'] = $type . ': ' . $row['identifier'];

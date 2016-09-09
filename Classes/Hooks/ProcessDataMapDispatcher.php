@@ -5,7 +5,7 @@ namespace Portrino\PxHybridAuth\Hooks;
  *
  *  Copyright notice
  *
- *  (c) 2015 André Wuttig <wuttig@portrino.de>, portrino GmbH
+ *  (c) 2016 André Wuttig <wuttig@portrino.de>, portrino GmbH
  *
  *  All rights reserved
  *
@@ -25,6 +25,9 @@ namespace Portrino\PxHybridAuth\Hooks;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
 
 /**
  * Class ProcessDataMapDispatcher
@@ -57,7 +60,8 @@ namespace Portrino\PxHybridAuth\Hooks;
  * </code>
  *
  */
-class ProcessDataMapDispatcher {
+class ProcessDataMapDispatcher
+{
 
     /**
      * @param array $incomingFieldArray
@@ -65,12 +69,13 @@ class ProcessDataMapDispatcher {
      * @param int $id
      * @param \TYPO3\CMS\Core\DataHandling\DataHandler $dataHandler
      */
-    function processDatamap_preProcessFieldArray(&$incomingFieldArray, $table, $id, $dataHandler) {
+    function processDatamap_preProcessFieldArray(&$incomingFieldArray, $table, $id, $dataHandler)
+    {
         /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
         /** @var \TYPO3\CMS\Extbase\SignalSlot\Dispatcher $signalSlotDispatcher */
-        $signalSlotDispatcher = $objectManager->get('TYPO3\\CMS\\Extbase\\SignalSlot\Dispatcher');
-        $signalSlotDispatcher->dispatch($table, 'PreProcessFieldArray', array(&$incomingFieldArray, $id, $dataHandler));
+        $signalSlotDispatcher = $objectManager->get(Dispatcher::class);
+        $signalSlotDispatcher->dispatch($table, 'PreProcessFieldArray', [&$incomingFieldArray, $id, $dataHandler]);
     }
 
     /**
@@ -80,12 +85,14 @@ class ProcessDataMapDispatcher {
      * @param array $fieldArray
      * @param \TYPO3\CMS\Core\DataHandling\DataHandler $dataHandler
      */
-    function processDatamap_postProcessFieldArray($status, $table, $id, &$fieldArray, $dataHandler) {
+    function processDatamap_postProcessFieldArray($status, $table, $id, &$fieldArray, $dataHandler)
+    {
         /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
         /** @var \TYPO3\CMS\Extbase\SignalSlot\Dispatcher $signalSlotDispatcher */
-        $signalSlotDispatcher = $objectManager->get('TYPO3\\CMS\\Extbase\\SignalSlot\Dispatcher');
-        $signalSlotDispatcher->dispatch($table, $status . 'RecordPostProcessFieldArray', array($id, &$fieldArray, $dataHandler));
+        $signalSlotDispatcher = $objectManager->get(Dispatcher::class);
+        $signalSlotDispatcher->dispatch($table, $status . 'RecordPostProcessFieldArray',
+            [$id, &$fieldArray, $dataHandler]);
     }
 
     /**
@@ -95,14 +102,16 @@ class ProcessDataMapDispatcher {
      * @param array $fieldArray
      * @param \TYPO3\CMS\Core\DataHandling\DataHandler $dataHandler
      */
-    function processDatamap_afterDatabaseOperations($status, $table, $id, &$fieldArray, $dataHandler) {
+    function processDatamap_afterDatabaseOperations($status, $table, $id, &$fieldArray, $dataHandler)
+    {
         /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
         /** @var \TYPO3\CMS\Extbase\SignalSlot\Dispatcher $signalSlotDispatcher */
-        $signalSlotDispatcher = $objectManager->get('TYPO3\\CMS\\Extbase\\SignalSlot\Dispatcher');
-            // @deprecated: will be removed soon
-        $signalSlotDispatcher->dispatch($table, $status . 'Record', array($id, &$fieldArray, $dataHandler));
-        $signalSlotDispatcher->dispatch($table, $status . 'RecordAfterDataBaseOperations', array($id, &$fieldArray, $dataHandler));
+        $signalSlotDispatcher = $objectManager->get(Dispatcher::class);
+        // @deprecated: will be removed soon
+        $signalSlotDispatcher->dispatch($table, $status . 'Record', [$id, &$fieldArray, $dataHandler]);
+        $signalSlotDispatcher->dispatch($table, $status . 'RecordAfterDataBaseOperations',
+            [$id, &$fieldArray, $dataHandler]);
     }
 
 }

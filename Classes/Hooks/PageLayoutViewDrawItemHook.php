@@ -31,7 +31,8 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @package Portrino\PxHybridAuth\Hooks
  */
-class PageLayoutViewDrawItemHook implements \TYPO3\CMS\Backend\View\PageLayoutViewDrawItemHookInterface {
+class PageLayoutViewDrawItemHook implements \TYPO3\CMS\Backend\View\PageLayoutViewDrawItemHookInterface
+{
 
     /**
      * Preprocesses the preview rendering of a content element.
@@ -41,15 +42,25 @@ class PageLayoutViewDrawItemHook implements \TYPO3\CMS\Backend\View\PageLayoutVi
      * @param string $headerContent Header content
      * @param string $itemContent Item content
      * @param array $row Record row of tt_content
+     *
      * @return void
      */
-    public function preProcess(\TYPO3\CMS\Backend\View\PageLayoutView &$parentObject, &$drawItem, &$headerContent, &$itemContent, array &$row) {
-        if ($row['CType'] !== 'px_hybrid_auth_login') return;
-        $drawItem = FALSE;
+    public function preProcess(
+        \TYPO3\CMS\Backend\View\PageLayoutView &$parentObject,
+        &$drawItem,
+        &$headerContent,
+        &$itemContent,
+        array &$row
+    ) {
+        if ($row['CType'] !== 'px_hybrid_auth_login') {
+            return;
+        }
+        $drawItem = false;
         $data = GeneralUtility::xml2array($row['pi_flexform']);
-        $headerContent = '<strong>' . htmlspecialchars($GLOBALS['LANG']->sL('LLL:EXT:px_hybrid_auth/Resources/Private/Language/locallang_db.xlf:CType.I.px_hybrid_auth_login')) . '</strong><br />';
+        $headerContent = '<strong>' . htmlspecialchars($GLOBALS['LANG']->sL('LLL:EXT:px_hybrid_auth/Resources/Private/Language/locallang_db.xlf:tt_content.CType.px_hybrid_auth_login')) . '</strong><br />';
         if (is_array($data) && isset($data['data']['sDEF']['lDEF']['switchableControllerActions']['vDEF'])) {
-            $provider = strtolower(str_replace('User->newLogin;', '', $data['data']['sDEF']['lDEF']['switchableControllerActions']['vDEF']));
+            $provider = strtolower(str_replace('User->newLogin;', '',
+                $data['data']['sDEF']['lDEF']['switchableControllerActions']['vDEF']));
             if ($provider) {
                 $headerContent .= htmlspecialchars($GLOBALS['LANG']->sL('LLL:EXT:px_hybrid_auth/Resources/Private/Language/locallang_db.xlf:' . $provider . '_user.new_login')) . '<br />';
             }

@@ -5,7 +5,7 @@ namespace Portrino\PxHybridAuth\Domain\Model\Identity;
  *
  *  Copyright notice
  *
- *  (c) 2015 André Wuttig <wuttig@portrino.de>, portrino GmbH
+ *  (c) 2016 André Wuttig <wuttig@portrino.de>, portrino GmbH
  *
  *  All rights reserved
  *
@@ -25,17 +25,20 @@ namespace Portrino\PxHybridAuth\Domain\Model\Identity;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Portrino\PxHybridAuth\Domain\Model\Identity;
 
 /**
  * Class FacebookIdentity
  *
  * @package Portrino\PxHybridAuth\Domain\Model\Identity
  */
-class FacebookIdentity extends \Portrino\PxHybridAuth\Domain\Model\Identity {
+class FacebookIdentity extends Identity
+{
 
     const EXTBASE_TYPE = 'Tx_PxHybridAuth_Domain_Model_Identity_FacebookIdentity';
 
-    public function initializeObject() {
+    public function initializeObject()
+    {
         $this->extbaseType = self::EXTBASE_TYPE;
     }
 

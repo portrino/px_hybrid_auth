@@ -5,7 +5,7 @@ namespace Portrino\PxHybridAuth\Utility;
  *
  *  Copyright notice
  *
- *  (c) 2014 André Wuttig <wuttig@portrino.de>, portrino GmbH
+ *  (c) 2016 André Wuttig <wuttig@portrino.de>, portrino GmbH
  *
  *  All rights reserved
  *
@@ -35,12 +35,13 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
  *
  * @package Portrino\PxHybridAuth\Utility
  */
-class SingleSignOnUtility  {
+class SingleSignOnUtility
+{
 
     /**
      * @var array
      */
-    protected $config = array();
+    protected $config = [];
 
     /**
      * @var array
@@ -50,73 +51,72 @@ class SingleSignOnUtility  {
     /**
      * initializeObject
      */
-    public function initializeObject() {
+    public function initializeObject()
+    {
         $this->extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['px_hybrid_auth']);
-        $this->config = array(
-                'base_url' => 'http://' . $_SERVER['HTTP_HOST'] . '/?type=1410157426&no_cache=1',
-                'providers' => array (
-                    'Facebook' => array (
-                        'enabled' =>  $this->extConf['provider.']['facebook.']['enabled'],
-                        'keys'    => array (
-                            'id' => $this->extConf['provider.']['facebook.']['id'],
-                            'secret' => $this->extConf['provider.']['facebook.']['secret']
-                        ),
-                        'scope'   => 'email',
-                        'display' => 'page',
-                        'wrapper' => array (
-                            'class' => Facebook::class
-                        )
-                    ),
-                    'LinkedIn' => array (
-                        'enabled' => $this->extConf['provider.']['linkedin.']['enabled'],
-                        'keys'    => array (
-                            'key' => $this->extConf['provider.']['linkedin.']['key'],
-                            'secret' => $this->extConf['provider.']['linkedin.']['secret']
-                        ),
-                        'scope'   => 'email',
-                        'display' => 'page',
-                        'wrapper' => array (
-                            'class' => LinkedIn::class
-                        )
-                    ),
-                    'XING' => array (
-                        'enabled' => $this->extConf['provider.']['xing.']['enabled'],
-                        'keys'    => array (
-                            'key' => $this->extConf['provider.']['xing.']['key'],
-                            'secret' => $this->extConf['provider.']['xing.']['secret']
-                        ),
-                        'scope'   => 'email',
-                        'display' => 'page',
-                        'wrapper' => array (
-                            'class' => Xing::class
-                        )
-                    )
-                ),
-                'debug_mode' => (boolean)$this->extConf['basic.']['debug_mode'],
-                'debug_file' => $this->extConf['basic.']['debug_file'],
-        );
+        $this->config = [
+            'base_url' => 'http://' . $_SERVER['HTTP_HOST'] . '/?type=1410157426&no_cache=1',
+            'providers' => [
+                'Facebook' => [
+                    'enabled' => $this->extConf['provider.']['facebook.']['enabled'],
+                    'keys' => [
+                        'id' => $this->extConf['provider.']['facebook.']['id'],
+                        'secret' => $this->extConf['provider.']['facebook.']['secret']
+                    ],
+                    'scope' => 'email',
+                    'display' => 'page',
+                    'wrapper' => [
+                        'class' => Facebook::class
+                    ]
+                ],
+                'LinkedIn' => [
+                    'enabled' => $this->extConf['provider.']['linkedin.']['enabled'],
+                    'keys' => [
+                        'key' => $this->extConf['provider.']['linkedin.']['key'],
+                        'secret' => $this->extConf['provider.']['linkedin.']['secret']
+                    ],
+                    'scope' => 'email',
+                    'display' => 'page',
+                    'wrapper' => [
+                        'class' => LinkedIn::class
+                    ]
+                ],
+                'XING' => [
+                    'enabled' => $this->extConf['provider.']['xing.']['enabled'],
+                    'keys' => [
+                        'key' => $this->extConf['provider.']['xing.']['key'],
+                        'secret' => $this->extConf['provider.']['xing.']['secret']
+                    ],
+                    'scope' => 'email',
+                    'display' => 'page',
+                    'wrapper' => [
+                        'class' => Xing::class
+                    ]
+                ]
+            ],
+            'debug_mode' => (boolean)$this->extConf['basic.']['debug_mode'],
+            'debug_file' => $this->extConf['basic.']['debug_file'],
+        ];
     }
 
     /**
      * @param string $provider
      * @param string $returnTo
      *
-     *  @return \Hybrid_User_Profile|\PxHybridAuth_Hybrid_User|FALSE
+     * @return \Hybrid_User_Profile|\PxHybridAuth_Hybrid_User|FALSE
      */
-    public function authenticate($provider, $returnTo) {
-        try{
+    public function authenticate($provider, $returnTo)
+    {
+        try {
             $hybridauth = new \Hybrid_Auth($this->config);
             $service = $hybridauth->authenticate($provider,
-                array(
+                [
                     'hauth_return_to' => $returnTo
-                )
+                ]
             );
             $socialUser = $service->getUserProfile();
 
-        } catch( \Exception $exception ){
-
-            \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($exception);
-            exit;
+        } catch (\Exception $exception) {
 
             switch ($exception->getCode()) {
                 case 0:
@@ -129,10 +129,12 @@ class SingleSignOnUtility  {
                     $error = 'Provider not properly configured.';
                     break;
                 case 3:
-                    $error = 'Unknown or disabled provider.'; break;
+                    $error = 'Unknown or disabled provider.';
+                    break;
                     break;
                 case 4:
-                    $error = 'Missing provider application credentials.'; break;
+                    $error = 'Missing provider application credentials.';
+                    break;
                     break;
                 case 5:
                     $error = 'User has cancelled the authentication or the provider refused the connection.';
@@ -146,14 +148,15 @@ class SingleSignOnUtility  {
         if ($socialUser) {
             return $socialUser;
         } else {
-            return FALSE;
+            return false;
         }
     }
 
     /**
      * logout from all providers when typo3 logout takes place
      */
-    public function logout() {
+    public function logout()
+    {
         (new \Hybrid_Auth($this->config))->logoutAllProviders();
     }
 

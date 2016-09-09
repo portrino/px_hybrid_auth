@@ -19,16 +19,17 @@ namespace Portrino\PxHybridAuth\ViewHelpers\Format;
  * TextWithMixedCase
  *
  */
-class UppercaseFirstViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+class UppercaseFirstViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
 
     /**
      * Uppercase first character
      *
      * @return string The altered string.
      */
-    public function render() {
+    public function render()
+    {
         $content = $this->renderChildren();
         return ucfirst($content);
     }
 }
-?>

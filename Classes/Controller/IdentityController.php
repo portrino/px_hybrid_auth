@@ -6,7 +6,7 @@ namespace Portrino\PxHybridAuth\Controller;
  *
  *  Copyright notice
  *
- *  (c) 2015 André Wuttig <wuttig@portrino.de>, portrino GmbH
+ *  (c) 2016 André Wuttig <wuttig@portrino.de>, portrino GmbH
  *
  *  All rights reserved
  *
@@ -26,22 +26,17 @@ namespace Portrino\PxHybridAuth\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
-
-    // only take the px_lib abstract controller if it is installed
-if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('px_lib')) {
-    class DynamicIdentityController extends \Portrino\PxLib\Controller\AbstractController {}
-} else {
-    class DynamicIdentityController extends \Portrino\PxHybridAuth\Controller\AbstractController {}
-}
+use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * Class IdentityController
  *
  * @package Portrino\PxHybridAuth\Controller
  */
-class IdentityController extends DynamicIdentityController {
+class IdentityController extends AbstractController
+{
 
     /**
      * @var integer The uid of the current logged in user
@@ -70,16 +65,18 @@ class IdentityController extends DynamicIdentityController {
     /**
      *
      */
-    protected function initializeAction() {
+    protected function initializeAction()
+    {
         parent::initializeAction();
-        $this->feUserUid = is_array($GLOBALS['TSFE']->fe_user->user) ? $GLOBALS['TSFE']->fe_user->user['uid'] : NULL;
-        $this->feUserObj = $this->feUserUid ? $this->userRepository->findByUid((int)$this->feUserUid) : NULL;
+        $this->feUserUid = is_array($GLOBALS['TSFE']->fe_user->user) ? $GLOBALS['TSFE']->fe_user->user['uid'] : null;
+        $this->feUserObj = $this->feUserUid ? $this->userRepository->findByUid((int)$this->feUserUid) : null;
     }
 
     /**
      * @param \TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view
      */
-    protected function initializeView(\TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view) {
+    protected function initializeView(ViewInterface $view)
+    {
         parent::initializeView($view);
         $this->view->assign('user', $this->feUserObj);
     }
@@ -90,22 +87,24 @@ class IdentityController extends DynamicIdentityController {
      *
      * @return void
      */
-    public function listAction() {
-        $socialProviders = array();
+    public function listAction()
+    {
+        $socialProviders = [];
         if ($this->feUserObj) {
             foreach ($this->extConf['provider.'] as $provider => $config) {
                 $provider = str_replace('.', '', $provider);
                 if ((Boolean)$config['enabled']) {
-                    $socialProviders[$provider] = array(
+                    $socialProviders[$provider] = [
                         'isConnected' => $this->feUserObj->isConnected($provider)
-                    );
+                    ];
                 }
             }
             if (count($socialProviders) === 0) {
                 $this->addFlashMessage(
-                    \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('flash.warning.no_configured_providers.body', $this->extensionName),
-                    \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('flash.warning.no_configured_providers.header', $this->extensionName),
-                    \TYPO3\CMS\Core\Messaging\FlashMessage::WARNING
+                    LocalizationUtility::translate('flash.warning.no_configured_providers.body', $this->extensionName),
+                    LocalizationUtility::translate('flash.warning.no_configured_providers.header',
+                        $this->extensionName),
+                    FlashMessage::WARNING
                 );
             }
         }
@@ -117,14 +116,16 @@ class IdentityController extends DynamicIdentityController {
      *
      * @param \Portrino\PxHybridAuth\Domain\Model\Identity $identity
      * @ignorevalidation $identity
+     *
      * @return void
      */
-    public function createAction(\Portrino\PxHybridAuth\Domain\Model\Identity $identity = NULL) {
-        if ($this->feUserObj != NULL) {
+    public function createAction(\Portrino\PxHybridAuth\Domain\Model\Identity $identity = null)
+    {
+        if ($this->feUserObj != null) {
             $return_url = $this->uriBuilder->getRequest()->getRequestUri();
             /** @var \Hybrid_User_Profile $socialUser */
             $socialUser = $this->singleSignOnUtility->authenticate($identity->getProvider(), $return_url);
-            $this->signalSlotDispatcher->dispatch(__CLASS__, 'beforeCreateAction', array($this, &$socialUser, $identity));
+            $this->signalSlotDispatcher->dispatch(__CLASS__, 'beforeCreateAction', [$this, &$socialUser, $identity]);
 
             if ($socialUser) {
                 $identity->setIdentifier($socialUser->identifier);
@@ -133,37 +134,40 @@ class IdentityController extends DynamicIdentityController {
                 $this->userRepository->update($this->feUserObj);
             }
 
-            $this->signalSlotDispatcher->dispatch(__CLASS__, 'afterCreateAction', array($this, $socialUser, $identity));
+            $this->signalSlotDispatcher->dispatch(__CLASS__, 'afterCreateAction', [$this, $socialUser, $identity]);
         }
-        $this->redirect('list','Identity');
+        $this->redirect('list', 'Identity');
     }
 
-	/**
+    /**
      * remove action
      *
      * @param string $identity
      * @ignorevalidation $identity
+     *
      * @return void
      */
-	public function removeAction($identity) {
-		$identity = strtolower($identity);
+    public function removeAction($identity)
+    {
+        $identity = strtolower($identity);
 
-		$identities = $this->feUserObj->getIdentities();
-		foreach ($identities as $singleIdentity) {
-			/** @var \Portrino\PxHybridAuth\Domain\Model\Identity $singleIdentity */
-			if (strtolower($singleIdentity->getProvider()) === $identity && $this->feUserObj->isConnected($identity)) {
-				$this->feUserObj->removeIdentity($singleIdentity);
-				$this->userRepository->update($this->feUserObj);
-				$this->signalSlotDispatcher->dispatch(__CLASS__, 'afterRemoveAction', array($this, $singleIdentity));
-			}
-		}
-		$this->redirect('list', 'Identity');
-	}
+        $identities = $this->feUserObj->getIdentities();
+        foreach ($identities as $singleIdentity) {
+            /** @var \Portrino\PxHybridAuth\Domain\Model\Identity $singleIdentity */
+            if (strtolower($singleIdentity->getProvider()) === $identity && $this->feUserObj->isConnected($identity)) {
+                $this->feUserObj->removeIdentity($singleIdentity);
+                $this->userRepository->update($this->feUserObj);
+                $this->signalSlotDispatcher->dispatch(__CLASS__, 'afterRemoveAction', [$this, $singleIdentity]);
+            }
+        }
+        $this->redirect('list', 'Identity');
+    }
 
-	/**
-	 * @return \Portrino\PxHybridAuth\Domain\Model\User
-	 */
-	public function getCurrentUser() {
-		return $this->feUserObj;
-	}
+    /**
+     * @return \Portrino\PxHybridAuth\Domain\Model\User
+     */
+    public function getCurrentUser()
+    {
+        return $this->feUserObj;
+    }
 }

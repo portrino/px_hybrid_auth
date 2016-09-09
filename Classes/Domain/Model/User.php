@@ -5,7 +5,7 @@ namespace Portrino\PxHybridAuth\Domain\Model;
  *
  *  Copyright notice
  *
- *  (c) 2015 André Wuttig <wuttig@portrino.de>, portrino GmbH
+ *  (c) 2016 André Wuttig <wuttig@portrino.de>, portrino GmbH
  *
  *  All rights reserved
  *
@@ -25,13 +25,17 @@ namespace Portrino\PxHybridAuth\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Portrino\PxHybridAuth\Domain\Model\Identity;
+use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Class User
  *
  * @package Portrino\PxHybridAuth\Domain\Model
  */
-class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
+class User extends FrontendUser
+{
 
     /**
      * identities
@@ -39,9 +43,10 @@ class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Portrino\PxHybridAuth\Domain\Model\Identity>
      * @cascade remove
      */
-    protected $identities = NULL;
+    protected $identities = null;
 
-    public function initializeObject() {
+    public function initializeObject()
+    {
     }
 
     /**
@@ -49,7 +54,8 @@ class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
      *
      * @return void
      */
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         //Do not remove the next line: It would break the functionality
         $this->initStorageObjects();
@@ -63,17 +69,20 @@ class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
      *
      * @return void
      */
-    protected function initStorageObjects() {
-        $this->identities = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+    protected function initStorageObjects()
+    {
+        $this->identities = new ObjectStorage();
     }
 
     /**
      * Adds a Identity
      *
      * @param \Portrino\PxHybridAuth\Domain\Model\Identity $identity
+     *
      * @return void
      */
-    public function addIdentity(\Portrino\PxHybridAuth\Domain\Model\Identity $identity) {
+    public function addIdentity(Identity $identity)
+    {
         $this->identities->attach($identity);
     }
 
@@ -81,9 +90,11 @@ class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
      * Removes a Identity
      *
      * @param \Portrino\PxHybridAuth\Domain\Model\Identity $identityToRemove The Identity to be removed
+     *
      * @return void
      */
-    public function removeIdentity(\Portrino\PxHybridAuth\Domain\Model\Identity $identityToRemove) {
+    public function removeIdentity(Identity $identityToRemove)
+    {
         $this->identities->detach($identityToRemove);
     }
 
@@ -92,7 +103,8 @@ class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Portrino\PxHybridAuth\Domain\Model\Identity> $identities
      */
-    public function getIdentities() {
+    public function getIdentities()
+    {
         return $this->identities;
     }
 
@@ -100,9 +112,11 @@ class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
      * Sets the identities
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Portrino\PxHybridAuth\Domain\Model\Identity> $identities
+     *
      * @return void
      */
-    public function setIdentities(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $identities) {
+    public function setIdentities(ObjectStorage $identities)
+    {
         $this->identities = $identities;
     }
 
@@ -110,14 +124,16 @@ class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
      * check if the user is connected with the given provider (if a identity exists for the given provider)
      *
      * @param string $provider
+     *
      * @return boolean
      */
-    public function isConnected($provider) {
-        $result = FALSE;
+    public function isConnected($provider)
+    {
+        $result = false;
         /** @var \Portrino\PxHybridAuth\Domain\Model\Identity $identity */
         foreach ($this->getIdentities() as $identity) {
-            if (strtolower($identity->getExtbaseType()) === strtolower('Tx_PxHybridAuth_Domain_Model_Identity_' . $provider . 'Identity')){
-                $result = TRUE;
+            if (strtolower($identity->getExtbaseType()) === strtolower('Tx_PxHybridAuth_Domain_Model_Identity_' . $provider . 'Identity')) {
+                $result = true;
                 break;
             }
         }

@@ -5,7 +5,7 @@ namespace Portrino\PxHybridAuth\Service;
  *
  *  Copyright notice
  *
- *  (c) 2014 André Wuttig <wuttig@portrino.de>, portrino GmbH
+ *  (c) 2016 André Wuttig <wuttig@portrino.de>, portrino GmbH
  *
  *  All rights reserved
  *
@@ -25,18 +25,27 @@ namespace Portrino\PxHybridAuth\Service;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Portrino\PxHybridAuth\Utility\SingleSignOnUtility;
+use TYPO3\CMS\Core\Utility\ArrayUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\HttpUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
+use TYPO3\CMS\Sv\AbstractAuthenticationService;
 
 /**
  * Class SocialLoginAuthenticationService
  *
  * @package Portrino\PxHybridAuth\Service
  */
-class SocialLoginAuthenticationService extends \TYPO3\CMS\Sv\AbstractAuthenticationService {
+class SocialLoginAuthenticationService extends AbstractAuthenticationService
+{
 
     /**
      * 100 / 101 Authenticated / Not authenticated -> in each case go on with additonal auth
      */
     const STATUS_AUTHENTICATION_SUCCESS_CONTINUE = 100;
+
     const STATUS_AUTHENTICATION_FAILURE_CONTINUE = 101;
 
     /**
@@ -103,17 +112,19 @@ class SocialLoginAuthenticationService extends \TYPO3\CMS\Sv\AbstractAuthenticat
      */
     protected $extensionName = 'px_hybrid_auth';
 
-    public function init() {
-        $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Object\ObjectManager');
-        $this->signalSlotDispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\SignalSlot\Dispatcher');
+    public function init()
+    {
+        $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+        $this->signalSlotDispatcher = GeneralUtility::makeInstance(Dispatcher::class);
         $this->extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['px_hybrid_auth']);
         $this->db = $this->getDatabaseConnection();
 
         return parent::init();
     }
 
-    public function initAuth($mode, $loginData, $authInfo, $pObj) {
-        $this->singleSignOnUtility = $this->objectManager->get('Portrino\PxHybridAuth\Utility\SingleSignOnUtility');
+    public function initAuth($mode, $loginData, $authInfo, $pObj)
+    {
+        $this->singleSignOnUtility = $this->objectManager->get(SingleSignOnUtility::class);
         if (isset($_REQUEST['pid'])) {
             $this->db_user['check_pid_clause'] = ' AND pid IN (' .
                 $this->db->cleanIntList($_REQUEST['pid']) . ')';
@@ -131,39 +142,40 @@ class SocialLoginAuthenticationService extends \TYPO3\CMS\Sv\AbstractAuthenticat
         parent::initAuth($mode, $loginData, $authInfo, $pObj);
     }
 
-    public function getUser() {
-        $user = FALSE;
+    public function getUser()
+    {
+        $user = false;
         if ($this->isServiceResponsible()) {
             $loginPid = $this->extConf['basic.']['login_pid'];
-            $urlParts = array(
-                'scheme' => \TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('TYPO3_SSL') ? 'https' : 'http',
-                'host' => \TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('HTTP_HOST'),
-            );
+            $urlParts = [
+                'scheme' => GeneralUtility::getIndpEnv('TYPO3_SSL') ? 'https' : 'http',
+                'host' => GeneralUtility::getIndpEnv('HTTP_HOST'),
+            ];
 
-            $additionalUrlParts = array(
-                'query' => 'id=' . $loginPid . '&no_cache=1&logintype=login&tx_pxhybridauth_login[provider]=' . $this->provider . '&pid=' .  $this->userRecordStoragePage . '&tx_pxhybridauth_login[redirect_url]=' . $this->redirectUrl . '&tx_pxhybridauth_login[redirect_pid]=' . $this->redirectPid
-            );
-            \TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule($urlParts, $additionalUrlParts);
-            $returnUrl = \TYPO3\CMS\Core\Utility\HttpUtility::buildUrl($urlParts);
-            $this->signalSlotDispatcher->dispatch(__CLASS__, 'returnUrl', array(&$returnUrl, $this));
+            $additionalUrlParts = [
+                'query' => 'id=' . $loginPid . '&no_cache=1&logintype=login&tx_pxhybridauth_login[provider]=' . $this->provider . '&pid=' . $this->userRecordStoragePage . '&tx_pxhybridauth_login[redirect_url]=' . $this->redirectUrl . '&tx_pxhybridauth_login[redirect_pid]=' . $this->redirectPid
+            ];
+            ArrayUtility::mergeRecursiveWithOverrule($urlParts, $additionalUrlParts);
+            $returnUrl = HttpUtility::buildUrl($urlParts);
+            $this->signalSlotDispatcher->dispatch(__CLASS__, 'returnUrl', [&$returnUrl, $this]);
 
-            $additionalUrlParts = array(
+            $additionalUrlParts = [
                 'query' => 'id=' . $loginPid . '&no_cache=1&tx_pxhybridauth_login[login_error]=1&tx_pxhybridauth_login[provider]=' . $this->provider
-            );
-            \TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule($urlParts, $additionalUrlParts);
-            $returnUrlNoUser = \TYPO3\CMS\Core\Utility\HttpUtility::buildUrl($urlParts);
-            $this->signalSlotDispatcher->dispatch(__CLASS__, 'returnUrlNoUser', array(&$returnUrlNoUser, $this));
+            ];
+            ArrayUtility::mergeRecursiveWithOverrule($urlParts, $additionalUrlParts);
+            $returnUrlNoUser = HttpUtility::buildUrl($urlParts);
+            $this->signalSlotDispatcher->dispatch(__CLASS__, 'returnUrlNoUser', [&$returnUrlNoUser, $this]);
 
             $socialUser = $this->singleSignOnUtility->authenticate($this->provider, $returnUrl);
             $user = $this->fetchUserRecordByIdentifier($socialUser->identifier);
             if (isset($user['username'])) {
                 $this->login['uname'] = $user['username'];
             }
-            $this->signalSlotDispatcher->dispatch(__CLASS__, 'getUser', array(&$user, $socialUser, $this));
+            $this->signalSlotDispatcher->dispatch(__CLASS__, 'getUser', [&$user, $socialUser, $this]);
 
-                // redirect to px_hybrid_auth login box, when no user found
+            // redirect to px_hybrid_auth login box, when no user found
             if (!$user) {
-                \TYPO3\CMS\Core\Utility\HttpUtility::redirect($returnUrlNoUser);
+                HttpUtility::redirect($returnUrlNoUser);
             }
         }
         return $user;
@@ -171,9 +183,11 @@ class SocialLoginAuthenticationService extends \TYPO3\CMS\Sv\AbstractAuthenticat
 
     /**
      * @param array $user
+     *
      * @return int
      */
-    public function authUser(array $user) {
+    public function authUser(array $user)
+    {
         if (!$this->isServiceResponsible()) {
             return self::STATUS_AUTHENTICATION_FAILURE_CONTINUE;
         }
@@ -181,7 +195,7 @@ class SocialLoginAuthenticationService extends \TYPO3\CMS\Sv\AbstractAuthenticat
         if ($user) {
             $result = self::STATUS_AUTHENTICATION_SUCCESS_BREAK;
         }
-        $this->signalSlotDispatcher->dispatch(__CLASS__, 'authUser', array($user, &$result, $this));
+        $this->signalSlotDispatcher->dispatch(__CLASS__, 'authUser', [$user, &$result, $this]);
 
         return $result;
     }
@@ -191,15 +205,18 @@ class SocialLoginAuthenticationService extends \TYPO3\CMS\Sv\AbstractAuthenticat
      *
      * @return boolean
      */
-    protected function isServiceResponsible() {
+    protected function isServiceResponsible()
+    {
         return (Boolean)$this->extConf['provider.'][strtolower($this->provider) . '.']['enabled'];
     }
 
     /**
      * Get global database connection
+     *
      * @return \TYPO3\CMS\Core\Database\DatabaseConnection
      */
-    protected function getDatabaseConnection() {
+    protected function getDatabaseConnection()
+    {
         return $GLOBALS['TYPO3_DB'];
     }
 
@@ -209,16 +226,20 @@ class SocialLoginAuthenticationService extends \TYPO3\CMS\Sv\AbstractAuthenticat
      * @param string $identifier social identifier
      * @param string $extraWhere Additional WHERE clause: " AND ...
      * @param array $dbUserSetup User db table definition: $this->db_user
+     *
      * @return mixed User array or FALSE
      */
-    public function fetchUserRecordByIdentifier($identifier, $extraWhere = '', $dbUserSetup = '') {
-        $result = FALSE;
+    public function fetchUserRecordByIdentifier($identifier, $extraWhere = '', $dbUserSetup = '')
+    {
+        $result = false;
         $identityClassName = 'Portrino\\PxHybridAuth\\Domain\\Model\Identity\\' . ucfirst($this->getServiceProvider()) . 'Identity';
 
 
         if (class_exists($identityClassName) && defined($identityClassName . '::EXTBASE_TYPE')) {
             $extbaseType = constant($identityClassName . '::EXTBASE_TYPE');
-            $identityClause = 'deleted=0 AND hidden=0 AND identifier=' . $this->db->fullQuoteStr($identifier, 'tx_pxhybridauth_domain_model_identity') .' AND ' . 'tx_extbase_type='. $this->db->fullQuoteStr($extbaseType, 'tx_pxhybridauth_domain_model_identity') ;
+            $identityClause = 'deleted=0 AND hidden=0 AND identifier=' . $this->db->fullQuoteStr($identifier,
+                    'tx_pxhybridauth_domain_model_identity') . ' AND ' . 'tx_extbase_type=' . $this->db->fullQuoteStr($extbaseType,
+                    'tx_pxhybridauth_domain_model_identity');
             $socialIdentities = $this->db->exec_SELECTgetRows(
                 '*',
                 'tx_pxhybridauth_domain_model_identity',
@@ -229,7 +250,10 @@ class SocialLoginAuthenticationService extends \TYPO3\CMS\Sv\AbstractAuthenticat
                 if (isset($socialIdentity['fe_user'])) {
                     $dbUser = is_array($dbUserSetup) ? $dbUserSetup : $this->db_user;
                     // Look up the user by the username and/or extraWhere:
-                    $dbres = $this->db->exec_SELECTquery('*', $dbUser['table'], 'uid' . '=' . $this->db->fullQuoteStr($socialIdentity['fe_user'], $dbUser['table']) . $this->db->fullQuoteStr($dbUser['check_pid_clause'], $dbUser['table']) . $dbUser['enable_clause'] . $extraWhere);
+                    $dbres = $this->db->exec_SELECTquery('*', $dbUser['table'],
+                        'uid' . '=' . $this->db->fullQuoteStr($socialIdentity['fe_user'],
+                            $dbUser['table']) . $this->db->fullQuoteStr($dbUser['check_pid_clause'],
+                            $dbUser['table']) . $dbUser['enable_clause'] . $extraWhere);
                     if ($dbres) {
                         $result = $this->db->sql_fetch_assoc($dbres);
                         $this->db->sql_free_result($dbres);
@@ -248,7 +272,8 @@ class SocialLoginAuthenticationService extends \TYPO3\CMS\Sv\AbstractAuthenticat
      *
      * @return string
      */
-    public function getServiceProvider() {
+    public function getServiceProvider()
+    {
         return $this->provider;
     }
 }

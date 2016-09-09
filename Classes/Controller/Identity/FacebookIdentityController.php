@@ -6,7 +6,7 @@ namespace Portrino\PxHybridAuth\Controller\Identity;
  *
  *  Copyright notice
  *
- *  (c) 2015 André Wuttig <wuttig@portrino.de>, portrino GmbH
+ *  (c) 2016 André Wuttig <wuttig@portrino.de>, portrino GmbH
  *
  *  All rights reserved
  *
@@ -27,25 +27,28 @@ namespace Portrino\PxHybridAuth\Controller\Identity;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use Portrino\PxHybridAuth\Controller\IdentityController;
+use Portrino\PxHybridAuth\Domain\Model\Identity\FacebookIdentity;
 
 /**
  * Class FacebookIdentityController
  *
  * @package Portrino\PxHybridAuth\Controller\Identity
  */
-class FacebookIdentityController extends \Portrino\PxHybridAuth\Controller\IdentityController {
+class FacebookIdentityController extends IdentityController
+{
 
     /**
      * create action
      *
-     * @param \Portrino\PxHybridAuth\Domain\Model\Identity\FacebookIdentity|NULL $identity
+     * @param \Portrino\PxHybridAuth\Domain\Model\Identity\FacebookIdentity|null $identity
      * @ignorevalidation $identity
-     * 
+     *
      * @return void
      */
-    public function createAction(\Portrino\PxHybridAuth\Domain\Model\Identity\FacebookIdentity $identity = NULL) {
-        $identity = ($identity) ? $identity : $this->objectManager->get('Portrino\\PxHybridAuth\\Domain\\Model\\Identity\\FacebookIdentity');
+    public function createAction(\Portrino\PxHybridAuth\Domain\Model\Identity\FacebookIdentity $identity = null)
+    {
+        $identity = ($identity) ? $identity : $this->objectManager->get(FacebookIdentity::class);
         parent::createAction($identity);
     }
 

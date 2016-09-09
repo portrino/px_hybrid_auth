@@ -5,7 +5,7 @@ namespace Portrino\PxHybridAuth\Controller;
  *
  *  Copyright notice
  *
- *  (c) 2015 André Wuttig <wuttig@portrino.de>, portrino GmbH
+ *  (c) 2016 André Wuttig <wuttig@portrino.de>, portrino GmbH
  *
  *  All rights reserved
  *
@@ -25,13 +25,17 @@ namespace Portrino\PxHybridAuth\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
+
 /**
  * Class AbstractController
  *
  * @package Portrino\PxHybridAuth\Controller
  */
-abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+abstract class AbstractController extends ActionController
+{
 
     /**
      * @var \DateTime The current time
@@ -41,27 +45,27 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
     /**
      * @var array
      */
-    protected $extConf = array();
+    protected $extConf = [];
 
     /**
      * contains the ts settings for the current action
      *
      * @var array
      */
-    protected $actionSettings = array();
+    protected $actionSettings = [];
 
     /**
      * contains the specific ts settings for the current controller
      *
      * @var array
      */
-    protected $controllerSettings = array();
+    protected $controllerSettings = [];
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
      * @inject
      */
-    protected $persistenceManager = NULL;
+    protected $persistenceManager = null;
 
     /**
      * @var int
@@ -76,7 +80,8 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
      *
      * @return void
      */
-    protected function initializeAction() {
+    protected function initializeAction()
+    {
         parent::initializeAction();
         $this->dateTime = new \DateTime('now', new \DateTimeZone('Europe/Berlin'));
         $this->extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][GeneralUtility::camelCaseToLowerCaseUnderscored($this->extensionName)]);
@@ -92,17 +97,19 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
      * or prepare the view in another way before the action is called.
      *
      * @param \TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view
+     *
      * @return void
      */
-    protected function initializeView(\TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view) {
+    protected function initializeView(ViewInterface $view)
+    {
         parent::initializeView($view);
-        $this->view->assignMultiple(array(
+        $this->view->assignMultiple([
             'controllerSettings' => $this->controllerSettings,
             'actionSettings' => $this->actionSettings,
             'extConf' => $this->extConf,
             'currentPageUid' => $this->currentPageUid,
             'dateTime' => $this->dateTime
-        ));
+        ]);
     }
 
     /**
@@ -119,7 +126,18 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
      * @param bool $addQueryString
      * @param array $argumentsToBeExcludedFromQueryString
      */
-    protected function redirectToPage($pageUid = NULL, array $additionalParams = array(), $pageType = 0, $noCache = FALSE, $noCacheHash = FALSE, $section = '', $linkAccessRestrictedPages = FALSE, $absolute = FALSE, $addQueryString = FALSE, array $argumentsToBeExcludedFromQueryString = array()) {
+    protected function redirectToPage(
+        $pageUid = null,
+        array $additionalParams = [],
+        $pageType = 0,
+        $noCache = false,
+        $noCacheHash = false,
+        $section = '',
+        $linkAccessRestrictedPages = false,
+        $absolute = false,
+        $addQueryString = false,
+        array $argumentsToBeExcludedFromQueryString = []
+    ) {
         $uri = $this->uriBuilder
             ->reset()
             ->setTargetPageUid($pageUid)
@@ -134,13 +152,13 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
             ->setArgumentsToBeExcludedFromQueryString($argumentsToBeExcludedFromQueryString)
             ->build();
 
-        $this->redirectToURI($uri);
+        $this->redirectToUri($uri);
     }
 
     /**
      * Deactivate FlashMessages for erros
      *
-     * @see TYPO3\CMS\Extbase\Mvc\Controller\ActionController::getErrorFlashMessage()
+     * @see \TYPO3\CMS\Extbase\Mvc\Controller\ActionController::getErrorFlashMessage()
      */
 //    protected function getErrorFlashMessage() {
 //        return FALSE;
@@ -151,7 +169,8 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
      *
      * @return \TYPO3\CMS\Extbase\Mvc\View\ViewInterface
      */
-    public function getView() {
+    public function getView()
+    {
         return $this->view;
     }
 }

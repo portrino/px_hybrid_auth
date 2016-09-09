@@ -1,8 +1,8 @@
 mod.wizards.newContentElement.wizardItems.forms {
     elements.px_hybrid_auth_login {
-        icon = ../typo3conf/ext/px_hybrid_auth/Resources/Public/Icons/px_hybrid_auth_login_form.png
-        title = LLL:EXT:px_hybrid_auth/Resources/Private/Language/locallang_db.xlf:CType.I.px_hybrid_auth_login
-        description = LLL:EXT:px_hybrid_auth/Resources/Private/Language/locallang_db.xlf:CType.I.px_hybrid_auth_login.description
+        iconIdentifier = px-hybrid-auth-login
+        title = LLL:EXT:px_hybrid_auth/Resources/Private/Language/locallang_db.xlf:tt_content.CType.px_hybrid_auth_login
+        description = LLL:EXT:px_hybrid_auth/Resources/Private/Language/locallang_db.xlf:tt_content.CType.px_hybrid_auth_login.description
         tt_content_defValues {
             CType = px_hybrid_auth_login
         }

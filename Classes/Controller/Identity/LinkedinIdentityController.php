@@ -6,7 +6,7 @@ namespace Portrino\PxHybridAuth\Controller\Identity;
  *
  *  Copyright notice
  *
- *  (c) 2015 André Wuttig <wuttig@portrino.de>, portrino GmbH
+ *  (c) 2016 André Wuttig <wuttig@portrino.de>, portrino GmbH
  *
  *  All rights reserved
  *
@@ -27,23 +27,27 @@ namespace Portrino\PxHybridAuth\Controller\Identity;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use Portrino\PxHybridAuth\Controller\IdentityController;
+use Portrino\PxHybridAuth\Domain\Model\Identity\LinkedinIdentity;
 
 /**
  * Class LinkedinIdentityController
  *
  * @package Portrino\PxHybridAuth\Controller\Identity
  */
-class LinkedinIdentityController extends \Portrino\PxHybridAuth\Controller\IdentityController {
+class LinkedinIdentityController extends IdentityController
+{
 
     /**
      * create action
      *
-     * @param \Portrino\PxHybridAuth\Domain\Model\Identity\LinkedinIdentity|NULL $identity
+     * @param \Portrino\PxHybridAuth\Domain\Model\Identity\LinkedinIdentity|null $identity
+     *
      * @return void
      */
-    public function createAction(\Portrino\PxHybridAuth\Domain\Model\Identity\LinkedinIdentity $identity = NULL) {
-        $identity = ($identity) ? $identity : $this->objectManager->get('Portrino\\PxHybridAuth\\Domain\\Model\\Identity\\LinkedinIdentity');
+    public function createAction(\Portrino\PxHybridAuth\Domain\Model\Identity\LinkedinIdentity $identity = null)
+    {
+        $identity = ($identity) ? $identity : $this->objectManager->get(LinkedinIdentity::class);
         parent::createAction($identity);
     }
 

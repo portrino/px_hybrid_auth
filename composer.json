@@ -27,15 +27,15 @@
         "source": "https://github.com/portrino/px_hybrid_auth"
     },
     "require": {
-        "hybridauth/hybridauth": "^2.7"
-    },
-    "config": {
-        "vendor-dir": "Resources/Public/Php"
+        "typo3/cms-core": ">=7.6.2,<8.0",
+
+        "hybridauth/hybridauth": "~2.7.0"
     },
     "autoload": {
         "psr-4": {
             "Portrino\\PxHybridAuth\\": "Classes"
-        }
+        },
+        "files": ["vendor/hybridauth/hybridauth/additional-providers/hybridauth-xing/Providers/XING.php"]
     },
     "replace": {
         "px_hybrid_auth": "*"

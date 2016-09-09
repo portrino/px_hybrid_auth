@@ -1,8 +1,8 @@
 
 plugin.tx_pxhybridauth {
-	persistence {
-		# cat=plugin.tx_pxhybridauth//a; type=string; label=Default storage PID
-		storagePid =
+    persistence {
+        # cat=plugin.tx_pxhybridauth//a; type=string; label=Default storage PID
+        storagePid =
         recursive =
         classes {
             Portrino\PxHybridAuth\Domain\Model\Identity {
@@ -18,7 +18,7 @@ plugin.tx_pxhybridauth {
                 newRecordStoragePid =
             }
         }
-	}
+    }
     settings {
         redirectPageLogin =
         redirectPageLoginError =
