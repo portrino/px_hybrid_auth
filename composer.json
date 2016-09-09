@@ -28,7 +28,7 @@
     },
     "require": {
         "hybridauth/hybridauth": "2.4.*"
-    }
+    },
     "config": {
         "vendor-dir": "Resources/Public/Php"
     },
