@@ -25,6 +25,9 @@ namespace Portrino\PxHybridAuth\Utility;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Portrino\PxHybridAuth\Hybrid\Providers\Facebook;
+use Portrino\PxHybridAuth\Hybrid\Providers\LinkedIn;
+use Portrino\PxHybridAuth\Hybrid\Providers\Xing;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 /**
@@ -61,8 +64,7 @@ class SingleSignOnUtility  {
                         'scope'   => 'email',
                         'display' => 'page',
                         'wrapper' => array (
-                            'class' => 'PxHybridAuth_Providers_Facebook',
-                            'path' => ExtensionManagementUtility::extPath('px_hybrid_auth') . 'Classes/Hybrid/Providers/Facebook.php'
+                            'class' => Facebook::class
                         )
                     ),
                     'LinkedIn' => array (
@@ -74,8 +76,7 @@ class SingleSignOnUtility  {
                         'scope'   => 'email',
                         'display' => 'page',
                         'wrapper' => array (
-                            'class' => 'PxHybridAuth_Providers_LinkedIn',
-                            'path' => ExtensionManagementUtility::extPath('px_hybrid_auth') . 'Classes/Hybrid/Providers/LinkedIn.php'
+                            'class' => LinkedIn::class
                         )
                     ),
                     'XING' => array (
@@ -86,10 +87,9 @@ class SingleSignOnUtility  {
                         ),
                         'scope'   => 'email',
                         'display' => 'page',
-						'wrapper' => array (
-							'class' => 'PxHybridAuth_Providers_Xing',
-							'path' => ExtensionManagementUtility::extPath('px_hybrid_auth') . 'Classes/Hybrid/Providers/XING.php'
-						)
+                        'wrapper' => array (
+                            'class' => Xing::class
+                        )
                     )
                 ),
                 'debug_mode' => (boolean)$this->extConf['basic.']['debug_mode'],
@@ -114,6 +114,10 @@ class SingleSignOnUtility  {
             $socialUser = $service->getUserProfile();
 
         } catch( \Exception $exception ){
+
+            \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($exception);
+            exit;
+
             switch ($exception->getCode()) {
                 case 0:
                     $error = 'Unspecified error.';

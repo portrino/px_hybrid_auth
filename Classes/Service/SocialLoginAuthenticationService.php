@@ -160,6 +160,7 @@ class SocialLoginAuthenticationService extends \TYPO3\CMS\Sv\AbstractAuthenticat
                 $this->login['uname'] = $user['username'];
             }
             $this->signalSlotDispatcher->dispatch(__CLASS__, 'getUser', array(&$user, $socialUser, $this));
+
                 // redirect to px_hybrid_auth login box, when no user found
             if (!$user) {
                 \TYPO3\CMS\Core\Utility\HttpUtility::redirect($returnUrlNoUser);

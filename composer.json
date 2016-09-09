@@ -27,7 +27,7 @@
         "source": "https://github.com/portrino/px_hybrid_auth"
     },
     "require": {
-        "hybridauth/hybridauth": "2.4.*"
+        "hybridauth/hybridauth": "^2.7"
     },
     "config": {
         "vendor-dir": "Resources/Public/Php"

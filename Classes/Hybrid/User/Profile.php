@@ -1,5 +1,5 @@
 <?php
-namespace Portrino\PxHybridAuth\Hybrid;
+namespace Portrino\PxHybridAuth\Hybrid\User;
 
 /***************************************************************
  *  Copyright notice
@@ -25,21 +25,32 @@ namespace Portrino\PxHybridAuth\Hybrid;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use Portrino\PxHybridAuth\Hybrid\User\Profile;
-
 /**
- * Class User
+ * Class Profile
  *
- * @package Portrino\PxHybridAuth\Hybrid
+ * @package Portrino\PxHybridAuth\Hybrid\User
  */
-class User extends \Hybrid_User
+class Profile extends \Hybrid_User_Profile
 {
 
-    function __construct()
-    {
-        parent::__construct();
+    /**
+     * Position
+     *
+     * @var String
+     */
+    public $position = null;
 
-        $this->profile = new Profile();
-    }
+    /**
+     * Company
+     *
+     * @var String
+     */
+    public $company = null;
 
+    /**
+     * Industry
+     *
+     * @var String
+     */
+    public $industry = null;
 }
