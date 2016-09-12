@@ -19,7 +19,7 @@ $boot = function () {
         $tmp_columns = [
             'tx_pxhybridauth_identities' => [
                 'exclude' => 1,
-                'label' => $languageFilePrefix . ':tx_pxhybridauth_domain_model_user.identities',
+                'label' => $languageFilePrefix . 'tx_pxhybridauth_domain_model_user.identities',
                 'config' => [
                     'type' => 'inline',
                     'foreign_table' => 'tx_pxhybridauth_domain_model_identity',
@@ -37,7 +37,7 @@ $boot = function () {
         ];
 
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('fe_users', $tmp_columns);
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users', '--div--;' . $languageFilePrefix . ':fe_users.tabs.px_hybrid_auth, tx_pxhybridauth_identities,', '', '');
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users', '--div--;' . $languageFilePrefix . 'fe_users.tabs.px_hybrid_auth, tx_pxhybridauth_identities,', '', '');
     } else {
         $tmp_columns = [
             'tx_pxhybridauth_identities' => [
@@ -51,7 +51,7 @@ $boot = function () {
         ];
 
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('fe_users', $tmp_columns);
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users', '--div--;' . $languageFilePrefix . ':fe_users.tabs.px_hybrid_auth, tx_pxhybridauth_identities,', '', '');
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users', '--div--;' . $languageFilePrefix . 'fe_users.tabs.px_hybrid_auth, tx_pxhybridauth_identities,', '', '');
     }
 
 };

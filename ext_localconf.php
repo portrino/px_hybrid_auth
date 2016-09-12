@@ -20,7 +20,7 @@ $boot = function ($_EXTKEY) {
 
             'subtype' => 'authUserFE,getUserFE',
 
-            'available' => TRUE,
+            'available' => true,
             'priority' => 82, /* will be called before default typo3 authentication service */
             'quality' => 82,
 
@@ -81,7 +81,7 @@ $boot = function ($_EXTKEY) {
             ]
         );
 
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScript($_EXTKEY,'setup',
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScript($_EXTKEY, 'setup',
             '[GLOBAL]
                 tt_content.px_hybrid_auth_login = COA
                 tt_content.px_hybrid_auth_login {
@@ -91,10 +91,14 @@ $boot = function ($_EXTKEY) {
                 }
         ', true);
 
-        if ((boolean)$extConf['facebook.']['enabled'] ||
-            (boolean)$extConf['linkedin.']['enabled'] ||
-            (boolean)$extConf['xing.']['enabled']) {
+        if ((boolean)$extConf['provider.']['facebook.']['enabled'] ||
+            (boolean)$extConf['provider.']['linkedin.']['enabled'] ||
+            (boolean)$extConf['provider.']['xing.']['enabled']
+        ) {
 
+            if (is_array($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_userauth.php']['logoff_post_processing']) === false ) {
+                $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_userauth.php']['logoff_post_processing'] = [];
+            }
             $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_userauth.php']['logoff_post_processing'][$_EXTKEY] =
                 \Portrino\PxHybridAuth\Hooks\LogOffHook::class . '->postProcessing';
         }
@@ -105,7 +109,7 @@ $boot = function ($_EXTKEY) {
                 'getUser',
                 \Portrino\PxHybridAuth\Slots\SocialLoginAuthenticationServiceSlot::class,
                 'getUser',
-                FALSE
+                false
             );
         }
     }
@@ -163,7 +167,7 @@ $boot = function ($_EXTKEY) {
 
         foreach ($identityTypes as $identityType) {
             $iconRegistry->registerIcon(
-                'identity-'. $identityType,
+                'identity-' . $identityType,
                 \TYPO3\CMS\Core\Imaging\IconProvider\FontawesomeIconProvider::class,
                 [
                     'name' => $identityType

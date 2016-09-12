@@ -52,7 +52,7 @@ class LogOffHook
     public function postProcessing($_params, $pObj)
     {
         $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        /** @var \Portrino\PxHybridAuth\Utility\SingleSignOnUtility $singleSignOnUtility */
+        /** @var SingleSignOnUtility $singleSignOnUtility */
         $singleSignOnUtility = $this->objectManager->get(SingleSignOnUtility::class);
         $singleSignOnUtility->logout();
         $pObj->removeCookie('PHPSESSID');
