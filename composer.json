@@ -34,7 +34,7 @@
         "psr-4": {
             "Portrino\\PxHybridAuth\\": "Classes"
         },
-        "classmap": ["vendor/hybridauth/hybridauth/additional-providers/hybridauth-xing/Providers/"]
+        "classmap": ["./vendor/hybridauth/hybridauth/additional-providers"]
     },
     "replace": {
         "px_hybrid_auth": "*"
