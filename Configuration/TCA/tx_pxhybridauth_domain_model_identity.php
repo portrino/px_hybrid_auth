@@ -5,14 +5,15 @@ $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['px_hybrid_
 foreach ($extConf['provider.'] as $provider => $config) {
     $provider = str_replace('.', '', $provider);
     if ((Boolean)$config['enabled']) {
-        $types['Tx_PxHybridAuth_Domain_Model_Identity_' . ucfirst($provider) . 'Identity'] = ['LLL:EXT:px_hybrid_auth/Resources/Private/Language/locallang_db.xlf:tx_pxhybridauth_domain_model_identity.tx_extbase_type.Tx_PxHybridAuth_Domain_Model_Identity_' . ucfirst($provider) . 'Identity', 'Tx_PxHybridAuth_Domain_Model_Identity_' . ucfirst($provider) . 'Identity'];
+        $types['Tx_PxHybridAuth_Domain_Model_Identity_' . ucfirst($provider) . 'Identity'] =
+            ['LLL:EXT:px_hybrid_auth/Resources/Private/Language/locallang_db.xlf:tx_pxhybridauth_domain_model_identity.tx_extbase_type.Tx_PxHybridAuth_Domain_Model_Identity_' . ucfirst($provider) . 'Identity', 'Tx_PxHybridAuth_Domain_Model_Identity_' . ucfirst($provider) . 'Identity'];
     }
 }
 return [
     'ctrl' => [
-        'title'	=> 'LLL:EXT:px_hybrid_auth/Resources/Private/Language/locallang_db.xlf:tx_pxhybridauth_domain_model_identity',
+        'title'    => 'LLL:EXT:px_hybrid_auth/Resources/Private/Language/locallang_db.xlf:tx_pxhybridauth_domain_model_identity',
         'label' => 'identifier',
-        'label_userFunc' => 'Portrino\PxHybridAuth\UserFunc\Label->getIdentityLabel',
+        'label_userFunc' => \Portrino\PxHybridAuth\UserFunc\Label::class . '->getIdentityLabel',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
@@ -39,7 +40,6 @@ return [
             'Tx_PxHybridAuth_Domain_Model_Identity_LinkedinIdentity' => 'identity-linkedin'
         ],
         'searchFields' => 'identifier,',
-        'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('px_hybrid_auth') . 'Resources/Public/Icons/tx_pxhybridauth_domain_model_identity.gif'
     ],
     'types' => [
         'Tx_PxHybridAuth_Domain_Model_Identity_FacebookIdentity' => ['showitem' => 'tx_extbase_type, sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, identifier'],
@@ -48,7 +48,7 @@ return [
 
     ],
     'interface' => [
-		'showRecordFieldList' => 'tx_extbase_type, sys_language_uid, l10n_parent, l10n_diffsource, hidden, identifier',
+        'showRecordFieldList' => 'tx_extbase_type, sys_language_uid, l10n_parent, l10n_diffsource, hidden, identifier',
     ],
     'palettes' => [
         '1' => ['showitem' => ''],
@@ -91,16 +91,16 @@ return [
         ],
         'l10n_diffsource' => [
             'config' => [
-				'type' => 'passthrough',
+                'type' => 'passthrough',
             ],
         ],
 
         't3ver_label' => [
-			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.versionLabel',
-			'config' => [
-				'type' => 'input',
-				'size' => 30,
-				'max' => 255,
+            'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.versionLabel',
+            'config' => [
+                'type' => 'input',
+                'size' => 30,
+                'max' => 255,
             ]
         ],
 
@@ -108,7 +108,7 @@ return [
             'exclude' => 1,
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
             'config' => [
-				'type' => 'check',
+                'type' => 'check',
             ],
         ],
 
@@ -116,15 +116,15 @@ return [
             'exclude' => 1,
             'label' => 'LLL:EXT:px_hybrid_auth/Resources/Private/Language/locallang_db.xlf:tx_pxhybridauth_domain_model_identity.identifier',
             'config' => [
-				'type' => 'input',
-				'size' => 30,
-				'eval' => 'trim,required'
+                'type' => 'input',
+                'size' => 30,
+                'eval' => 'trim,required'
             ],
         ],
 
         'fe_user' => [
             'config' => [
-				'type' => 'passthrough',
+                'type' => 'passthrough',
             ],
         ],
     ],

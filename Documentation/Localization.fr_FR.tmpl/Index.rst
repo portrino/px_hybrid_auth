@@ -14,48 +14,48 @@ HybridAuth (Français)
 
 .. only:: html
 
-	:Classification:
-		extension_key
+    :Classification:
+        extension_key
 
-	:Version:
-		|release|
+    :Version:
+        |release|
 
-	:Langue:
-		fr
+    :Langue:
+        fr
 
-	:Description:
-		entrez une description.
+    :Description:
+        entrez une description.
 
-	:Mots-clés:
-		list,mots-clés,séparés,par,virgules
+    :Mots-clés:
+        list,mots-clés,séparés,par,virgules
 
-	:Copyright:
-		2015
+    :Copyright:
+        2016
 
-	:Auteur:
-		André Wuttig
+    :Auteur:
+        André Wuttig
 
-	:E-mail:
-		author@example.com
+    :E-mail:
+        author@example.com
 
-	:Licence:
-		Ce document est publié sous la licence de contenu libre
-		disponible sur http://www.opencontent.org/opl.shtml
+    :Licence:
+        Ce document est publié sous la licence de contenu libre
+        disponible sur http://www.opencontent.org/opl.shtml
 
-	:Généré:
-		|today|
+    :Généré:
+        |today|
 
-	Le contenu de ce document est en relation avec TYPO3,
-	un CMS/Framework GNU/GPL disponible sur `www.typo3.org <http://www.typo3.org/>`_.
+    Le contenu de ce document est en relation avec TYPO3,
+    un CMS/Framework GNU/GPL disponible sur `www.typo3.org <http://www.typo3.org/>`_.
 
 
-	**Sommaire**
+    **Sommaire**
 
 .. toctree::
-	:maxdepth: 5
-	:titlesonly:
-	:glob:
+    :maxdepth: 5
+    :titlesonly:
+    :glob:
 
-..	Introduction/Index
-..	UsersManual/Index
-..	AdministratorManual/Index
+..    Introduction/Index
+..    UsersManual/Index
+..    AdministratorManual/Index

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2014-09-08T07:52:05Z" product-name="px_hybrid_auth">
-		<header/>
-		<body>
+    <file source-language="en" datatype="plaintext" original="messages" date="2014-09-08T07:52:05Z" product-name="px_hybrid_auth">
+        <header/>
+        <body>
             <trans-unit id="tx_pxhybridauth_domain_model_identity.tx_extbase_type" xml:space="preserve">
                 <source>Type</source>
             </trans-unit>
@@ -59,6 +59,6 @@
             <trans-unit id="flash.warning.no_configured_providers.body" xml:space="preserve">
                 <source>Please enable and configure your social providers within the extension configuration in the extension manager!</source>
             </trans-unit>
-		</body>
-	</file>
+        </body>
+    </file>
 </xliff>

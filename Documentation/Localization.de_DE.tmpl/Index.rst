@@ -14,48 +14,48 @@ HybridAuth (Deutsch)
 
 .. only:: html
 
-	:Klassifikation:
-		extension_key
+    :Klassifikation:
+        extension_key
 
-	:Version:
-		|release|
+    :Version:
+        |release|
 
-	:Sprache:
-		de
+    :Sprache:
+        de
 
-	:Beschreibung:
-		Geben Sie eine Beschreibung ein.
+    :Beschreibung:
+        Geben Sie eine Beschreibung ein.
 
-	:Schlüsselwörter:
-		komma-getrennte,Liste,von,Schlüsselwörtern
+    :Schlüsselwörter:
+        komma-getrennte,Liste,von,Schlüsselwörtern
 
-	:Copyright:
-		2015
+    :Copyright:
+        2016
 
-	:Autor:
-		André Wuttig
+    :Autor:
+        André Wuttig
 
-	:E-Mail:
-		author@example.com
+    :E-Mail:
+        author@example.com
 
-	:Lizenz:
-		Dieses Dokument wird unter der Open Content License, siehe
-		http://www.opencontent.org/opl.shtml veröffentlicht.
+    :Lizenz:
+        Dieses Dokument wird unter der Open Content License, siehe
+        http://www.opencontent.org/opl.shtml veröffentlicht.
 
-	:Gerendert:
-		|today|
+    :Gerendert:
+        |today|
 
-	Der Inhalt dieses Dokuments bezieht sich auf TYPO3,
-	ein GNU/GPL CMS-Framework auf `www.typo3.org <http://www.typo3.org/>`_.
+    Der Inhalt dieses Dokuments bezieht sich auf TYPO3,
+    ein GNU/GPL CMS-Framework auf `www.typo3.org <http://www.typo3.org/>`_.
 
 
-	**Inhaltsverzeichnis**
+    **Inhaltsverzeichnis**
 
 .. toctree::
-	:maxdepth: 5
-	:titlesonly:
-	:glob:
+    :maxdepth: 5
+    :titlesonly:
+    :glob:
 
-..	Introduction/Index
-..	UsersManual/Index
-..	AdministratorManual/Index
+..    Introduction/Index
+..    UsersManual/Index
+..    AdministratorManual/Index

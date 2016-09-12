@@ -14,42 +14,42 @@ HybridAuth
 
 .. only:: html
 
-	:Classification:
-		px_hybrid_auth
+    :Classification:
+        px_hybrid_auth
 
-	:Version:
-		|release|
+    :Version:
+        |release|
 
-	:Language:
-		en
+    :Language:
+        en
 
-	:Description:
-		Adds a plugin "HybridAuth login form" and additional features for social sign-in via HybridAuth API
+    :Description:
+        Adds a plugin "HybridAuth login form" and additional features for social sign-in via HybridAuth API
 
-	:Keywords:
-		login, auth, oauth, oauth2, hybrid, social, sign-in, connect, facebook, linkedin, xing
+    :Keywords:
+        login, auth, oauth, oauth2, hybrid, social, sign-in, connect, facebook, linkedin, xing
 
-	:Copyright:
-		2015
+    :Copyright:
+        2016
 
-	:Author:
-		André Wuttig
+    :Author:
+        André Wuttig
 
-	:Email:
-		wuttig@portrino.de
+    :Email:
+        wuttig@portrino.de
 
-	:License:
-		This document is published under the Open Content License
-		available from http://www.opencontent.org/opl.shtml
+    :License:
+        This document is published under the Open Content License
+        available from http://www.opencontent.org/opl.shtml
 
-	:Rendered:
-		|today|
+    :Rendered:
+        |today|
 
-	The content of this document is related to TYPO3,
-	a GNU/GPL CMS/Framework available from `www.typo3.org <http://www.typo3.org/>`_.
+    The content of this document is related to TYPO3,
+    a GNU/GPL CMS/Framework available from `www.typo3.org <http://www.typo3.org/>`_.
 
 
-	**Table of Contents**
+    **Table of Contents**
 
 .. toctree::
     :maxdepth: 5

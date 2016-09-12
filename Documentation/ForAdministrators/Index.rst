@@ -14,32 +14,6 @@ For Administrators
 Import
 ------
 
-There are two ways of installing the extension. As described `here <https://wiki.typo3.org/Composer#Composer_Mode>`_
-
-Import the extension to your server from the
-
-- TYPO3 Extension Repository (TER) or
-- via GIT
-
-From TER (Classic Mode)
-^^^^^^^^^^^^^^^^^^^^^^^
-
-Select "*Get Extensions*" in the extension manager and update your extension list. Search for "px_hybrid_auth" and click "Import and Install" to get the latest version.
-There are no other dependencies than TYPO3 6.2.
-
-.. figure:: ../Images/Administration/GetExtensionHybridAuth.png
-    :width: 500px
-    :align: left
-
-From GIT
-^^^^^^^^
-
-Please use the following command to get the extension from GIT.
-
-.. code-block:: bash
-
-    git clone https://github.com/portrino/px_hybrid_auth
-
 Via composer
 ^^^^^^^^^^^^
 

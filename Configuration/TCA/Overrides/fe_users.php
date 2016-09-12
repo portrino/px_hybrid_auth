@@ -3,8 +3,9 @@ defined('TYPO3_MODE') || die();
 
 $boot = function () {
 
-    // load extConf
-    $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['px_hybrid_auth']);
+    $extKey = 'px_hybrid_auth';
+    $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$extKey]);
+    $languageFilePrefix = 'LLL:EXT:px_hybrid_auth/Resources/Private/Language/locallang_db.xlf:';
 
     $supportedProviders = [];
     foreach ($extConf['provider.'] as $provider => $config) {
@@ -18,7 +19,7 @@ $boot = function () {
         $tmp_columns = [
             'tx_pxhybridauth_identities' => [
                 'exclude' => 1,
-                'label' => 'LLL:EXT:px_hybrid_auth/Resources/Private/Language/locallang_db.xlf:tx_pxhybridauth_domain_model_user.identities',
+                'label' => $languageFilePrefix . ':tx_pxhybridauth_domain_model_user.identities',
                 'config' => [
                     'type' => 'inline',
                     'foreign_table' => 'tx_pxhybridauth_domain_model_identity',
@@ -36,12 +37,12 @@ $boot = function () {
         ];
 
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('fe_users', $tmp_columns);
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users', '--div--;LLL:EXT:px_hybrid_auth/Resources/Private/Language/locallang_db.xlf:fe_users.tabs.px_hybrid_auth, tx_pxhybridauth_identities,', '', '');
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users', '--div--;' . $languageFilePrefix . ':fe_users.tabs.px_hybrid_auth, tx_pxhybridauth_identities,', '', '');
     } else {
         $tmp_columns = [
             'tx_pxhybridauth_identities' => [
                 'exclude' => 1,
-                'label' => 'LLL:EXT:px_hybrid_auth/Resources/Private/Language/locallang_db.xlf:tx_pxhybridauth_domain_model_user.identities',
+                'label' => $languageFilePrefix . ':tx_pxhybridauth_domain_model_user.identities',
                 'config' => [
                     'type' => 'user',
                     'userFunc' => \Portrino\PxHybridAuth\UserFunc\Tca::class . '->showNoProvidersConfiguredMessage',
@@ -50,7 +51,7 @@ $boot = function () {
         ];
 
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('fe_users', $tmp_columns);
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users', '--div--;LLL:EXT:px_hybrid_auth/Resources/Private/Language/locallang_db.xlf:fe_users.tabs.px_hybrid_auth, tx_pxhybridauth_identities,', '', '');
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users', '--div--;' . $languageFilePrefix . ':fe_users.tabs.px_hybrid_auth, tx_pxhybridauth_identities,', '', '');
     }
 
 };

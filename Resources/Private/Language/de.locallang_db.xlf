@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-07-09T13:36:00Z" product-name="px_register">
-		<header/>
-		<body>
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-07-09T13:36:00Z" product-name="px_register">
+        <header/>
+        <body>
 
             <!-- #####      -->
             <!-- tt_content -->
@@ -23,29 +23,29 @@
                  <target state="translated">Allgemein</target>
             </trans-unit>
             <trans-unit id="tt_content.pi_flexform.sheet_redirect" xml:space="preserve">
-				<source>Redirects</source>
+                <source>Redirects</source>
                 <target state="translated">Weiterleitungen</target>
-			</trans-unit>
+            </trans-unit>
             <trans-unit id="tt_content.pi_flexform.redirectPageLogin" xml:space="preserve">
-				<source>After Successful Login Redirect to Page</source>
+                <source>After Successful Login Redirect to Page</source>
                 <target state="translated">Nach erfolgreicher Anmeldung auf folgende Seite weiterleiten</target>
-			</trans-unit>
-			<trans-unit id="tt_content.pi_flexform.redirectPageLoginError" xml:space="preserve">
-				<source>After Failed Login Redirect to Page</source>
+            </trans-unit>
+            <trans-unit id="tt_content.pi_flexform.redirectPageLoginError" xml:space="preserve">
+                <source>After Failed Login Redirect to Page</source>
                 <target state="translated">Nach einem Fehler bei der Anmeldung auf folgende Seite weiterleiten</target>
-			</trans-unit>
+            </trans-unit>
             <trans-unit id="tt_content.pi_flexform.user_storage" xml:space="preserve">
-				<source>User Storage Page</source>
+                <source>User Storage Page</source>
                 <target state="translated">Speicherort Benutzer</target>
-			</trans-unit>
+            </trans-unit>
             <trans-unit id="tt_content.pi_flexform.show_logoutFormAfterLogin" xml:space="preserve">
-				<source>Display Logout Form After Successful Login</source>
+                <source>Display Logout Form After Successful Login</source>
                 <target state="translated">Weiterleitung nach erfolgreicher Anmeldung deaktivieren, aber Abmeldeformular anzeigen</target>
-			</trans-unit>
+            </trans-unit>
             <trans-unit id="tt_content.pi_flexform.recursive" xml:space="preserve">
-				<source>Recursive</source>
+                <source>Recursive</source>
                 <target state="translated">Rekursiv</target>
-			</trans-unit>
+            </trans-unit>
 
             <trans-unit id="tt_content.pi_flexform.recursive.I.0">
                 <source>0 Evenen (only selected page)</source>
@@ -128,6 +128,6 @@
                 <source>PxHybridAuth::SocialAccounts</source>
                 <target state="translated">PxHybridAuth::SocialAccounts</target>
             </trans-unit>
-		</body>
-	</file>
+        </body>
+    </file>
 </xliff>

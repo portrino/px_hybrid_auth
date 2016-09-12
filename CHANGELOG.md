@@ -1,5 +1,15 @@
 # PxHybridAuth Change log
 
+3.0.0 - 2016-09-12
+------------------
+* [TASK] switch to PSR1/2 code style 
+* [TASK] replaces traditional literal array syntax with shorthand syntax
+* [TASK] code refactoring with code some code inspection tools
+* [FEATURE] replaces old icons with SVG and uses new TYPO3 `IconRegistry` 
+* [BUGIX] adapts facebook adapter to work with new facebook API 
+* [TASK] general refactoring of social login adapters for better update compatibility of hybridauth library
+* [FEATURE] adds typeicon_column and typeicon_classes for identity model
+
 2.1.0 - 2015-10-19
 ------------------
 * [FEATURE] adds slot for `returnUrlNoUser` in `SocialLoginAuthenticationService`

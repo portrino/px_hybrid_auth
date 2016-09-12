@@ -11,8 +11,8 @@ plugin.tx_pxhybridauth {
             10 = EXT:px_hybrid_auth/Resources/Private/Layouts/
         }
     }
-	persistence {
-		storagePid = {$plugin.tx_pxhybridauth.persistence.storagePid}
+    persistence {
+        storagePid = {$plugin.tx_pxhybridauth.persistence.storagePid}
         recursive = {$plugin.tx_pxhybridauth.persistence.recursive}
         classes {
             Portrino\PxHybridAuth\Domain\Model\Identity {
@@ -28,7 +28,7 @@ plugin.tx_pxhybridauth {
                 newRecordStoragePid = {$plugin.tx_pxhybridauth.persistence.classes.Portrino\PxHybridAuth\Domain\Model\Identity\LinkedinIdentity.newRecordStoragePid}
             }
         }
-	}
+    }
     features {
         skipDefaultArguments = 1
     }

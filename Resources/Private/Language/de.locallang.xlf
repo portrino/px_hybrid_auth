@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2014-09-08T07:52:05Z" product-name="px_hybrid_auth">
-		<header/>
-		<body>
+    <file source-language="en" datatype="plaintext" original="messages" date="2014-09-08T07:52:05Z" product-name="px_hybrid_auth">
+        <header/>
+        <body>
             <trans-unit id="tx_pxhybridauth_domain_model_identity.tx_extbase_type" xml:space="preserve">
                 <source>Type</source>
                 <target state="translated">Typ</target>
@@ -67,6 +67,6 @@
                 <source>Logout</source>
                 <target state="translated">Logout</target>
             </trans-unit>
-		</body>
-	</file>
+        </body>
+    </file>
 </xliff>

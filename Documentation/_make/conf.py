@@ -23,8 +23,8 @@ import os
 
 from sphinx.highlighting import lexers
 if lexers:
-	from pygments.lexers.web import PhpLexer
-	lexers['php'] = PhpLexer(startinline=True)
+    from pygments.lexers.web import PhpLexer
+    lexers['php'] = PhpLexer(startinline=True)
 
 # -- General configuration -----------------------------------------------------
 
