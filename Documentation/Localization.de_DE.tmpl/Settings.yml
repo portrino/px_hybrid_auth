@@ -4,10 +4,10 @@
 
 ---
 conf.py:
-  copyright: 2015
+  copyright: 2011
   project: HybridAuth (Deutsch)
   version: 3.0
-  release: 3.0.0
+  release: 3.0.1
   latex_documents:
   - - Index
     - px_hybrid_auth.tex

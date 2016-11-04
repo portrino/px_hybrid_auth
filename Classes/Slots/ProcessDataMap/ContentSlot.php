@@ -4,7 +4,7 @@ namespace Portrino\PxHybridAuth\Slots\ProcessDataMap;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2015 Andre Wuttig <wuttig@portrino.de>, portrino GmbH
+ *  (c) 2011 Andre Wuttig <wuttig@portrino.de>, portrino GmbH
  *
  *  All rights reserved
  *

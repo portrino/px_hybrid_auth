@@ -81,8 +81,12 @@ class Xing extends \Hybrid_Providers_XING
                 if (property_exists($primaryCompany, 'name')) {
                     $this->user->profile->company = $primaryCompany->name;
                 }
-                if (property_exists($primaryCompany, 'description')) {
-                    $this->user->profile->position = $primaryCompany->description;
+                if (property_exists($primaryCompany, 'title')) {
+                    $this->user->profile->position = $primaryCompany->title;
+                } else {
+                    if (property_exists($primaryCompany, 'description')) {
+                        $this->user->profile->position = $primaryCompany->description;
+                    }
                 }
                 if (property_exists($primaryCompany, 'industry')) {
                     $this->user->profile->industry = $primaryCompany->industry;

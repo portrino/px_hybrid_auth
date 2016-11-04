@@ -1,5 +1,10 @@
 # PxHybridAuth Change log
 
+3.0.1 - 2016-11-04
+------------------
+* [BUGFIX] changes logic to retrieve the position via XING provider 
+  * we now take the title field at first and then the description field
+
 3.0.0 - 2016-09-12
 ------------------
 * [TASK] switch to PSR1/2 code style 
