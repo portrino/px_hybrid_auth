@@ -1,10 +1,15 @@
 # PxHybridAuth Change log
 
+3.0.2 - 2016-12-16
+------------------
+* [BUGFIX] adds additional property `loginError` to `SocialLoginAuthenticationService` which is used in 
+  `isServiceresponsible()` to prevent redirect loops after a login error occured
+
 3.0.1 - 2016-11-04
 ------------------
 * [BUGFIX] changes logic to retrieve the position via XING provider 
   * we now take the title field at first and then the description field
-
+ 
 3.0.0 - 2016-09-12
 ------------------
 * [TASK] switch to PSR1/2 code style 
@@ -29,5 +34,4 @@
 ** we also add 'ext_autoload.php' for legacy support of the "old" autoloading mechanism
 * we decouple our own overriden HybridAuth-Adapters from hybridAuth vendor package which is located under Resources/Public/Php for legacy purposes
 ** this makes it even easier to integrate updates from vendor package "hybridauth/hybridauth"
-** for now we are not able to add "hybridauth/hybridauth" as dependency to 'composer.json', because older versions need the hybridauth php code anyway
-* we also integrate features and bugfixes from the fork of georg ringer (https://github.com/georgringer/px_hybrid_auth)  
+** for now we are not able to add "hybridauth/h

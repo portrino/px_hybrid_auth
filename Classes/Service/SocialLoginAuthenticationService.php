@@ -26,6 +26,7 @@ namespace Portrino\PxHybridAuth\Service;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 use Portrino\PxHybridAuth\Utility\SingleSignOnUtility;
+use TYPO3\CMS\Core\Authentication\AbstractUserAuthentication;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\HttpUtility;
@@ -112,6 +113,19 @@ class SocialLoginAuthenticationService extends AbstractAuthenticationService
      */
     protected $extensionName = 'px_hybrid_auth';
 
+    /**
+     * @var boolean
+     */
+    protected $loginError = false;
+
+    /**
+     * Initialization of the service.
+     *
+     * The class have to do a strict check if the service is available.
+     * example: check if the perl interpreter is available which is needed to run an extern perl script.
+     *
+     * @return bool TRUE if the service is available
+     */
     public function init()
     {
         $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
@@ -122,6 +136,15 @@ class SocialLoginAuthenticationService extends AbstractAuthenticationService
         return parent::init();
     }
 
+    /**
+     * Initialize authentication service
+     *
+     * @param string $mode Subtype of the service which is used to call the service.
+     * @param array $loginData Submitted login form data
+     * @param array $authInfo Information array. Holds submitted form data etc.
+     * @param AbstractUserAuthentication $pObj Parent object
+     * @return void
+     */
     public function initAuth($mode, $loginData, $authInfo, $pObj)
     {
         $this->singleSignOnUtility = $this->objectManager->get(SingleSignOnUtility::class);
@@ -137,6 +160,9 @@ class SocialLoginAuthenticationService extends AbstractAuthenticationService
         }
         if (isset($_REQUEST['tx_pxhybridauth_login']['provider'])) {
             $this->provider = $_REQUEST['tx_pxhybridauth_login']['provider'];
+        }
+        if (isset($_REQUEST['tx_pxhybridauth_login']['login_error'])) {
+            $this->loginError = (boolean)$_REQUEST['tx_pxhybridauth_login']['login_error'];
         }
 
         parent::initAuth($mode, $loginData, $authInfo, $pObj);
@@ -202,12 +228,13 @@ class SocialLoginAuthenticationService extends AbstractAuthenticationService
 
     /**
      * Returns TRUE if single sign on for the given provider is enabled in ext_conf and is available
+     * and if no loginError error occured to prevent loops
      *
      * @return boolean
      */
     protected function isServiceResponsible()
     {
-        return (Boolean)$this->extConf['provider.'][strtolower($this->provider) . '.']['enabled'];
+        return (Boolean)$this->extConf['provider.'][strtolower($this->provider) . '.']['enabled'] && $this->loginError === false;
     }
 
     /**
