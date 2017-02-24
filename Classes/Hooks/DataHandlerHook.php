@@ -5,7 +5,7 @@ namespace Portrino\PxHybridAuth\Hooks;
  *
  *  Copyright notice
  *
- *  (c) 2016 André Wuttig <wuttig@portrino.de>, portrino GmbH
+ *  (c) 2017 Axel Boeswetter <boeswetter@portrino.de>, portrino GmbH
  *
  *  All rights reserved
  *
@@ -32,7 +32,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * Class DataHandlerHook
  *
- * @author Andre Wuttig <wuttig@portrino.de>
  * @package Portrino\PxHybridAuth\Hooks
  */
 class DataHandlerHook
