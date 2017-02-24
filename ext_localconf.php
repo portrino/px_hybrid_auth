@@ -115,28 +115,14 @@ $boot = function ($_EXTKEY) {
     }
 
     if (TYPO3_MODE === 'BE') {
+        /**
+         * register hooks
+         */
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['cms/layout/class.tx_cms_layout.php']['tt_content_drawItem'][$_EXTKEY] =
             \Portrino\PxHybridAuth\Hooks\PageLayoutViewDrawItemHook::class;
 
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][] =
-            \Portrino\PxHybridAuth\Hooks\ProcessDataMapDispatcher::class;
-
-        $signalSlotDispatcher->connect(
-            'tt_content',
-            'updateRecordPostProcessFieldArray',
-            \Portrino\PxHybridAuth\Slots\ProcessDataMap\ContentSlot::class,
-            'preventEmptyFlexFormValues',
-            false
-        );
-
-        $signalSlotDispatcher->connect(
-            'tt_content',
-            'newRecordPostProcessFieldArray',
-            \Portrino\PxHybridAuth\Slots\ProcessDataMap\ContentSlot::class,
-            'preventEmptyFlexFormValues',
-            false
-        );
-
+            \Portrino\PxHybridAuth\Hooks\DataHandlerHook::class;
 
         /**
          * register icons for each plugin

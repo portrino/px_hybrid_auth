@@ -1,10 +1,11 @@
 <?php
-namespace Portrino\PxHybridAuth\Slots\ProcessDataMap;
+namespace Portrino\PxHybridAuth\Hooks;
 
 /***************************************************************
+ *
  *  Copyright notice
  *
- *  (c) 2011 Andre Wuttig <wuttig@portrino.de>, portrino GmbH
+ *  (c) 2016 André Wuttig <wuttig@portrino.de>, portrino GmbH
  *
  *  All rights reserved
  *
@@ -24,25 +25,37 @@ namespace Portrino\PxHybridAuth\Slots\ProcessDataMap;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
-use \TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Configuration\FlexForm\FlexFormTools;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * Class ContentSlot
+ * Class DataHandlerHook
  *
- * @package Portrino\PxHybridAuth\Slots\ProcessDataMap
+ * @author Andre Wuttig <wuttig@portrino.de>
+ * @package Portrino\PxHybridAuth\Hooks
  */
-class ContentSlot
+class DataHandlerHook
 {
 
     /**
-     * @var \TYPO3\CMS\Core\Configuration\FlexForm\FlexFormTools
-     * @inject
+     * @var string
      */
-    protected $flexFormTools;
-
     protected $CType = 'px_hybrid_auth_login';
+
+    /**
+     * @param string $status
+     * @param string $table
+     * @param int $id
+     * @param array $fieldArray
+     * @param \TYPO3\CMS\Core\DataHandling\DataHandler $dataHandler
+     */
+    public function processDatamap_postProcessFieldArray($status, $table, $id, &$fieldArray, &$dataHandler)
+    {
+        if ($table == 'tt_content' && ($status == 'new' || $status == 'update')) {
+            $this->preventEmptyFlexFormValues($id, $fieldArray, $dataHandler);
+        }
+    }
 
     /**
      * @param int $id
@@ -51,9 +64,12 @@ class ContentSlot
      *
      * @return void
      */
-    public function preventEmptyFlexFormValues($id, &$fieldArray, $dataHandler)
+    protected function preventEmptyFlexFormValues($id, &$fieldArray, &$dataHandler)
     {
         $content = BackendUtility::getRecord('tt_content', $id);
+        /** @var FlexFormTools $flexFormTools */
+        $flexFormTools = GeneralUtility::makeInstance(FlexFormTools::class);
+
         if (isset($fieldArray) && $fieldArray['CType'] === $this->CType || $content['CType'] === $this->CType) {
             if (isset($fieldArray['pi_flexform'])) {
                 $flexformData = GeneralUtility::xml2array($fieldArray['pi_flexform']);
@@ -68,7 +84,7 @@ class ContentSlot
                             unset($flexformData['data'][$sheet]);
                         }
                     }
-                    $fieldArray['pi_flexform'] = $this->flexFormTools->flexArray2Xml($flexformData, true);
+                    $fieldArray['pi_flexform'] = $flexFormTools->flexArray2Xml($flexformData, true);
                 }
             }
         }

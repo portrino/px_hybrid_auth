@@ -1,4 +1,8 @@
-# PxHybridAuth Change log
+# PxHybridAuth Changelog
+
+3.0.3 - 2017-02-24
+------------------
+* [BUGFIX][CLEANUP] renames ProcessDataMapDispatcher hook class to DataHandlerHook and moves ContentSlot logic into it
 
 3.0.2 - 2016-12-16
 ------------------
