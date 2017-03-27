@@ -2,8 +2,7 @@
 
 3.1.0 - 2017-03-23
 ------------------
-* [TASK] Updates hybridauth/hybdridauth package to 2.8.3-dev which is not released yet but necessary to get facebook 
-  login working
+* [TASK] Updates hybridauth/hybdridauth package to 2.9.1
 
 3.0.3 - 2017-02-24
 ------------------
