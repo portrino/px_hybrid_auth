@@ -27,7 +27,7 @@
     },
     "require": {
         "typo3/cms-core": ">=7.6.2,<8.0",
-        "hybridauth/hybridauth": "~2.9.1"
+        "hybridauth/hybridauth": "2.9.1"
     },
     "autoload": {
         "psr-4": {
