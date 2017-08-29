@@ -1,5 +1,10 @@
 # PxHybridAuth Changelog
 
+3.1.1 - 2017-08-28
+------------------
+* [TASK] Adds `@lazy` to property `identities` in `FrontendUser` model to prevent uneccessary database queries for 
+these stuff
+
 3.1.0 - 2017-03-23
 ------------------
 * [TASK] Updates hybridauth/hybdridauth package to 2.9.1

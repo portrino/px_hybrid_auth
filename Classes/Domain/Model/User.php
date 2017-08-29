@@ -42,6 +42,7 @@ class User extends FrontendUser
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Portrino\PxHybridAuth\Domain\Model\Identity>
      * @cascade remove
+     * @lazy
      */
     protected $identities = null;
 
