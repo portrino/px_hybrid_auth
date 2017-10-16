@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="fr" datatype="plaintext" original="messages" date="2017-10-16T13:08:21Z">
+		<header>
+			<generator>LFEditor</generator>
+		</header>
+		<body>
+		<trans-unit id="logout" approved="yes" xml:space="preserve">
+			<source>Logout</source>
+			<target>Connectez - Out
+</target>
+		</trans-unit>
+		</body>
+	</file>
+</xliff>

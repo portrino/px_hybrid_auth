@@ -1,64 +1,61 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-    <file source-language="en" datatype="plaintext" original="messages" date="2014-09-08T07:52:05Z" product-name="px_hybrid_auth">
-        <header/>
-        <body>
-            <trans-unit id="tx_pxhybridauth_domain_model_identity.tx_extbase_type" xml:space="preserve">
-                <source>Type</source>
-            </trans-unit>
-            <trans-unit id="tx_pxhybridauth_domain_model_identity.tx_extbase_type.Tx_PxHybridAuth_Domain_Model_Identity_FacebookIdentity" xml:space="preserve">
-                <source>Facebook</source>
-            </trans-unit>
-            <trans-unit id="tx_pxhybridauth_domain_model_identity.tx_extbase_type.Tx_PxHybridAuth_Domain_Model_Identity_XingIdentity" xml:space="preserve">
-                <source>Xing</source>
-            </trans-unit>
-            <trans-unit id="tx_pxhybridauth_domain_model_identity.tx_extbase_type.Tx_PxHybridAuth_Domain_Model_Identity_LinkedinIdentity" xml:space="preserve">
-                <source>LinkedIn</source>
-            </trans-unit>
-
-            <trans-unit id="facebook" xml:space="preserve">
-                <source>Facebook</source>
-            </trans-unit>
-            <trans-unit id="linkedin" xml:space="preserve">
-                <source>LinkedIn</source>
-            </trans-unit>
-            <trans-unit id="xing" xml:space="preserve">
-                <source>Xing</source>
-            </trans-unit>
-
-            <trans-unit id="sign_in_facebook" xml:space="preserve">
-                <source>Sign in with Facebook</source>
-            </trans-unit>
-            <trans-unit id="sign_in_linkedin" xml:space="preserve">
-                <source>Sign in with LinkedIn</source>
-            </trans-unit>
-            <trans-unit id="sign_in_xing" xml:space="preserve">
-                <source>Sign in with Xing</source>
-            </trans-unit>
-            <trans-unit id="connect_with_facebook" xml:space="preserve">
-                <source>Connect with Facebook</source>
-            </trans-unit>
-            <trans-unit id="connect_with_linkedin" xml:space="preserve">
-                <source>Connect with LinkedIn</source>
-            </trans-unit>
-            <trans-unit id="connect_with_xing" xml:space="preserve">
-                <source>Connect with Xing</source>
-            </trans-unit>
-
-            <trans-unit id="connected" xml:space="preserve">
-                <source>Connected</source>
-            </trans-unit>
-
-            <trans-unit id="logout" xml:space="preserve">
-                <source>Logout</source>
-            </trans-unit>
-
-            <trans-unit id="flash.warning.no_configured_providers.header" xml:space="preserve">
-                <source>No social provider configuration given!</source>
-            </trans-unit>
-            <trans-unit id="flash.warning.no_configured_providers.body" xml:space="preserve">
-                <source>Please enable and configure your social providers within the extension configuration in the extension manager!</source>
-            </trans-unit>
-        </body>
-    </file>
+	<file source-language="en" datatype="plaintext" original="messages" date="2017-10-16T13:08:21Z">
+		<header>
+			<generator>LFEditor</generator>
+		</header>
+		<body>
+		<trans-unit id="connect_with_facebook">
+			<source>Connect with Facebook</source>
+		</trans-unit>
+		<trans-unit id="connect_with_linkedin">
+			<source>Connect with LinkedIn</source>
+		</trans-unit>
+		<trans-unit id="connect_with_xing">
+			<source>Connect with Xing</source>
+		</trans-unit>
+		<trans-unit id="connected">
+			<source>Connected</source>
+		</trans-unit>
+		<trans-unit id="facebook">
+			<source>Facebook</source>
+		</trans-unit>
+		<trans-unit id="flash.warning.no_configured_providers.body">
+			<source>Please enable and configure your social providers within the extension configuration in the extension manager!</source>
+		</trans-unit>
+		<trans-unit id="flash.warning.no_configured_providers.header">
+			<source>No social provider configuration given!</source>
+		</trans-unit>
+		<trans-unit id="linkedin">
+			<source>LinkedIn</source>
+		</trans-unit>
+		<trans-unit id="logout">
+			<source>Logout</source>
+		</trans-unit>
+		<trans-unit id="sign_in_facebook">
+			<source>Sign in with Facebook</source>
+		</trans-unit>
+		<trans-unit id="sign_in_linkedin">
+			<source>Sign in with LinkedIn</source>
+		</trans-unit>
+		<trans-unit id="sign_in_xing">
+			<source>Sign in with Xing</source>
+		</trans-unit>
+		<trans-unit id="tx_pxhybridauth_domain_model_identity.tx_extbase_type">
+			<source>Type</source>
+		</trans-unit>
+		<trans-unit id="tx_pxhybridauth_domain_model_identity.tx_extbase_type.Tx_PxHybridAuth_Domain_Model_Identity_FacebookIdentity">
+			<source>Facebook</source>
+		</trans-unit>
+		<trans-unit id="tx_pxhybridauth_domain_model_identity.tx_extbase_type.Tx_PxHybridAuth_Domain_Model_Identity_LinkedinIdentity">
+			<source>LinkedIn</source>
+		</trans-unit>
+		<trans-unit id="tx_pxhybridauth_domain_model_identity.tx_extbase_type.Tx_PxHybridAuth_Domain_Model_Identity_XingIdentity">
+			<source>Xing</source>
+		</trans-unit>
+		<trans-unit id="xing">
+			<source>Xing</source>
+		</trans-unit>
+		</body>
+	</file>
 </xliff>
