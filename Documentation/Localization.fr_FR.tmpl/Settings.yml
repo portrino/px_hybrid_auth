@@ -7,7 +7,7 @@ conf.py:
   copyright: 2011
   project: HybridAuth (Français)
   version: 3.1
-  release: 3.1.1
+  release: 3.1.3
   latex_documents:
   - - Index
     - px_hybrid_auth.tex
